@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\FormationRepository;
 use Symfony\Component\HttpFoundation\Response;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SessionController extends AbstractController
 {
@@ -14,10 +17,14 @@ class SessionController extends AbstractController
     // ajout etdit d'une formation 
     
     #[Route('/formation/list', name: 'list_formation')]
-    public function listFormation(): Response
+    public function listFormation(FormationRepository $FormationRepository): Response
     {
+        $formations = $FormationRepository->findAll();
+
         return $this->render('session/index.html.twig', [
             'controller_name' => 'SessionController',
+            'view_name' => 'session/index.html.twig',
+            "formations" => $formations
         ]);
     }
 

@@ -19,6 +19,18 @@
         {
             "folderPath": "session\\src\\Controller\\SessionController.php\\",
             "color": "foldercolorizer.red"
+        },
+        {
+            "folderPath": "session\\templates\\",
+            "color": "foldercolorizer.green"
+        },
+        {
+            "folderPath": "session\\",
+            "color": "foldercolorizer.green"
+        },
+        {
+            "folderPath": "session\\templates\\course\\",
+            "color": "foldercolorizer.White"
         }
     ]
 }

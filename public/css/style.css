@@ -22,7 +22,7 @@
   html,
   body {
     background-color: var(--background-color) !important;
-    color: var(--primary-color) !important;
+    color: var(--secondary-color) !important;
   }
   h1,
   h2,
@@ -30,29 +30,29 @@
   h4,
   h5,
   h6 {
-    color: var(--primary-color) !important;
+    color: var(--secondary-color) !important;
   }
-.wrapper {
-    text-align: center;
-}
-.input-controller {
-    display: flex;
-    justify-content: space-around;
+
+.link-color {
+  color: var(--link-color) !important;
 }
 
-.color-accent {
-    color: var(--accent-color) !important;
+.navigation-controller {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-#footer {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 2.5rem;
-    width: 100%;
-    height: 40px; /* Hauteur du pied de page */
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-    box-sizing: border-box; /* Incluez le padding et le border dans la largeur/hauteur */
+
+.container-logo {
+  width:100%;
+  object-fit: cover;
+  padding-top:10px;
+}
+.logo {
+  width: 100%;
+  height: 80px;
+  object-fit: cover;
+  object-position: 0 0px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
 }

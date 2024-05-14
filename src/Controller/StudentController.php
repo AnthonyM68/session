@@ -16,25 +16,16 @@ class StudentController extends AbstractController
     // ajout student 
     // delete student
 
-    #[Route('/student', name: 'app_student')]
-    public function index(): Response
-    {
-        return $this->render('student/index.html.twig', [
-            'controller_name' => 'StudentController',
-        ]);
-    }
-
-
-
 
     #[Route('/student/list', name: 'list_student')]
 
-    public function listStudent(StudentRepository $StudentRepository): Response
+    public function listStudents(StudentRepository $StudentRepository): Response
     {
         $students = $StudentRepository->findBy([], ["firstName" => "ASC"]);
 
         return $this->render('student/index.html.twig', [
             'controller_name' => 'StudentController',
+            'view_name' => 'student/index.html.twig',
             "students" => $students
         ]);
     }

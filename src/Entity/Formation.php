@@ -15,11 +15,12 @@ class Formation
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $name = null;
 
     #[ORM\OneToMany(targetEntity: Session::class, mappedBy: 'formation', orphanRemoval: true)]
     private Collection $sessions;
+
+    #[ORM\Column(length: 50)]
+    private ?string $nameFormation = null;
 
     public function __construct()
     {
@@ -31,17 +32,6 @@ class Formation
         return $this->id;
     }
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): static
-    {
-        $this->name = $name;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Session>
@@ -71,5 +61,21 @@ class Formation
         }
 
         return $this;
+    }
+
+    public function getNameFormation(): ?string
+    {
+        return $this->nameFormation;
+    }
+
+    public function setNameFormation(string $nameFormation): static
+    {
+        $this->nameFormation = $nameFormation;
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return $this->nameFormation;
     }
 }

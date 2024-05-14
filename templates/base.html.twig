@@ -1,18 +1,78 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-        {% endblock %}
 
-        {% block javascripts %}
-            {{ importmap() }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    {% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/uikit.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/grid.css') }}">
+    {% endblock %}
+
+
+</head>
+{# {% block body %}{% endblock %} #}
+<body>
+    <header id="pageHeader">
+        <nav class="uk-navbar-container">
+            <div class="uk-container">
+                <div uk-navbar>
+
+                    <div class="uk-navbar-center">
+
+                        <div class="uk-navbar-center-left">
+                            <ul class="uk-navbar-nav">
+                                <li><a href="{{ asset('formation/list')}}">Formations</a></li>
+                                <li><a href="">Programmes</a></li>
+                            </ul>
+                        </div>
+                        <a class="uk-navbar-item uk-logo container-logo" href="#"><img class="logo" src="{{ asset('img/education.jpg') }}" alt="Education tagline"></a>
+                        <div class="uk-navbar-center-right">
+                            <ul class="uk-navbar-nav">
+                                <li><a href="{{ asset('session/list') }}">Sessions</a></li>
+                                <li><a href="{{ asset('teatcher/list') }}">Formateurs</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="navigation-controller">
+                <div>
+                    <span class="link-color">Controller: </span><span>{{ controller_name }}</span>
+                </div>
+                <div>
+                    <span class="link-color">Controller: </span><span>{{ view_name }}</span>
+                </div>
+
+            </div>
+
+        </nav>
+
+
+    </header>
+    <article id="mainArticle">
+        <div class="uk-container">
+            {% block body %}{% endblock %}
+        </div>
+    </article>
+
+    <footer id="pageFooter">
+        <div class="uk-padding uk-column-1-2 uk-text-center">
+            <p>col-1</p>
+            <p>col-2</p>
+        </div>
+    </footer>
+    {% block javascripts %}
+
+    <script src="{{ asset('js/uikit.js') }}"></script>
+    <script src="{{ asset('js/uikit-icons.js') }}"></script>
+    {{ importmap() }}
+    {% endblock %}
+</body>
+
 </html>
