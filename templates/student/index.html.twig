@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello StudentController!{% endblock %}
+
+{% block body %}
+
+<div class="wrapper">
+    <h1>{{ controller_name }}!</h1>
+</div>
+
+<h1>Liste des stagiaires</h1>
+{% for student in students %}
+{{ student }}
+{# <a href="{{ path('edit_employe', {'id' : student.id}) }}">{{ student }}</a> {{ student.student.firstName }}<br>
+<a class="btn btn-warning" href="{{ path('edit_employe', {'id': student.id }) }}">Editer</a>
+<a class="btn btn-danger" href="{{ path('delete_employe', {'id': student.id }) }}">Supprimer</a><br> #}
+{% endfor %}
+{# <a href="{{ path('new_employe') }}" class="btn btn-success">Ajouter un student</a><br> #}
+
+
+
+
+<div id="footer">
+    <div class="input-controller">
+
+        <div>
+            <span class="color-accent">Controller:</span>
+            <code>C:/laragon/www/session/src/Controller/StudentController.php</code>
+        </div>
+        
+        <div>
+            <span class="color-accent">Views</span>
+            <code>C:/laragon/www/session/templates/student/index.html.twig</code>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

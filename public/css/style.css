@@ -1,0 +1,58 @@
+* {
+    box-sizing: border-box;
+    margin: 0; 
+    padding: 0; 
+}
+:root {
+    --color: #fff;
+    --primary-color: #ccc;
+    --secondary-color:#888888  ;
+    --link-color: rgb(0, 122, 156);
+    --hover-color: rgb(33, 53, 52);
+    --border-color: #ccc;
+    --background-color: rgba(29, 32, 47, 1);
+    --accent-color: rgb(0, 122, 156);
+    /*--highlight-color:;
+    --text-color:;
+    --error-color:;
+    --warning-color:;
+    --success-color:;*/
+    /*--background-color-light:;*/
+  }
+  html,
+  body {
+    background-color: var(--background-color) !important;
+    color: var(--primary-color) !important;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--primary-color) !important;
+  }
+.wrapper {
+    text-align: center;
+}
+.input-controller {
+    display: flex;
+    justify-content: space-around;
+}
+
+.color-accent {
+    color: var(--accent-color) !important;
+}
+#footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 2.5rem;
+    width: 100%;
+    height: 40px; /* Hauteur du pied de page */
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box; /* Incluez le padding et le border dans la largeur/hauteur */
+}

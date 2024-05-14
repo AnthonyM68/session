@@ -1,0 +1,24 @@
+{
+    "folder-color.pathColors": [
+        {
+            "folderPath": "session\\src\\Controller\\",
+            "color": "foldercolorizer.red"
+        },
+        {
+            "folderPath": "session\\src\\Repository\\",
+            "color": "foldercolorizer.LightSteelBlue"
+        },
+        {
+            "folderPath": "session\\templates\\base.html.twig\\",
+            "color": "foldercolorizer.LightYellow"
+        },
+        {
+            "folderPath": "session\\src\\Controller\\CourseController.php\\",
+            "color": "foldercolorizer.red"
+        },
+        {
+            "folderPath": "session\\src\\Controller\\SessionController.php\\",
+            "color": "foldercolorizer.red"
+        }
+    ]
+}
