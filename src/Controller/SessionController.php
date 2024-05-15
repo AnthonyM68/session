@@ -16,7 +16,26 @@ class SessionController extends AbstractController
     // liste des formations 
     // detail formation 
     // ajout etdit d'une formation 
-    
+
+
+
+    // # HOME  #
+
+    #[Route('/formation', name: 'formation')]
+    public function index(FormationRepository $FormationRepository): Response
+    {
+        $formations = $FormationRepository->findAll();
+
+        return $this->render('home/index.html.twig', [
+            'controller_name' => 'SessionController',
+            'view_name' => 'home/index.html.twig',
+            "formations" => $formations
+        ]);
+    }
+
+
+
+
     #[Route('/formation/list', name: 'list_formation')]
     public function listFormation(FormationRepository $FormationRepository): Response
     {
