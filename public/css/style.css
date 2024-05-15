@@ -1,37 +1,25 @@
 * {
-    box-sizing: border-box;
-    margin: 0; 
-    padding: 0; 
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 :root {
-    --color: #fff;
-    --primary-color: #ccc;
-    --secondary-color:#888888  ;
-    --link-color: rgb(0, 122, 156);
-    --hover-color: rgb(33, 53, 52);
-    --border-color: #ccc;
-    --background-color: rgb(227, 227, 227);
-    --accent-color: rgb(0, 122, 156);
-    /*--highlight-color:;
+  --color: #fff;
+  --primary-color: #ccc;
+  --secondary-color: #888888;
+  --link-color: rgb(0, 122, 156);
+  --hover-color: rgb(33, 53, 52);
+  --border-color: #ccc;
+  --background-color: rgb(227, 227, 227);
+  --accent-color: rgb(0, 122, 156);
+  /*--highlight-color:;
     --text-color:;*/
-    --error-color: red;
-    /*--warning-color:;
+  --error-color: red;
+  /*--warning-color:;
     --success-color:;*/
-    /*--background-color-light:;*/
-  }
-  html,
-  body {
-    background-color: var(--background-color) !important;
-    color: var(--secondary-color) !important;
-  }
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: var(--secondary-color) !important;
-  }
+  /*--background-color-light:;*/
+}
+/* COLOR */
 /* .card h1 {
   color: var(--color) !important;
 } */
@@ -44,16 +32,25 @@
 .background-color {
   background-color: var(--background-color) !important;
 }
-.navigation-controller {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+html,
+body {
+  background-color: var(--background-color) !important;
+  color: var(--secondary-color) !important;
 }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--secondary-color) !important;
+}
+
 /* navbar*/
 .container-logo {
-  width:100%;
+  width: 100%;
   object-fit: cover;
-  padding-top:10px;
+  padding: 10px;
 }
 .logo {
   width: 100%;
@@ -65,7 +62,7 @@
 }
 /* article */
 #mainArticle {
-  padding-top:2.5rem;
+  padding-top: 2.5rem;
 }
 /* card-home */
 .card-container {
@@ -86,7 +83,7 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-size: cover; 
+  background-size: cover;
   z-index: 1 !important;
 }
 .card .card-image::before {
@@ -101,11 +98,10 @@
 }
 .card .card-content {
   position: absolute;
-  bottom: 20px; 
+  bottom: 20px;
   left: 50%;
-  transform: translateX(-50%); 
+  transform: translateX(-50%);
   z-index: 2 !important;
   color: white;
   text-align: center;
 }
-
