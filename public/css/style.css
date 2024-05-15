@@ -32,14 +32,17 @@
   h6 {
     color: var(--secondary-color) !important;
   }
-.card h1 {
+/* .card h1 {
   color: var(--color) !important;
-}
+} */
 .link-color {
   color: var(--link-color) !important;
 }
 .error-color {
   color: var(--error-color) !important;
+}
+.background-color {
+  background-color: var(--background-color) !important;
 }
 .navigation-controller {
   display: flex;
