@@ -4,37 +4,44 @@
 
 {% block body %}
 
-
+{% if slug == "category" %}
 {# list cateories #}
 {% if categories|default %}
 
 <h1>Liste des catégories</h1>
-    {% for categorie in categories %}
-        {{ categorie }}
-    {% endfor %}
-
+{% for categorie in categories %}
+{{ categorie }}
+{% endfor %}
+{% else %}
+<h2>Aucune informations en base de données</h2>
+{% endif %}
 {% endif %}
 
-
-
+{% if slug == "course" %}
 {# list course #}
 {% if course|default %}
 
 <h1>Liste des cours</h1>
-    {% for course in courses %}
-        {{ course }}
-    {% endfor %}
+{% for course in courses %}
+{{ course }}
+{% endfor %}
+{% else %}
+<h2>Aucune informations en base de données</h2>
+{% endif %}
 {% endif %}
 
 
-
+{% if slug == "program" %}
 {# list program #}
 {% if programs|default %}
 
 <h1>Liste des cours</h1>
-    {% for program in programs %}
-        {{ program }}
-    {% endfor %}
+{% for program in programs %}
+{{ program }}
+{% endfor %}
+{% else %}
+<h2>Aucune informations en base de données</h2>
+{% endif %}
 {% endif %}
 
 {% endblock %}

@@ -8,26 +8,28 @@
 
 {% if sessions|default %}
 
-    <h1>Liste des stagiaires</h1>
-    <ul>
-        {% for student in students %}
-            <li>{{ student }}</li>
-        {% endfor %}
-    </ul>
-
+<h1>Liste des stagiaires</h1>
+<ul>
+    {% for student in students %}
+    <li>{{ student }}</li>
+    {% endfor %}
+</ul>
+{% else %}
+<h2>Aucune informations en base de données</h2>
 {% endif %}
 
 {# list user #}
 
 {% if users|default %}
 
-    <h1>Liste des stagiaires</h1>
-    <ul>
-        {% for user in users %}
-            <li>{{ user }}</li>
-        {% endfor %}
-    </ul>
-
+<h1>Liste des stagiaires</h1>
+<ul>
+    {% for user in users %}
+    <li>{{ user }}</li>
+    {% endfor %}
+</ul>
+{% else %}
+<h2>Aucune informations en base de données</h2>
 {% endif %}
 
 

@@ -23,10 +23,8 @@ class CourseController extends AbstractController
     // detail course 
     // delete course
 
-    /**
-     * Categories
-     *
-     */
+    /* Categories */
+
     #[Route('/category/list', name: 'app_category')]
     public function listCategory(CategoryRepository $CategoryRepository): Response
     {
@@ -34,6 +32,8 @@ class CourseController extends AbstractController
 
         return $this->render('course/index.html.twig', [
             'controller_name' => 'CourseController',
+            'view_name' => 'course/course.html.twig',
+            'slug' => 'category',
             "categories" => $categories
         ]);
     }
@@ -65,9 +65,7 @@ class CourseController extends AbstractController
             'controller_name' => 'CourseController',
         ]);
     }
-    /**
-     *  COURSE
-     */
+    /* COURSE */
     #[Route('/course/list', name: 'list_course')]
     public function listCours(CourseRepository $CourseRepository): Response
     {
@@ -75,6 +73,7 @@ class CourseController extends AbstractController
 
         return $this->render('course/index.html.twig', [
             'controller_name' => 'CourseController',
+            'slug' => 'course',
             "courses" => $courses
         ]);
     }
@@ -104,6 +103,7 @@ class CourseController extends AbstractController
         return $this->render('course/index.html.twig', [
             'controller_name' => 'CourseController',
             'view_name' => 'course/index.html.twig',
+            'slug' => 'program',
             "programs" => $programs
         ]);
     }

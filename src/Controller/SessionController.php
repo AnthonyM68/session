@@ -17,9 +17,7 @@ class SessionController extends AbstractController
     // detail formation 
     // ajout etdit d'une formation 
 
-
-
-    // # HOME  #
+    /* HOME */
 
     #[Route('/formation', name: 'formation')]
     public function index(FormationRepository $FormationRepository): Response
@@ -29,7 +27,49 @@ class SessionController extends AbstractController
         return $this->render('home/index.html.twig', [
             'controller_name' => 'SessionController',
             'view_name' => 'home/index.html.twig',
+            'slug' => 'formation',
             "formations" => $formations
+        ]);
+    }
+    /* TRAINER */
+    #[Route('/trainer/list', name: 'list_trainer')]
+    public function listTrainer(FormationRepository $FormationRepository): Response
+    {
+        // recherche les formateurs
+        return $this->render('trainer/trainer.html.twig', [
+            'controller_name' => 'SessionController',
+            'view_name' => 'trainer/trainer.html.twig',
+            'slug' => 'trainer',
+            "trainer" => null
+        ]);
+    }
+    /* SESSION */
+    #[Route('/session/list', name: 'list_session')]
+    public function listSession(SessionRepository $SessionRepository): Response
+    {
+        $sessions = $SessionRepository->findAll();
+
+        return $this->render('session/index.html.twig', [
+            'controller_name' => 'SessionController',
+            'view_name' => 'session/index.html.twig',
+            'slug' => 'session',
+            "sessions" => $sessions
+        ]);
+    }
+
+    #[Route('/session/{id}/detail', name: 'detail_session')]
+    public function detailsSession(): Response
+    {
+        return $this->render('session/index.html.twig', [
+            'controller_name' => 'SessionController',
+        ]);
+    }
+
+    #[Route('/session/{id}/edit', name: 'edit_session')]
+    public function editSession(): Response
+    {
+        return $this->render('session/index.html.twig', [
+            'controller_name' => 'SessionController',
         ]);
     }
 
@@ -44,6 +84,7 @@ class SessionController extends AbstractController
         return $this->render('session/index.html.twig', [
             'controller_name' => 'SessionController',
             'view_name' => 'session/index.html.twig',
+            'slug' => 'formation',
             "formations" => $formations
         ]);
     }
@@ -65,46 +106,5 @@ class SessionController extends AbstractController
     }
 
 
-    /* SESSION */
 
-
-    #[Route('/session/list', name: 'list_session')]
-    public function listSession(SessionRepository $SessionRepository): Response
-    {
-        $sessions = $SessionRepository->findAll();
-
-        return $this->render('session/index.html.twig', [
-            'controller_name' => 'SessionController',
-            'view_name' => 'session/index.html.twig',
-            "sessions" => $sessions
-        ]);
-    }
-
-    #[Route('/session/{id}/detail', name: 'detail_session')]
-    public function detailsSession(): Response
-    {
-        return $this->render('session/index.html.twig', [
-            'controller_name' => 'SessionController',
-        ]);
-    }
-
-    #[Route('/session/{id}/edit', name: 'edit_session')]
-    public function editSession(): Response
-    {
-        return $this->render('session/index.html.twig', [
-            'controller_name' => 'SessionController',
-        ]);
-    }
-
-    /* TRAINER */
-    #[Route('/trainer/list', name: 'list_trainer')]
-    public function listTrainer(FormationRepository $FormationRepository): Response
-    {
-        // recherche les formateurs
-        return $this->render('trainer/trainer.html.twig', [
-            'controller_name' => 'SessionController',
-            'view_name' => 'trainer/trainer.html.twig',
-            "trainer" => null
-        ]);
-    }
 }
