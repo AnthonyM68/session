@@ -7,7 +7,22 @@
 {# formation #}
 {% if formations|default %}
 
-<div class="card-container">
+<div class="uk-child-width-1-2@s uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
+    {% for formation in formations %}
+    <div>
+        <div class="uk-card uk-card-default">
+            <div class="uk-card-media-top" style="background-image: url('{{ asset('img/' ~ formation.name ~ '.jpg') }}')"></div>
+            <div class="uk-card-body">
+                <h3 class="uk-card-title">{{ formation.name }}</h3>
+                <p>Autre infos session</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+{# <div class="card-container">
     {% for formation in formations %}
     <div class="card">
         <div class="card-image" style="background-image: url('{{ asset('img/' ~ formation.name ~ '.jpg') }}')"></div>
@@ -16,7 +31,7 @@
         </div>
     </div>
     {% endfor %}
-</div>
+</div> #}
 
 {% endif %}
 {% endblock %}

@@ -34,7 +34,7 @@ class SessionController extends AbstractController
     }
 
 
-
+    /* FORMATION  */
 
     #[Route('/formation/list', name: 'list_formation')]
     public function listFormation(FormationRepository $FormationRepository): Response
@@ -93,6 +93,18 @@ class SessionController extends AbstractController
     {
         return $this->render('session/index.html.twig', [
             'controller_name' => 'SessionController',
+        ]);
+    }
+
+    /* TRAINER */
+    #[Route('/trainer/list', name: 'list_trainer')]
+    public function listTrainer(FormationRepository $FormationRepository): Response
+    {
+        // recherche les formateurs
+        return $this->render('trainer/trainer.html.twig', [
+            'controller_name' => 'SessionController',
+            'view_name' => 'trainer/trainer.html.twig',
+            "trainer" => null
         ]);
     }
 }

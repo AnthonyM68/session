@@ -16,63 +16,16 @@
 </head>
 {# navbar #}
 <body>
-    <header id="pageHeader">
-        <nav class="uk-navbar-container">
-            <div class="uk-container">
-                <div uk-navbar>
-
-                    <div class="uk-navbar-center">
-
-                        <div class="uk-navbar-center-left">
-                            <ul class="uk-navbar-nav">
-                                <li><a href="{{ asset('session/list') }}">Sessions</a></li>
-                                <li><a href="{{ asset('formation/list') }}">Formations</a></li>
-
-                            </ul>
-                        </div>
-
-                        <a class="uk-navbar-item uk-logo container-logo" href="#">
-                            <img class="logo" src="{{ asset('img/education.jpg') }}" alt="Education tagline">
-                        </a>
-
-                        <div class="uk-navbar-center-right">
-                            <ul class="uk-navbar-nav">
-                                <li><a href="{{ asset('program/list') }}">Programmes</a></li>
-                                <li><a href="{{ asset('user/list') }}">Formateurs</a></li>
-                            </ul>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-            <div class="navigation-controller">
-                <div>
-                    <span class="link-color">Controller: </span><span class="error-color">{{ controller_name }}</span>
-                </div>
-                <div>
-                    <span class="link-color">View: </span><span class="error-color">{{ view_name }}</span>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-
+    {# header #}
+    <header id="pageHeader">{% include 'navbar/navbar.html.twig' %}</header>
     {# article  #}
     <article id="mainArticle">
         <div class="uk-container">
             {% block body %}{% endblock %}
         </div>
     </article>
-
     {# footer #}
-    <footer id="pageFooter">
-        <div class="uk-padding uk-column-1-2 uk-text-center">
-            <p>col-1</p>
-            <p>col-2</p>
-        </div>
-    </footer>
-
+    <footer id="pageFooter">{% include 'footer/footer.html.twig' %}</footer>
 
     {% block javascripts %}
     <script src="{{ asset('js/uikit.js') }}"></script>
