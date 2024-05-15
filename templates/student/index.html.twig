@@ -4,16 +4,31 @@
 
 {% block body %}
 
-<div class="wrapper">
-    <h1>{{ controller_name }}!</h1>
-</div>
+{# list students #}
 
-<h1>Liste des stagiaires</h1>
-<ul>
-{% for student in students %}
-<li>{{ student }}</li>
-{% endfor %}
-</ul>
+{% if sessions|default %}
+
+    <h1>Liste des stagiaires</h1>
+    <ul>
+        {% for student in students %}
+            <li>{{ student }}</li>
+        {% endfor %}
+    </ul>
+
+{% endif %}
+
+{# list user #}
+
+{% if users|default %}
+
+    <h1>Liste des stagiaires</h1>
+    <ul>
+        {% for user in users %}
+            <li>{{ user }}</li>
+        {% endfor %}
+    </ul>
+
+{% endif %}
 
 
 {% endblock %}

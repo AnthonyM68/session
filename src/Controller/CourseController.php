@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\CourseRepository;
+use App\Repository\ProgramRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +30,7 @@ class CourseController extends AbstractController
     #[Route('/category/list', name: 'app_category')]
     public function listCategory(CategoryRepository $CategoryRepository): Response
     {
-        $categories= $CategoryRepository->findBy([], ["name" => "ASC"]);
+        $categories = $CategoryRepository->findBy([], ["name" => "ASC"]);
 
         return $this->render('course/index.html.twig', [
             'controller_name' => 'CourseController',
@@ -70,16 +71,13 @@ class CourseController extends AbstractController
     #[Route('/course/list', name: 'list_course')]
     public function listCours(CourseRepository $CourseRepository): Response
     {
-        $courses = $CourseRepository->findBy();
+        $courses = $CourseRepository->findAll();
 
         return $this->render('course/index.html.twig', [
             'controller_name' => 'CourseController',
             "courses" => $courses
         ]);
     }
-
-
-
 
     #[Route('/course/{id}/detail', name: 'detail_course')]
     public function detailCourse(): Response
@@ -93,6 +91,36 @@ class CourseController extends AbstractController
     {
         return $this->render('course/index.html.twig', [
             'controller_name' => 'CourseController',
+        ]);
+    }
+    /**
+     *  PROGRAMS
+     */
+    #[Route('/program/list', name: 'list_program')]
+    public function listProgram(ProgramRepository $ProgramRepository): Response
+    {
+        $programs = $ProgramRepository->findAll();
+
+        return $this->render('course/index.html.twig', [
+            'controller_name' => 'CourseController',
+            'view_name' => 'course/index.html.twig',
+            "programs" => $programs
+        ]);
+    }
+    #[Route('/program/{id}/detail', name: 'detail_program')]
+    public function detailProgram(): Response
+    {
+        return $this->render('course/index.html.twig', [
+            'controller_name' => 'CourseController',
+            'view_name' => 'course/index.html.twig',
+        ]);
+    }
+    #[Route('/course/{id}/delete', name: 'delete_course')]
+    public function deleteProgram(): Response
+    {
+        return $this->render('course/index.html.twig', [
+            'controller_name' => 'CourseController',
+            'view_name' => 'course/index.html.twig',
         ]);
     }
 }

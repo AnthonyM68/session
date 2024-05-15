@@ -26,11 +26,34 @@
         },
         {
             "folderPath": "session\\",
+            "color": "foldercolorizer.Coral"
+        },
+        {
+            "folderPath": "session\\templates\\center_formation\\"
+        },
+        {
+            "folderPath": "session\\templates\\course\\index.html.twig\\",
             "color": "foldercolorizer.green"
         },
         {
+            "folderPath": "session\\templates\\student\\",
+            "color": "foldercolorizer.Coral"
+        },
+        {
             "folderPath": "session\\templates\\course\\",
-            "color": "foldercolorizer.White"
+            "color": "foldercolorizer.Coral"
+        },
+        {
+            "folderPath": "session\\templates\\student\\index.html.twig\\",
+            "color": "foldercolorizer.green"
+        },
+        {
+            "folderPath": "session\\index.html.twig\\",
+            "color": "foldercolorizer.green"
+        },
+        {
+            "folderPath": "session\\src\\Entity\\",
+            "color": "foldercolorizer.AliceBlue"
         }
     ]
 }

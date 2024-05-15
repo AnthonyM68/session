@@ -1,37 +1,73 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SessionController!{% endblock %}
+{% block title %}Formations{% endblock %}
 
 {% block body %}
-<div class="wrapper">
-    <h1>{{ controller_name }}!</h1>
-</div>
 
+{# session #}
+{% if sessions|default %}
 
-
-
-{% if formations|default %}
-<div class="uk-child-width-1-2@m" uk-grid>
-    <div>
-        
-        {% for formation in formations %}
-
-        <div class="uk-card uk-card-default">
-            <div class="uk-card-media-top">
-        
-                 <img src="" alt=""> 
-            </div>
-            <div class="uk-card-body">
-                <h3 class="uk-card-title">{{ formation.nameFormation }}</h3>
-                <p>Descriptif</p>
-            </div>
-        </div>
-
+ <table class="uk-table uk-table-hover uk-table-divider">
+    <thead>
+        <tr>
+            <th>Session id:</th>
+            <th>Formation id:</th>
+            <th>Places:</th>
+            <th>Date début</th>
+            <th>Date fin</th>
+            <th>Inscrits</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for session in sessions %}
+        <tr>
+            <td>{{ session.id }}</td>
+            <td>{{ session.formation.id }}</td>
+            <td>{{ session.maxstudents }}</td>
+            <td>{{ session.datestart | date("j-m-Y") }}</td>
+            <td>{{ session.dateend | date("j-m-Y") }}</td>
+            <td>{{ session.reservations }}</td>
+        </tr>
         {% endfor %}
-
-        
-    </div>
-<div>
-
+    </tbody>
+</table> 
 {% endif %}
+
+
+{# formation #}
+{% if formations|default %}
+
+
+<table class="uk-table uk-table-hover uk-table-divider">
+    <thead>
+        <tr>
+            <th>Formation id:</th>
+            <th>Intitulé:</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for formation in formations %}
+        <tr>
+            <td>{{ formation.id }}</td>
+            <td>{{ formation.name }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table> 
+{% endif %}
+
+{# 
+<div class="card-container">
+    {% for formation in formations %}
+    <div class="card">
+        <div class="card-image" style="background-image: url('{{ asset('img/' ~ formation.nameFormation ~ '.jpg') }}')"></div>
+        <div class="card-content">
+            <h1>{{ formation.nameFormation }}</h1>
+        </div>
+    </div>
+    {% endfor %}
+</div> #}
+
+
 {% endblock %}

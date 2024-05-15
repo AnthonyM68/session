@@ -14,7 +14,7 @@
 
 
 </head>
-{# {% block body %}{% endblock %} #}
+{# navbar #}
 <body>
     <header id="pageHeader">
         <nav class="uk-navbar-container">
@@ -25,15 +25,20 @@
 
                         <div class="uk-navbar-center-left">
                             <ul class="uk-navbar-nav">
-                                <li><a href="{{ asset('formation/list')}}">Formations</a></li>
-                                <li><a href="">Programmes</a></li>
+                                <li><a href="{{ asset('session/list') }}">Sessions</a></li>
+                                <li><a href="{{ asset('formation/list') }}">Formations</a></li>
+
                             </ul>
                         </div>
-                        <a class="uk-navbar-item uk-logo container-logo" href="#"><img class="logo" src="{{ asset('img/education.jpg') }}" alt="Education tagline"></a>
+
+                        <a class="uk-navbar-item uk-logo container-logo" href="#">
+                            <img class="logo" src="{{ asset('img/education.jpg') }}" alt="Education tagline">
+                        </a>
+
                         <div class="uk-navbar-center-right">
                             <ul class="uk-navbar-nav">
-                                <li><a href="{{ asset('session/list') }}">Sessions</a></li>
-                                <li><a href="{{ asset('teatcher/list') }}">Formateurs</a></li>
+                                <li><a href="{{ asset('program/list') }}">Programmes</a></li>
+                                <li><a href="{{ asset('user/list') }}">Formateurs</a></li>
                             </ul>
                         </div>
 
@@ -43,32 +48,33 @@
             </div>
             <div class="navigation-controller">
                 <div>
-                    <span class="link-color">Controller: </span><span>{{ controller_name }}</span>
+                    <span class="link-color">Controller: </span><span class="error-color">{{ controller_name }}</span>
                 </div>
                 <div>
-                    <span class="link-color">Controller: </span><span>{{ view_name }}</span>
+                    <span class="link-color">View: </span><span class="error-color">{{ view_name }}</span>
                 </div>
-
             </div>
-
         </nav>
-
-
     </header>
+
+
+    {# article  #}
     <article id="mainArticle">
         <div class="uk-container">
             {% block body %}{% endblock %}
         </div>
     </article>
 
+    {# footer #}
     <footer id="pageFooter">
         <div class="uk-padding uk-column-1-2 uk-text-center">
             <p>col-1</p>
             <p>col-2</p>
         </div>
     </footer>
-    {% block javascripts %}
 
+
+    {% block javascripts %}
     <script src="{{ asset('js/uikit.js') }}"></script>
     <script src="{{ asset('js/uikit-icons.js') }}"></script>
     {{ importmap() }}

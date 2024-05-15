@@ -20,7 +20,7 @@ class Formation
     private Collection $sessions;
 
     #[ORM\Column(length: 50)]
-    private ?string $nameFormation = null;
+    private ?string $name = null;
 
     public function __construct()
     {
@@ -63,19 +63,19 @@ class Formation
         return $this;
     }
 
-    public function getNameFormation(): ?string
+    public function getName(): ?string
     {
-        return $this->nameFormation;
+        return $this->name;
     }
 
-    public function setNameFormation(string $nameFormation): static
+    public function setName(string $name): static
     {
-        $this->nameFormation = $nameFormation;
+        $this->name = $name;
 
         return $this;
     }
     public function __toString()
     {
-        return $this->nameFormation;
+        return $this->name;
     }
 }

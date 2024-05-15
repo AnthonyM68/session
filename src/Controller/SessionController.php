@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
+use App\Repository\SessionRepository;
 use App\Repository\FormationRepository;
-use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -28,7 +29,6 @@ class SessionController extends AbstractController
         ]);
     }
 
-
     #[Route('/formation/{id}/detail', name: 'detail_formation')]
     public function detailFormation(): Response
     {
@@ -37,9 +37,40 @@ class SessionController extends AbstractController
         ]);
     }
 
-
     #[Route('/formation/{id}/edit', name: 'edit_formation')]
     public function editFormation(): Response
+    {
+        return $this->render('session/index.html.twig', [
+            'controller_name' => 'SessionController',
+        ]);
+    }
+
+
+    /* SESSION */
+
+
+    #[Route('/session/list', name: 'list_session')]
+    public function listSession(SessionRepository $SessionRepository): Response
+    {
+        $sessions = $SessionRepository->findAll();
+
+        return $this->render('session/index.html.twig', [
+            'controller_name' => 'SessionController',
+            'view_name' => 'session/index.html.twig',
+            "sessions" => $sessions
+        ]);
+    }
+
+    #[Route('/session/{id}/detail', name: 'detail_session')]
+    public function detailsSession(): Response
+    {
+        return $this->render('session/index.html.twig', [
+            'controller_name' => 'SessionController',
+        ]);
+    }
+
+    #[Route('/session/{id}/edit', name: 'edit_session')]
+    public function editSession(): Response
     {
         return $this->render('session/index.html.twig', [
             'controller_name' => 'SessionController',

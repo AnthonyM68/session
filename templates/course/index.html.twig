@@ -3,50 +3,38 @@
 {% block title %}Hello CourseController!{% endblock %}
 
 {% block body %}
-<div class="wrapper">
-    <h1>{{ controller_name }}!</h1>
-</div>
 
 
+{# list cateories #}
 {% if categories|default %}
 
 <h1>Liste des catégories</h1>
+    {% for categorie in categories %}
+        {{ categorie }}
+    {% endfor %}
 
-{% for categorie in categories %}
-{{ categorie }}
-{# <a href="{{ path('edit_employe', {'id' : student.id}) }}">{{ student }}</a> {{ student.student.firstName }}<br>
-<a class="btn btn-warning" href="{{ path('edit_employe', {'id': student.id }) }}">Editer</a>
-<a class="btn btn-danger" href="{{ path('delete_employe', {'id': student.id }) }}">Supprimer</a><br> #}
-{% endfor %}
-{# <a href="{{ path('new_employe') }}" class="btn btn-success">Ajouter un student</a><br> #}
 {% endif %}
 
+
+
+{# list course #}
 {% if course|default %}
 
-<h1>Liste des stagiaires</h1>
-
-{% for course in courses %}
-{{ course }}
-{# <a href="{{ path('edit_employe', {'id' : student.id}) }}">{{ student }}</a> {{ student.student.firstName }}<br>
-<a class="btn btn-warning" href="{{ path('edit_employe', {'id': student.id }) }}">Editer</a>
-<a class="btn btn-danger" href="{{ path('delete_employe', {'id': student.id }) }}">Supprimer</a><br> #}
-{% endfor %}
-{# <a href="{{ path('new_employe') }}" class="btn btn-success">Ajouter un student</a><br> #}
+<h1>Liste des cours</h1>
+    {% for course in courses %}
+        {{ course }}
+    {% endfor %}
 {% endif %}
 
-<div id="footer">
-    <div class="input-controller">
 
-        <div>
-            <span class="span-color">Controller:</span>
-            <code>C:/laragon/www/session/src/Controller/StudentController.php</code>
-        </div>
 
-        <div>
-            <span class="span-color">Views</span>
-            <code>C:/laragon/www/session/templates/student/index.html.twig</code>
-        </div>
+{# list program #}
+{% if programs|default %}
 
-    </div>
-</div>
+<h1>Liste des cours</h1>
+    {% for program in programs %}
+        {{ program }}
+    {% endfor %}
+{% endif %}
+
 {% endblock %}
