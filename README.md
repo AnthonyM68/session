@@ -12,7 +12,7 @@ Chaque session de formation possède un programme constitué d'un ou plusieurs c
 
 # Bonus :
 
-- nous utiliserons symfonysur ce projet, ainsi que pour la création d'entrées en utilisatn la gestion de forms et d'users
+- nous utiliserons symfony sur ce projet, ainsi que pour la création d'entrées en utilisant la gestion de forms et d'users
 
 # Schémas :
 
