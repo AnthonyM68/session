@@ -18,6 +18,11 @@ class Course
     #[ORM\OneToMany(targetEntity: Program::class, mappedBy: 'course')]
     private Collection $programs;
 
+    #[ORM\Column(length: 50)]
+    private ?string $nameCourse = null;
+
+
+
     public function __construct()
     {
         $this->programs = new ArrayCollection();
@@ -54,6 +59,18 @@ class Course
                 $program->setCourse(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNameCourse(): ?string
+    {
+        return $this->nameCourse;
+    }
+
+    public function setNameCourse(string $nameCourse): static
+    {
+        $this->nameCourse = $nameCourse;
 
         return $this;
     }

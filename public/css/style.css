@@ -10,7 +10,7 @@
   --link-color: #e46030;
   --hover-color: rgb(33, 53, 52);
   --border-color: #ccc;
-  --background-color: rgb(227, 227, 227);
+  --background-color: #fff;
   --accent-color: rgb(0, 122, 156);
   /*--highlight-color:;
     --text-color:;*/
@@ -21,7 +21,7 @@
 }
 html,
 body {
-  background-color: transparent !important;
+  background-color: var(--background-color) !important;
   color: var(--secondary-color) !important;
 }
 
@@ -48,6 +48,10 @@ h6 {
 a:hover {
   color: var(--link-color) !important;
 }
+.separator  {
+  width: 100%;
+  height:100px
+}
 /* navbar*/
 .container-logo {
   width: 100%;
@@ -66,7 +70,7 @@ a:hover {
 
 /* HOME */
 .parallax {
-  background-image: url("./../img/home.jpg");
+  /*background-image: url("./../img/home.jpg");*/
   min-height: 100vh; 
   background-attachment: fixed;
   background-position: center;

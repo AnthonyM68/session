@@ -20,7 +20,46 @@ class StudentRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Student::class);
     }
+    //  $sql = "SELECT id
+    //  FROM student
+    //  WHERE id NOT IN (
 
+    //  SELECT student_id
+    //  FROM session_student 
+    //  WHERE session_id = 1)";
+
+    
+    public function getNotRegister($sessionId): array
+    {
+        //session_student
+
+        $st = $this->createQueryBuilder('session_student: session_student');
+
+
+        $query = $this->createQueryBuilder('s')
+            ->where($query->expr()->notIn('st.id', $st->select('st.student_id')->getDQL()))
+            ->setParameter('sessionId', $sessionId)
+
+        ;
+
+        return $query->getQuery()->getSql();
+    }
+
+//     public function getNotRegister($sessionId): array
+// {
+//     $subQuery = $this->_em->createQueryBuilder()
+//         ->select('ss.student_id')
+//         ->from('YourBundleName:SessionStudent', 'ss')
+//         ->where('ss.session_id = :sessionId');
+
+//     $qb = $this->_em->createQueryBuilder();
+//     $qb->select('s.id')
+//         ->from('YourBundleName:Student', 's')
+//         ->where($qb->expr()->notIn('s.id', $subQuery->getDQL()))
+//         ->setParameter('sessionId', $sessionId);
+
+//     return $qb->getQuery()->getResult();
+// }
 //    /**
 //     * @return Student[] Returns an array of Student objects
 //     */

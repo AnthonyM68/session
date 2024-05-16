@@ -19,9 +19,9 @@ class StudentController extends AbstractController
 
     #[Route('/student/list', name: 'list_student')]
 
-    public function listStudents(StudentRepository $StudentRepository): Response
+    public function listStudents(StudentRepository $studentRepository): Response
     {
-        $students = $StudentRepository->findBy([], ["firstName" => "ASC"]);
+        $students = $studentRepository->findBy([], ["firstName" => "ASC"]);
 
         return $this->render('student/student.html.twig', [
             'controller_name' => 'StudentController',

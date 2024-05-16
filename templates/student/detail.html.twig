@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formations{% endblock %}
+
+{% block body %}
+<div class="uk-container">
+
+    {# session #}
+    {% if slug == 'detail' %}
+
+    <h1>Détails de la sessions</h1>
+
+    {% if student|default %}
+
+    <table class="uk-table uk-table-responsive uk-table-hover uk-table-divider uk-table-small">
+        <thead>
+            <tr>
+                <th>Session id:</th>
+                <th>Formation id:</th>
+                <th>Places:</th>
+                <th>Date début</th>
+                <th>Date fin</th>
+                <th>Inscrits</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ session.id }}</td>
+                <td>{{ session.formation.id }}</td>
+                <td>{{ session.maxstudents }}</td>
+                <td>{{ session.datestart | date("j-m-Y") }}</td>
+                <td>{{ session.dateend | date("j-m-Y") }}</td>
+                <td>{{ session.reservations }}</td>
+            </tr>
+        </tbody>
+    </table>
+    {% endif %}
+
+    {% else %}
+    <h2>Aucune informations en base de données</h2>
+    {% endif %}
+    {% endif %}
+</div>
+{% endblock %}

@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Session;
 use App\Repository\SessionRepository;
+use App\Repository\StudentRepository;
 use App\Repository\FormationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,9 +22,9 @@ class SessionController extends AbstractController
     /* HOME */
 
     #[Route('/formation', name: 'formation')]
-    public function index(FormationRepository $FormationRepository): Response
+    public function index(FormationRepository $formationRepository): Response
     {
-        $formations = $FormationRepository->findAll();
+        $formations = $formationRepository->findAll();
 
         return $this->render('home/index.html.twig', [
             'controller_name' => 'SessionController',
@@ -33,7 +35,7 @@ class SessionController extends AbstractController
     }
     /* TRAINER */
     #[Route('/trainer/list', name: 'list_trainer')]
-    public function listTrainer(FormationRepository $FormationRepository): Response
+    public function listTrainer(FormationRepository $formationRepository): Response
     {
         // recherche les formateurs
         return $this->render('trainer/trainer.html.twig', [
@@ -47,9 +49,9 @@ class SessionController extends AbstractController
     /* SESSION */
 
     #[Route('/session/list', name: 'list_session')]
-    public function listSession(SessionRepository $SessionRepository): Response
+    public function listSession(SessionRepository $sessionRepository): Response
     {
-        $sessions = $SessionRepository->findAll();
+        $sessions = $sessionRepository->findAll();
 
         return $this->render('session/session.html.twig', [
             'controller_name' => 'SessionController',
@@ -59,13 +61,34 @@ class SessionController extends AbstractController
         ]);
     }
 
+
+
+
     #[Route('/session/{id}/detail', name: 'detail_session')]
-    public function detailsSession(): Response
+    public function detailSession(Session $session = null, Request $request, SessionRepository $sessionRepository, StudentRepository $studentRepository): Response
     {
-        return $this->render('session/session.html.twig', [
+        if(!$session) {
+             $session = new Session();
+        }
+        $students = $studentRepository->findBy(["id" => "{id}"]);
+     
+
+        $notRegister = $sessionRepository->getNotRegister(1);
+
+        return $this->render('session/detail.html.twig', [
             'controller_name' => 'SessionController',
+            'view_name' => 'session/detail.html.twig',
+            'slug' => 'detail',
+            'session' => $session,
+            'not-register' => $notRegister,
+            'students' => $students
         ]);
     }
+
+
+
+
+
 
     #[Route('/session/{id}/edit', name: 'edit_session')]
     public function editSession(): Response
@@ -79,9 +102,9 @@ class SessionController extends AbstractController
     /* FORMATION  */
 
     #[Route('/formation/list', name: 'list_formation')]
-    public function listFormation(FormationRepository $FormationRepository): Response
+    public function listFormation(FormationRepository $formationRepository): Response
     {
-        $formations = $FormationRepository->findAll();
+        $formations = $formationRepository->findAll();
 
         return $this->render('session/session.html.twig', [
             'controller_name' => 'SessionController',
@@ -108,5 +131,14 @@ class SessionController extends AbstractController
     }
 
 
+    // public function countNotRegister(SessionRepository $sessionRepository): Response
+    // {
+        
+
+    //     return $this->render('session/session.html.twig', [
+    //         'controller_name' => 'SessionController',
+    //         'not-register' => $notRegister
+    //     ]);
+    // }
 
 }

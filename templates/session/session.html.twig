@@ -4,18 +4,18 @@
 
 {% block body %}
 <div class="uk-container">
-    
+
     {# session #}
     {% if slug == 'session' %}
 
     <h1>Liste des sessions</h1>
-    
+
     {% if sessions|default %}
 
     <table class="uk-table uk-table-responsive uk-table-hover uk-table-divider uk-table-small">
         <thead>
             <tr>
-                <th>Session id:</th>
+                <th>id</th>
                 <th>Formation id:</th>
                 <th>Places:</th>
                 <th>Date début</th>
@@ -24,16 +24,21 @@
             </tr>
         </thead>
         <tbody>
-            {% for session in sessions %}
-            <tr>
-                <td>{{ session.id }}</td>
-                <td>{{ session.formation.id }}</td>
-                <td>{{ session.maxstudents }}</td>
-                <td>{{ session.datestart | date("j-m-Y") }}</td>
-                <td>{{ session.dateend | date("j-m-Y") }}</td>
-                <td>{{ session.reservations }}</td>
+
+           
+            {% for session in sessions %} 
+            <tr>  
+                <td><a href="{{ path('detail_session', {'id': session.id }) }}">{{ session.id }}</a></td>
+                <td><a href="{{ path('detail_session', {'id': session.id }) }}">{{ session.formation.id }}</a></td>
+                <td><a href="{{ path('detail_session', {'id': session.id }) }}">{{ session.maxstudents }}</a></td>
+                <td><a href="{{ path('detail_session', {'id': session.id }) }}">{{ session.datestart | date("j-m-Y") }}</a></td>
+                <td><a href="{{ path('detail_session', {'id': session.id }) }}">{{ session.dateend | date("j-m-Y") }}</a></td>
+                <td><a href="{{ path('detail_session', {'id': session.id }) }}">{{ session.reservations }}</a></td>
+            </a>
             </tr>
+        
             {% endfor %}
+            
         </tbody>
     </table>
 
