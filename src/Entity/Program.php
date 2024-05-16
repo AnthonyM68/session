@@ -44,22 +44,27 @@ class Program
         return $this->course;
     }
 
+
     public function setCourse(?Course $course): static
     {
         $this->course = $course;
 
         return $this;
     }
-
     public function getDays(): ?int
     {
         return $this->days;
     }
 
+    
     public function setDays(int $days): static
     {
         $this->days = $days;
 
         return $this;
+    }
+    public function __toString()
+    {
+        return $this->id;
     }
 }

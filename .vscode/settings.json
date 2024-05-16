@@ -40,10 +40,6 @@
             "color": "foldercolorizer.Coral"
         },
         {
-            "folderPath": "session\\templates\\course\\",
-            "color": "foldercolorizer.Coral"
-        },
-        {
             "folderPath": "session\\templates\\student\\index.html.twig\\",
             "color": "foldercolorizer.green"
         },
@@ -54,6 +50,10 @@
         {
             "folderPath": "session\\src\\Entity\\",
             "color": "foldercolorizer.AliceBlue"
+        },
+        {
+            "folderPath": "session\\templates\\course\\",
+            "color": "foldercolorizer.green"
         }
     ]
 }

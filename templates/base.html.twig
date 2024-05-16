@@ -16,17 +16,18 @@
 </head>
 {# navbar #}
 <body>
+    <div class="parallax"></div> 
     {# header #}
     <header id="pageHeader">{% include 'navbar/navbar.html.twig' %}</header>
     {# article  #}
     <article id="mainArticle">
-        <div class="uk-container">
             {% block body %}{% endblock %}
-        </div>
     </article>
     {# footer #}
+    
     <footer id="pageFooter">{% include 'footer/footer.html.twig' %}</footer>
 
+    
     {% block javascripts %}
     <script src="{{ asset('js/uikit.js') }}"></script>
     <script src="{{ asset('js/uikit-icons.js') }}"></script>

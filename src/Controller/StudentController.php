@@ -23,9 +23,9 @@ class StudentController extends AbstractController
     {
         $students = $StudentRepository->findBy([], ["firstName" => "ASC"]);
 
-        return $this->render('student/index.html.twig', [
+        return $this->render('student/student.html.twig', [
             'controller_name' => 'StudentController',
-            'view_name' => 'student/index.html.twig',
+            'view_name' => 'student/student.html.twig',
             'slug' => 'student',
             "students" => $students
         ]);

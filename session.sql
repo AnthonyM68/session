@@ -16,56 +16,80 @@
 
 
 -- Listage de la structure de la base pour session
-CREATE DATABASE IF NOT EXISTS `session` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE IF NOT EXISTS `session` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `session`;
 
 -- Listage de la structure de table session. category
 CREATE TABLE IF NOT EXISTS `category` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table session.category : ~2 rows (environ)
+-- Listage des données de la table session.category : ~14 rows (environ)
 INSERT INTO `category` (`id`, `name`) VALUES
-	(1, 'Bureautique'),
-	(2, 'DevWeb');
+	(1, 'Développement Web'),
+	(2, 'Développement d\'applications mobiles'),
+	(3, 'Microsoft Office'),
+	(4, 'Gestion de projet'),
+	(5, 'Design graphique'),
+	(6, 'Design d\'interface utilisateur (UIUX)'),
+	(7, 'Marketing digital'),
+	(8, 'Réseaux sociaux'),
+	(9, 'Gestion d\'entreprise'),
+	(10, 'Comptabilité'),
+	(11, 'Anglais'),
+	(12, 'Français'),
+	(13, 'Nutrition'),
+	(14, 'Fitness');
 
 -- Listage de la structure de table session. course
 CREATE TABLE IF NOT EXISTS `course` (
   `id` int NOT NULL AUTO_INCREMENT,
+  `id_category` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table session.course : ~0 rows (environ)
+-- Listage des données de la table session.course : ~1 rows (environ)
+INSERT INTO `course` (`id`, `id_category`) VALUES
+	(1, 1);
 
 -- Listage de la structure de table session. doctrine_migration_versions
 CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
-  `version` varchar(191) COLLATE utf8mb3_unicode_ci NOT NULL,
+  `version` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `executed_at` datetime DEFAULT NULL,
   `execution_time` int DEFAULT NULL,
   PRIMARY KEY (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
--- Listage des données de la table session.doctrine_migration_versions : ~1 rows (environ)
+-- Listage des données de la table session.doctrine_migration_versions : ~0 rows (environ)
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
 	('DoctrineMigrations\\Version20240513123739', '2024-05-13 12:39:12', 227);
 
 -- Listage de la structure de table session. formation
 CREATE TABLE IF NOT EXISTS `formation` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table session.formation : ~0 rows (environ)
+-- Listage des données de la table session.formation : ~8 rows (environ)
+INSERT INTO `formation` (`id`, `name`) VALUES
+	(1, 'Informatique et Technologie'),
+	(2, 'Bureautique et Productivité'),
+	(3, 'Design et Créativité '),
+	(4, 'Marketing et Communication :'),
+	(5, 'Gestion et Finance'),
+	(6, 'Langues et Communication '),
+	(7, 'Santé et Bien-être'),
+	(8, 'Divers');
 
 -- Listage de la structure de table session. messenger_messages
 CREATE TABLE IF NOT EXISTS `messenger_messages` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `body` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `headers` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue_name` varchar(190) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `body` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `headers` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue_name` varchar(190) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
   `available_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
   `delivered_at` datetime DEFAULT NULL COMMENT '(DC2Type:datetime_immutable)',
@@ -88,9 +112,11 @@ CREATE TABLE IF NOT EXISTS `program` (
   KEY `IDX_92ED7784591CC992` (`course_id`),
   CONSTRAINT `FK_92ED7784591CC992` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`),
   CONSTRAINT `FK_92ED7784613FECDF` FOREIGN KEY (`session_id`) REFERENCES `session` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table session.program : ~1 rows (environ)
+INSERT INTO `program` (`id`, `session_id`, `course_id`, `days`) VALUES
+	(1, 1, 1, 15);
 
 -- Listage de la structure de table session. session
 CREATE TABLE IF NOT EXISTS `session` (
@@ -103,9 +129,11 @@ CREATE TABLE IF NOT EXISTS `session` (
   PRIMARY KEY (`id`),
   KEY `IDX_D044D5D45200282E` (`formation_id`),
   CONSTRAINT `FK_D044D5D45200282E` FOREIGN KEY (`formation_id`) REFERENCES `formation` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table session.session : ~0 rows (environ)
+-- Listage des données de la table session.session : ~1 rows (environ)
+INSERT INTO `session` (`id`, `formation_id`, `max_students`, `date_start`, `date_end`, `reservations`) VALUES
+	(1, 1, 15, '2024-05-15 06:09:24', '2024-06-15 06:09:33', 5);
 
 -- Listage de la structure de table session. session_student
 CREATE TABLE IF NOT EXISTS `session_student` (
@@ -123,21 +151,21 @@ CREATE TABLE IF NOT EXISTS `session_student` (
 -- Listage de la structure de table session. student
 CREATE TABLE IF NOT EXISTS `student` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `last_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `first_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `city` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone_number` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `first_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `city` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone_number` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `birthday` datetime NOT NULL,
-  `zip_code` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `zip_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table session.student : ~3 rows (environ)
 INSERT INTO `student` (`id`, `last_name`, `first_name`, `address`, `city`, `phone_number`, `birthday`, `zip_code`) VALUES
-	(1, 'Avery', 'Adam', '185 impasse des canards', 'MArseille', '07.01.69.54.10', '2024-05-13 15:49:19', '13000'),
-	(2, 'Rampling', 'Jason	', '5 rue de l\'étang', 'lens', '06.09.15.75.85', '2024-05-13 15:50:10', '62000'),
-	(3, 'Mills', 'Jessica	', '89 rue du Général de Gaule', 'belfort\r\n', '03.88.10.52.32', '2024-05-13 15:51:12', '90000');
+	(1, 'Avery', 'Adam', '185 impasse des canards', 'Marseille', '07.01.69.54.10', '2024-05-13 15:49:19', '13000'),
+	(2, 'Rampling', 'Jason	', '5 rue de l\'étang', 'Lens', '06.09.15.75.85', '2024-05-13 15:50:10', '62000'),
+	(3, 'Mills', 'Jessica	', '89 rue du Général de Gaule', 'Belfort\r\n', '03.88.10.52.32', '2024-05-13 15:51:12', '90000');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

@@ -30,7 +30,7 @@ class CourseController extends AbstractController
     {
         $categories = $CategoryRepository->findBy([], ["name" => "ASC"]);
 
-        return $this->render('course/index.html.twig', [
+        return $this->render('course/course.html.twig', [
             'controller_name' => 'CourseController',
             'view_name' => 'course/course.html.twig',
             'slug' => 'category',
@@ -40,28 +40,28 @@ class CourseController extends AbstractController
     #[Route('/category/{id}/detail', name: 'detail_category')]
     public function detailCategory(): Response
     {
-        return $this->render('course/index.html.twig', [
+        return $this->render('course/course.html.twig', [
             'controller_name' => 'CourseController',
         ]);
     }
     #[Route('/category/add', name: 'add_category')]
     public function createCategory(): Response
     {
-        return $this->render('course/index.html.twig', [
+        return $this->render('course/course.html.twig', [
             'controller_name' => 'CourseController',
         ]);
     }
     #[Route('/catgegory/{id}/edit', name: 'edit_category')]
     public function editCategory(): Response
     {
-        return $this->render('course/index.html.twig', [
+        return $this->render('course/course.html.twig', [
             'controller_name' => 'CourseController',
         ]);
     }
     #[Route('/category/{id}/delete', name: 'delete_category')]
     public function deleteCategory(): Response
     {
-        return $this->render('course/index.html.twig', [
+        return $this->render('course/course.html.twig', [
             'controller_name' => 'CourseController',
         ]);
     }
@@ -71,7 +71,7 @@ class CourseController extends AbstractController
     {
         $courses = $CourseRepository->findAll();
 
-        return $this->render('course/index.html.twig', [
+        return $this->render('course/course.html.twig', [
             'controller_name' => 'CourseController',
             'slug' => 'course',
             "courses" => $courses
@@ -81,14 +81,14 @@ class CourseController extends AbstractController
     #[Route('/course/{id}/detail', name: 'detail_course')]
     public function detailCourse(): Response
     {
-        return $this->render('course/index.html.twig', [
+        return $this->render('course/course.html.twig', [
             'controller_name' => 'CourseController',
         ]);
     }
     #[Route('/course/{id}/delete', name: 'delete_course')]
     public function deleteCourse(): Response
     {
-        return $this->render('course/index.html.twig', [
+        return $this->render('course/course.html.twig', [
             'controller_name' => 'CourseController',
         ]);
     }
@@ -100,9 +100,9 @@ class CourseController extends AbstractController
     {
         $programs = $ProgramRepository->findAll();
 
-        return $this->render('course/index.html.twig', [
+        return $this->render('course/course.html.twig', [
             'controller_name' => 'CourseController',
-            'view_name' => 'course/index.html.twig',
+            'view_name' => 'course/course.html.twig',
             'slug' => 'program',
             "programs" => $programs
         ]);
@@ -110,17 +110,17 @@ class CourseController extends AbstractController
     #[Route('/program/{id}/detail', name: 'detail_program')]
     public function detailProgram(): Response
     {
-        return $this->render('course/index.html.twig', [
+        return $this->render('course/course.html.twig', [
             'controller_name' => 'CourseController',
-            'view_name' => 'course/index.html.twig',
+            'view_name' => 'course/course.html.twig',
         ]);
     }
     #[Route('/course/{id}/delete', name: 'delete_course')]
     public function deleteProgram(): Response
     {
-        return $this->render('course/index.html.twig', [
+        return $this->render('course/course.html.twig', [
             'controller_name' => 'CourseController',
-            'view_name' => 'course/index.html.twig',
+            'view_name' => 'course/course.html.twig',
         ]);
     }
 }

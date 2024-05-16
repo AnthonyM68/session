@@ -43,15 +43,17 @@ class SessionController extends AbstractController
             "trainer" => null
         ]);
     }
+
     /* SESSION */
+
     #[Route('/session/list', name: 'list_session')]
     public function listSession(SessionRepository $SessionRepository): Response
     {
         $sessions = $SessionRepository->findAll();
 
-        return $this->render('session/index.html.twig', [
+        return $this->render('session/session.html.twig', [
             'controller_name' => 'SessionController',
-            'view_name' => 'session/index.html.twig',
+            'view_name' => 'session/session.html.twig',
             'slug' => 'session',
             "sessions" => $sessions
         ]);
@@ -60,7 +62,7 @@ class SessionController extends AbstractController
     #[Route('/session/{id}/detail', name: 'detail_session')]
     public function detailsSession(): Response
     {
-        return $this->render('session/index.html.twig', [
+        return $this->render('session/session.html.twig', [
             'controller_name' => 'SessionController',
         ]);
     }
@@ -68,7 +70,7 @@ class SessionController extends AbstractController
     #[Route('/session/{id}/edit', name: 'edit_session')]
     public function editSession(): Response
     {
-        return $this->render('session/index.html.twig', [
+        return $this->render('session/session.html.twig', [
             'controller_name' => 'SessionController',
         ]);
     }
@@ -81,9 +83,9 @@ class SessionController extends AbstractController
     {
         $formations = $FormationRepository->findAll();
 
-        return $this->render('session/index.html.twig', [
+        return $this->render('session/session.html.twig', [
             'controller_name' => 'SessionController',
-            'view_name' => 'session/index.html.twig',
+            'view_name' => 'session/session.html.twig',
             'slug' => 'formation',
             "formations" => $formations
         ]);
@@ -92,7 +94,7 @@ class SessionController extends AbstractController
     #[Route('/formation/{id}/detail', name: 'detail_formation')]
     public function detailFormation(): Response
     {
-        return $this->render('session/index.html.twig', [
+        return $this->render('session/session.html.twig', [
             'controller_name' => 'SessionController',
         ]);
     }
@@ -100,7 +102,7 @@ class SessionController extends AbstractController
     #[Route('/formation/{id}/edit', name: 'edit_formation')]
     public function editFormation(): Response
     {
-        return $this->render('session/index.html.twig', [
+        return $this->render('session/session.html.twig', [
             'controller_name' => 'SessionController',
         ]);
     }
