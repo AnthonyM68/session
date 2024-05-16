@@ -17,9 +17,9 @@ Chaque session de formation possède un programme constitué d'un ou plusieurs c
 # Schémas :
 
 > Réalisation des schémas conceptuels de données :
-> ![MCD](https://github.com/AnthonyM68/session/blob/main/MCD.jpg)
-> ![UML](https://github.com/AnthonyM68/session/blob/main/UML.jpg)
-> ![MLD](https://github.com/AnthonyM68/session/blob/main/MLD.jpg)
+> ![MCD](https://github.com/AnthonyM68/session/blob/master/MCD.jpg)
+> ![UML](https://github.com/AnthonyM68/session/blob/master/UML.jpg)
+> ![MLD](https://github.com/AnthonyM68/session/blob/master/MLD.jpg)
 
 # NOTE :
 
