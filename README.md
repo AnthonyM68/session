@@ -23,6 +23,10 @@ Chaque session de formation possède un programme constitué d'un ou plusieurs c
 
 # NOTE :
 
+> git clone https://github.com/AnthonyM68/session.git
+
+> composer update 
+
 Utilisez la base de données fournie dans le dépot et modifiez le fichier .env si besoin
 
 > .env
