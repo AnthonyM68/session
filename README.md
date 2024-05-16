@@ -1,4 +1,5 @@
-<h1>CineBdd</h1>
+<h1>Session</h1>
+<h2>Centre de formation</h2>
 Réalisation d'une application Web permettant de gérer des sessions de formations pour administrateurs d'un centre de formation
 
 L'application sera seulement accessible par les administrateurs du centre.
