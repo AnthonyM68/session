@@ -22,11 +22,12 @@ Chaque session de formation possède un programme constitué d'un ou plusieurs c
 > ![MLD](https://github.com/AnthonyM68/session/blob/master/MLD.jpg)
 
 # NOTE :
-
-> git clone https://github.com/AnthonyM68/session.git
-
-> composer update 
-
+```php
+$ git clone https://github.com/AnthonyM68/session.git
+```
+```php
+$ composer update 
+```
 Utilisez la base de données fournie dans le dépot et modifiez le fichier .env si besoin
 
 > .env
