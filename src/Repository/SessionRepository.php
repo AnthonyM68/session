@@ -21,22 +21,6 @@ class SessionRepository extends ServiceEntityRepository
         parent::__construct($registry, Session::class);
     }
 
-
-    
-    
-    // public function getRegister($sessionId): ?Session
-    // {
-    //     return $this->createQueryBuilder('s')
-    //     ->leftJoin('','')   
-    //     ->andWhere('
-    //     ')
-    //     ->setParameter('
-    //     ', $sessionId)
-    //     ->getQuery()
-    //     ->getOneOrNullResult();
-
-    // }
-
     //    /**
     //     * @return Session[] Returns an array of Session objects
     //     */

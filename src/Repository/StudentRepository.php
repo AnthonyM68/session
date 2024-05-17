@@ -20,68 +20,81 @@ class StudentRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Student::class);
     }
-    //  $sql = "SELECT id
-    //  FROM student
-    //  WHERE id NOT IN (
+    //  SELECT * 
+    //  FROM student 
+    //  WHERE id_student
+    //  NOT IN (SELECT id_student FROM session_student WHERE session_id = : session_id)
 
-    //  SELECT student_id
-    //  FROM session_student 
-    //  WHERE session_id = 1)";
-
-    
-    public function getNotRegister($sessionId): array
+    public function findNotRegister($sessionId): array
     {
-        //session_student
+        $em = $this->getEntityManager(); //em=EntityManager ()
 
-        $st = $this->createQueryBuilder('session_student: session_student');
+        //  instance de QueryBuilder
+        // permet de construire dynamiquement des requêtes SQL de manière programmatique.
+        $qb = $em->createQueryBuilder();
 
-
-        $query = $this->createQueryBuilder('s')
-            ->where($query->expr()->notIn('st.id', $st->select('st.student_id')->getDQL()))
-            ->setParameter('sessionId', $sessionId)
-
-        ;
-
-        return $query->getQuery()->getSql();
+        // on recherche tous les étudiants (s) qui sont liés à une session (se) spécifique,
+        $qb->select('s') //s=student
+            ->from('App\Entity\Student', 's')
+            ->leftJoin('s.sessions', 'se')
+            ->where('se.id = :id');
+        //  nouvelle instance de QueryBuilder
+        $sub = $em->createQueryBuilder();
+        /**
+         * sous-requête pour trouver les étudiants non inscrits à cette session :
+         * sous-requête est créée pour sélectionner tous les étudiants (st) dont 
+         * l'ID n'est pas dans les résultats de la première requête. Cela signifie 
+         * qu'ils ne sont pas inscrits à la session spécifique.
+         */
+        $sub->select('st')
+            ->from('App\Entity\Student', 'st')
+            ->where($sub->expr()->notIn('st.id', $qb->getDQL()))
+            ->setParameter('id', $sessionId)
+            ->orderBy('st.firstName');
+        // on retourne le resultat
+        $query = $sub->getQuery();
+        return $query->getResult();
     }
 
-//     public function getNotRegister($sessionId): array
-// {
-//     $subQuery = $this->_em->createQueryBuilder()
-//         ->select('ss.student_id')
-//         ->from('YourBundleName:SessionStudent', 'ss')
-//         ->where('ss.session_id = :sessionId');
 
-//     $qb = $this->_em->createQueryBuilder();
-//     $qb->select('s.id')
-//         ->from('YourBundleName:Student', 's')
-//         ->where($qb->expr()->notIn('s.id', $subQuery->getDQL()))
-//         ->setParameter('sessionId', $sessionId);
+    
+    //     public function getNotRegister($sessionId): array
+    // {
+    //     $subQuery = $this->_em->createQueryBuilder()
+    //         ->select('ss.student_id')
+    //         ->from('YourBundleName:SessionStudent', 'ss')
+    //         ->where('ss.session_id = :sessionId');
 
-//     return $qb->getQuery()->getResult();
-// }
-//    /**
-//     * @return Student[] Returns an array of Student objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('s.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //     $qb = $this->_em->createQueryBuilder();
+    //     $qb->select('s.id')
+    //         ->from('YourBundleName:Student', 's')
+    //         ->where($qb->expr()->notIn('s.id', $subQuery->getDQL()))
+    //         ->setParameter('sessionId', $sessionId);
 
-//    public function findOneBySomeField($value): ?Student
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //     return $qb->getQuery()->getResult();
+    // }
+    //    /**
+    //     * @return Student[] Returns an array of Student objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('s')
+    //            ->andWhere('s.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('s.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
+
+    //    public function findOneBySomeField($value): ?Student
+    //    {
+    //        return $this->createQueryBuilder('s')
+    //            ->andWhere('s.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

@@ -65,30 +65,21 @@ class SessionController extends AbstractController
 
 
     #[Route('/session/{id}/detail', name: 'detail_session')]
-    public function detailSession(Session $session = null, Request $request, SessionRepository $sessionRepository, StudentRepository $studentRepository): Response
+    public function detailSession(Session $session = null, Request $request, StudentRepository $studentRepository): Response
     {
         if(!$session) {
              $session = new Session();
         }
-        $students = $studentRepository->findBy(["id" => "{id}"]);
-     
-
-        $notRegister = $sessionRepository->getNotRegister(1);
+        $notRegister = $studentRepository->findNotRegister($session->getId());
 
         return $this->render('session/detail.html.twig', [
             'controller_name' => 'SessionController',
             'view_name' => 'session/detail.html.twig',
             'slug' => 'detail',
             'session' => $session,
-            'not-register' => $notRegister,
-            'students' => $students
+            'notRegister' => $notRegister,
         ]);
     }
-
-
-
-
-
 
     #[Route('/session/{id}/edit', name: 'edit_session')]
     public function editSession(): Response
@@ -129,16 +120,4 @@ class SessionController extends AbstractController
             'controller_name' => 'SessionController',
         ]);
     }
-
-
-    // public function countNotRegister(SessionRepository $sessionRepository): Response
-    // {
-        
-
-    //     return $this->render('session/session.html.twig', [
-    //         'controller_name' => 'SessionController',
-    //         'not-register' => $notRegister
-    //     ]);
-    // }
-
 }
