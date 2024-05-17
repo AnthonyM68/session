@@ -11,7 +11,7 @@
     <h1>Détails de la sessions</h1>
 
     {% if session|default %}
-
+    
     <table class="uk-table uk-table-responsive uk-table-hover uk-table-divider uk-table-small">
         <thead>
             <tr>
@@ -35,8 +35,7 @@
         </tbody>
     </table>
     {% endif %}
-
-
+    
     {# list of student #}
     {% if session.students|default %}
     <ul>
@@ -46,11 +45,10 @@
     </ul>
     {% endif %}
 
-
+    {% if session.students|default %}
     {# SEPARATOR #}
     <div class="separator"></div>
 
-    {% if session.students|default %}
     <h3>Liste des stagiaires inscrits à cette session <span>{{ session.students | length  }}</span></h3>
     <table class="uk-table uk-table-responsive uk-table-hover uk-table-divider uk-table-small">
         <thead>
@@ -69,13 +67,13 @@
             {% for student in session.students %}
             <tr>
                 <td>{{ student.id }}</td>
-                <td><a href="{{ path('detail_session', {'id': student.id }) }}">{{ student.firstName }}</a></td>
-                <td><a href="{{ path('detail_session', {'id': student.id }) }}">{{ student.lastName }}</a></td>
-                <td><a href="{{ path('detail_session', {'id': student.id }) }}">{{ student.address }}</a></td>
-                <td><a href="{{ path('detail_session', {'id': student.id }) }}">{{ student.city }}</a></td>
-                <td><a href="{{ path('detail_session', {'id': student.id }) }}">{{ student.phoneNumber }}</a></td>
-                <td><a href="{{ path('detail_session', {'id': student.id }) }}">{{ student.birthday | date('d-m-Y')}}</a></td>
-                <td><a href="{{ path('detail_session', {'id': student.id }) }}">{{ student.zipCode }}</a></td>
+                <td><a href="{{ path('detail_student', {'id': student.id }) }}">{{ student.firstName }}</a></td>
+                <td><a href="{{ path('detail_student', {'id': student.id }) }}">{{ student.lastName }}</a></td>
+                <td><a href="{{ path('detail_student', {'id': student.id }) }}">{{ student.address }}</a></td>
+                <td><a href="{{ path('detail_student', {'id': student.id }) }}">{{ student.city }}</a></td>
+                <td><a href="{{ path('detail_student', {'id': student.id }) }}">{{ student.phoneNumber }}</a></td>
+                <td><a href="{{ path('detail_student', {'id': student.id }) }}">{{ student.birthday | date('d-m-Y')}}</a></td>
+                <td><a href="{{ path('detail_student', {'id': student.id }) }}">{{ student.zipCode }}</a></td>
             </tr>
             {% endfor %}
         </tbody>
@@ -83,7 +81,7 @@
     {% else %}
     <h2>Aucune informations en base de données</h2>
     {% endif %}
-    {# {% endif %} #}
+
 
 
 
@@ -111,13 +109,13 @@
             {% for student in notRegister %}
             <tr>
                 <td>{{ student.id }}</td>
-                <td><a href="{{ path('detail_session', {'id': student.id }) }}">{{ student.firstName }}</a></td>
-                <td><a href="{{ path('detail_session', {'id': student.id }) }}">{{ student.lastName }}</a></td>
-                <td><a href="{{ path('detail_session', {'id': student.id }) }}">{{ student.address }}</a></td>
-                <td><a href="{{ path('detail_session', {'id': student.id }) }}">{{ student.city }}</a></td>
-                <td><a href="{{ path('detail_session', {'id': student.id }) }}">{{ student.phoneNumber }}</a></td>
-                <td><a href="{{ path('detail_session', {'id': student.id }) }}">{{ student.birthday | date('d-m-Y')}}</a></td>
-                <td><a href="{{ path('detail_session', {'id': student.id }) }}">{{ student.zipCode }}</a></td>
+                <td><a href="{{ path('detail_student', {'id': student.id }) }}">{{ student.firstName }}</a></td>
+                <td><a href="{{ path('detail_student', {'id': student.id }) }}">{{ student.lastName }}</a></td>
+                <td><a href="{{ path('detail_student', {'id': student.id }) }}">{{ student.address }}</a></td>
+                <td><a href="{{ path('detail_student', {'id': student.id }) }}">{{ student.city }}</a></td>
+                <td><a href="{{ path('detail_student', {'id': student.id }) }}">{{ student.phoneNumber }}</a></td>
+                <td><a href="{{ path('detail_student', {'id': student.id }) }}">{{ student.birthday | date('d-m-Y')}}</a></td>
+                <td><a href="{{ path('detail_student', {'id': student.id }) }}">{{ student.zipCode }}</a></td>
             </tr>
             {% endfor %}
         </tbody>
@@ -127,7 +125,7 @@
     {% else %}
     <h2>Tous les stagiaires sont inscrit</h2>
     {% endif %}
-
     {% endif %}
+
 </div>
 {% endblock %}

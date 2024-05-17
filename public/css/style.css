@@ -21,8 +21,8 @@
 }
 html,
 body {
-  background-color: var(--background-color) !important;
-  color: var(--secondary-color) !important;
+  /* background-color: var(--background-color) !important;
+  color: var(--secondary-color) !important; */
 }
 
 /* COLOR GENERAL */
