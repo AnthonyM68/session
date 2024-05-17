@@ -72,7 +72,27 @@ class SessionController extends AbstractController
 
 
 
-    
+
+
+
+
+    /* SESSION */
+    #[Route('/session/formation/{id}', name: 'list_session_formation')]
+    public function listSessionFormation(Formation $formation, Request $request, SessionRepository $sessionRepository): Response
+    {
+        $sessions = $sessionRepository->findBy(["id" => $formation->getId()]);
+
+        return $this->render('session/session.html.twig', [
+            'controller_name' => 'SessionController',
+            'view_name' => 'session/session.html.twig',
+            'slug' => 'session',
+            "sessions" => $sessions
+        ]);
+    }
+
+
+
+
     #[Route('/session/{id}/detail', name: 'detail_session')]
     public function detailSession(Session $session = null, Request $request, StudentRepository $studentRepository): Response
     {
@@ -89,26 +109,29 @@ class SessionController extends AbstractController
             'notRegister' => $notRegister,
         ]);
     }
+    // #[Route('/session/{id}/edit', name: 'edit_session')]
+    // public function foundSessionByIdFormation()
+    // {
+
+    // }
 
 
 
+    // #[Route('/session/{id}/formations', name: 'formations_session')]
+    // public function formationsSession(Session $session = null, Request $request, FormationRepository $formationRepository): Response
+    // {
+    //     if (!$session) {
+    //         $session = new Session();
+    //     }
+    //     $formations = $formationRepository->findFormationByIdStudent($session->getId());
 
-
-    #[Route('/session/{id}/formations', name: 'formations_session')]
-    public function formationsSession(Session $session = null, Request $request, FormationRepository $formationRepository): Response
-    {
-        if (!$session) {
-            $session = new Session();
-        }
-        $formations = $formationRepository->findFormationByIdStudent($session->getId());
-
-        return $this->render('formation/formation.html.twig', [
-            'controller_name' => 'SessionController',
-            'view_name' => 'formation/formation.html.twig',
-            'slug' => 'formations',
-            'formations' => $formations,
-        ]);
-    }
+    //     return $this->render('formation/formation.html.twig', [
+    //         'controller_name' => 'SessionController',
+    //         'view_name' => 'formation/formation.html.twig',
+    //         'slug' => 'formations',
+    //         'formations' => $formations,
+    //     ]);
+    // }
 
     #[Route('/session/{id}/edit', name: 'edit_session')]
     public function editSession(): Response
