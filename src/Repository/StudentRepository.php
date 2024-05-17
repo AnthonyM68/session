@@ -56,7 +56,6 @@ class StudentRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
-
     
     //     public function getNotRegister($sessionId): array
     // {

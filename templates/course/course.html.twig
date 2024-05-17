@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CourseController!{% endblock %}
+{% block title %}Catégories{% endblock %}
 
 {% block body %}
 
@@ -73,21 +73,36 @@
         <thead>
             <tr>
                 <th>id</th>
-                <th>Jours:</th>
+                <th>session_id</th>
+                <th>course_id</th>
+                <th>Durée en jours:</th>
 
             </tr>
         </thead>
         <tbody>
             {% for program in programs %}
             <tr>
-                <td>{{ program.id }}</td>
-                <td>{{ program.id }}</td>
-                <td>{{ program.id }}</td>
-                <td>{{ program.days }}</td>
+                <td><a href="{{ path('detail_program', {'id': program.id }) }}">{{ program.id }}</a></td>
+                <td><a href="{{ path('detail_program', {'id': program.id }) }}">{{ program.session.id }}</a></td>
+                <td><a href="{{ path('detail_program', {'id': program.id }) }}">{{ program.course.id }}</a></td>
+                <td><a href="{{ path('detail_program', {'id': program.id }) }}">{{ program.days }}</a></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    {% else %}
+    <h2>Aucune informations en base de données</h2>
+    {% endif %}
+    {% endif %}
+
+
+
+    {% if slug == 'detail' %}
+
+    <h1>Liste des programmes</h1>
+    
+    {% if programs|default %}
+
     {% else %}
     <h2>Aucune informations en base de données</h2>
     {% endif %}

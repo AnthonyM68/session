@@ -21,6 +21,19 @@ class FormationRepository extends ServiceEntityRepository
         parent::__construct($registry, Formation::class);
     }
 
+    public function findFormationByIdStudent($sessionId): array
+    {
+        $em = $this->getEntityManager(); //em=EntityManager ()
+        $qb = $em->createQueryBuilder();
+
+        // on recherche toutes les formations où le stagiaire est inscrit
+        $qb->select('f') //s=student
+            ->from('App\Entity\Formation', 'f')
+            ->where('f.id = ' . $sessionId);
+
+        $query = $qb->getQuery();
+        return $query->getResult();
+    }
 //    /**
 //     * @return Formation[] Returns an array of Formation objects
 //     */

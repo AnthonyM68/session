@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Program;
 use App\Repository\CourseRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\CategoryRepository;
@@ -30,10 +31,9 @@ class CourseController extends AbstractController
     {
         $categories = $CategoryRepository->findBy([], ["name" => "ASC"]);
 
-        return $this->render('course/course.html.twig', [
+        return $this->render('category/category.html.twig', [
             'controller_name' => 'CourseController',
-            'view_name' => 'course/course.html.twig',
-            'slug' => 'category',
+            'view_name' => 'category/category.html.twig',
             "categories" => $categories
         ]);
     }
@@ -92,6 +92,20 @@ class CourseController extends AbstractController
             'controller_name' => 'CourseController',
         ]);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     /**
      *  PROGRAMS
      */
@@ -107,14 +121,46 @@ class CourseController extends AbstractController
             "programs" => $programs
         ]);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
     #[Route('/program/{id}/detail', name: 'detail_program')]
-    public function detailProgram(): Response
+    public function detailProgram(Program $program,Request $request, ProgramRepository $programRepository): Response
     {
-        return $this->render('course/course.html.twig', [
+        if(!$program) {
+            $program = new Program();
+        }
+        return $this->render('program/detail.html.twig', [
             'controller_name' => 'CourseController',
-            'view_name' => 'course/course.html.twig',
+            'view_name' => 'program/detail.html.twig',
+            'slug' => 'detail',
+            'program' => $program
         ]);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     #[Route('/course/{id}/delete', name: 'delete_course')]
     public function deleteProgram(): Response
     {

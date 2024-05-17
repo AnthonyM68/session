@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formations{% endblock %}
+
+{% block body %}
+<div class="uk-container">
+
+    {# session #}
+    {% if slug == 'detail' %}
+
+    <h1></h1>
+
+    {% if program|default %}
+    
+       
+    {{ dump(formation.sessions.program)}}
+
+    {% else %}
+    <h2>Aucune informations en base de données</h2>
+    {% endif %}
+    {% endif %}
+
+</div>
+{% endblock %}
