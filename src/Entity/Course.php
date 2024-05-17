@@ -21,6 +21,9 @@ class Course
     #[ORM\Column(length: 50)]
     private ?string $nameCourse = null;
 
+    #[ORM\Column]
+    private ?int $id_category = null;
+
 
 
     public function __construct()
@@ -71,6 +74,18 @@ class Course
     public function setNameCourse(string $nameCourse): static
     {
         $this->nameCourse = $nameCourse;
+
+        return $this;
+    }
+
+    public function getIdCategory(): ?int
+    {
+        return $this->id_category;
+    }
+
+    public function setIdCategory(int $id_category): static
+    {
+        $this->id_category = $id_category;
 
         return $this;
     }

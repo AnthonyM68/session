@@ -2,11 +2,20 @@
 
 namespace App\Controller;
 
+use App\Entity\Course;
 use App\Entity\Program;
+use App\Entity\Category;
+
+use App\Form\CategoryType;
+
 use App\Repository\CourseRepository;
 use App\Repository\ProgramRepository;
+use App\Repository\SessionRepository;
+
 use App\Repository\CategoryRepository;
+
 use Doctrine\ORM\EntityManagerInterface;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -51,13 +60,40 @@ class CourseController extends AbstractController
             'controller_name' => 'CourseController',
         ]);
     }
-    #[Route('/catgegory/{id}/edit', name: 'edit_category')]
-    public function editCategory(): Response
+
+
+    #[Route('/category/new', name: 'new_category')]
+    #[Route('/category/{id}/edit', name: 'edit_category')]
+
+    public function editCategory(Category $category = null, Request $request, EntityManagerInterface $entityManager): Response
     {
-        return $this->render('course/course.html.twig', [
+        if (!$category) {
+            $category = new Category();
+        }
+
+        $form = $this->createForm(CategoryType::class, $category);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $category = $form->getData();
+            // prepare PDO
+            $entityManager->persist($category);
+            // execute PDO
+            $entityManager->flush();
+
+            return $this->redirectToRoute('');
+        }
+
+        return $this->render('category/category.html.twig', [
             'controller_name' => 'CourseController',
+            'view_name' => 'category/category.html.twig'
         ]);
     }
+
+
+
+
+
     #[Route('/category/{id}/delete', name: 'delete_category')]
     public function deleteCategory(): Response
     {
@@ -65,6 +101,20 @@ class CourseController extends AbstractController
             'controller_name' => 'CourseController',
         ]);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /* COURSE */
     #[Route('/course/list', name: 'list_course')]
     public function listCours(CourseRepository $CourseRepository): Response
@@ -77,6 +127,22 @@ class CourseController extends AbstractController
             "courses" => $courses
         ]);
     }
+
+
+    #[Route('/course/category/{id}', name: 'list_course_category')]
+    public function listSessionFormation(Category $category, Request $request, CourseRepository $categoryRepository): Response
+    {
+
+        $courses = $categoryRepository->findBy(["id_category" => $category->getId()]);
+
+        return $this->render('course/course.html.twig', [
+            'controller_name' => 'SessionController',
+            'view_name' => 'course/course.html.twig',
+            'slug' => 'course',
+            "courses" => $courses
+        ]);
+    }
+
 
     #[Route('/course/{id}/detail', name: 'detail_course')]
     public function detailCourse(): Response
@@ -105,7 +171,7 @@ class CourseController extends AbstractController
 
 
 
-    
+
     /**
      *  PROGRAMS
      */
@@ -135,9 +201,9 @@ class CourseController extends AbstractController
 
 
     #[Route('/program/{id}/detail', name: 'detail_program')]
-    public function detailProgram(Program $program,Request $request, ProgramRepository $programRepository): Response
+    public function detailProgram(Program $program, Request $request, ProgramRepository $programRepository): Response
     {
-        if(!$program) {
+        if (!$program) {
             $program = new Program();
         }
         return $this->render('program/detail.html.twig', [
