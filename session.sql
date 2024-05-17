@@ -24,35 +24,40 @@ CREATE TABLE IF NOT EXISTS `category` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table session.category : ~14 rows (environ)
+-- Listage des données de la table session.category : ~4 rows (environ)
 INSERT INTO `category` (`id`, `name`) VALUES
-	(1, 'Développement Web'),
-	(2, 'Développement d\'applications mobiles'),
-	(3, 'Microsoft Office'),
-	(4, 'Gestion de projet'),
-	(5, 'Design graphique'),
-	(6, 'Design d\'interface utilisateur (UIUX)'),
-	(7, 'Marketing digital'),
-	(8, 'Réseaux sociaux'),
-	(9, 'Gestion d\'entreprise'),
-	(10, 'Comptabilité'),
-	(11, 'Anglais'),
-	(12, 'Français'),
-	(13, 'Nutrition'),
-	(14, 'Fitness');
+	(1, 'Front-end'),
+	(2, 'Back-end'),
+	(3, 'Gestion de Projet'),
+	(15, 'Microsoft Office');
 
 -- Listage de la structure de table session. course
 CREATE TABLE IF NOT EXISTS `course` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_category` int NOT NULL,
+  `name_course` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table session.course : ~1 rows (environ)
-INSERT INTO `course` (`id`, `id_category`) VALUES
-	(1, 1);
+-- Listage des données de la table session.course : ~15 rows (environ)
+INSERT INTO `course` (`id`, `id_category`, `name_course`) VALUES
+	(1, 1, 'HTML5 et CSS3'),
+	(2, 1, 'Javascript'),
+	(3, 1, 'Framework'),
+	(4, 1, 'Accessibilité'),
+	(5, 2, 'PHP'),
+	(6, 2, 'MySQL'),
+	(7, 2, 'Sécurité'),
+	(8, 2, 'API'),
+	(9, 3, 'Méthodologies Planification'),
+	(10, 3, 'Gestion Trello'),
+	(11, 3, 'Risques Qualité'),
+	(12, 3, 'Communication'),
+	(13, 4, 'Word'),
+	(14, 4, 'Excel'),
+	(15, 4, 'PowerPoint');
 
 -- Listage de la structure de table session. doctrine_migration_versions
 CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
@@ -62,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
   PRIMARY KEY (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
--- Listage des données de la table session.doctrine_migration_versions : ~0 rows (environ)
+-- Listage des données de la table session.doctrine_migration_versions : ~1 rows (environ)
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
 	('DoctrineMigrations\\Version20240513123739', '2024-05-13 12:39:12', 227);
 
@@ -73,16 +78,12 @@ CREATE TABLE IF NOT EXISTS `formation` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table session.formation : ~8 rows (environ)
+-- Listage des données de la table session.formation : ~4 rows (environ)
 INSERT INTO `formation` (`id`, `name`) VALUES
 	(1, 'Informatique et Technologie'),
 	(2, 'Bureautique et Productivité'),
 	(3, 'Design et Créativité '),
-	(4, 'Marketing et Communication :'),
-	(5, 'Gestion et Finance'),
-	(6, 'Langues et Communication '),
-	(7, 'Santé et Bien-être'),
-	(8, 'Divers');
+	(4, 'Marketing et Communication :');
 
 -- Listage de la structure de table session. messenger_messages
 CREATE TABLE IF NOT EXISTS `messenger_messages` (
@@ -112,11 +113,21 @@ CREATE TABLE IF NOT EXISTS `program` (
   KEY `IDX_92ED7784591CC992` (`course_id`),
   CONSTRAINT `FK_92ED7784591CC992` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`),
   CONSTRAINT `FK_92ED7784613FECDF` FOREIGN KEY (`session_id`) REFERENCES `session` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table session.program : ~1 rows (environ)
+-- Listage des données de la table session.program : ~11 rows (environ)
 INSERT INTO `program` (`id`, `session_id`, `course_id`, `days`) VALUES
-	(1, 1, 1, 15);
+	(1, 1, 1, 15),
+	(2, 1, 2, 10),
+	(3, 1, 3, 15),
+	(4, 1, 4, 10),
+	(5, 2, 5, 15),
+	(6, 2, 6, 10),
+	(7, 2, 7, 15),
+	(8, 2, 8, 10),
+	(9, 3, 9, 15),
+	(10, 3, 10, 10),
+	(11, 3, 11, 15);
 
 -- Listage de la structure de table session. session
 CREATE TABLE IF NOT EXISTS `session` (
@@ -129,11 +140,13 @@ CREATE TABLE IF NOT EXISTS `session` (
   PRIMARY KEY (`id`),
   KEY `IDX_D044D5D45200282E` (`formation_id`),
   CONSTRAINT `FK_D044D5D45200282E` FOREIGN KEY (`formation_id`) REFERENCES `formation` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table session.session : ~1 rows (environ)
+-- Listage des données de la table session.session : ~3 rows (environ)
 INSERT INTO `session` (`id`, `formation_id`, `max_students`, `date_start`, `date_end`, `reservations`) VALUES
-	(1, 1, 15, '2024-05-15 06:09:24', '2024-06-15 06:09:33', 5);
+	(1, 1, 15, '2024-05-15 06:09:24', '2024-06-15 06:09:33', 0),
+	(2, 2, 15, '2024-05-16 18:42:06', '2024-05-16 18:42:10', 0),
+	(3, 3, 15, '2024-05-16 19:06:08', '2024-05-16 19:06:12', 0);
 
 -- Listage de la structure de table session. session_student
 CREATE TABLE IF NOT EXISTS `session_student` (
@@ -146,7 +159,14 @@ CREATE TABLE IF NOT EXISTS `session_student` (
   CONSTRAINT `FK_A5FB2D69CB944F1A` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table session.session_student : ~0 rows (environ)
+-- Listage des données de la table session.session_student : ~6 rows (environ)
+INSERT INTO `session_student` (`session_id`, `student_id`) VALUES
+	(1, 1),
+	(1, 2),
+	(2, 1),
+	(2, 3),
+	(3, 2),
+	(3, 3);
 
 -- Listage de la structure de table session. student
 CREATE TABLE IF NOT EXISTS `student` (
