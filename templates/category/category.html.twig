@@ -40,6 +40,19 @@
     <h2>Aucune informations en base de données</h2>
     {% endif %}
 
+
+
+    {{ form_start(formAddCategory) }}
+
+    <div class="row">
+        <div class="col-sm">{{ form_row(formAddCategory.name) }}</div>
+    </div>
+
+
+        {{ form_row(formAddCategory.Valider) }}
+    {{ form_end(formAddCategory) }}
+
+
 </div>
 
     {% endblock %}

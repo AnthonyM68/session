@@ -86,7 +86,8 @@ class CourseController extends AbstractController
 
         return $this->render('category/category.html.twig', [
             'controller_name' => 'CourseController',
-            'view_name' => 'category/category.html.twig'
+            'view_name' => 'category/category.html.twig',
+            'formAddCategory' => $form,
         ]);
     }
 
