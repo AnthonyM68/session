@@ -36,7 +36,7 @@
     </table>
     {% endif %}
     
-    {# list of student #}
+    {# list of students registered for the session #}
     {% if session.students|default %}
     <ul>
         {% for program in session.programs %}
@@ -46,7 +46,7 @@
     {% endif %}
 
     {% if session.students|default %}
-    {# SEPARATOR #}
+    
     <div class="separator"></div>
 
     <h3>Liste des stagiaires inscrits à cette session <span>{{ session.students | length  }}</span></h3>
@@ -67,13 +67,13 @@
             {% for student in session.students %}
             <tr>
                 <td>{{ student.id }}</td>
-                <td><a href="{{ path('detail_student', {'id': student.id }) }}">{{ student.firstName }}</a></td>
-                <td><a href="{{ path('detail_student', {'id': student.id }) }}">{{ student.lastName }}</a></td>
-                <td><a href="{{ path('detail_student', {'id': student.id }) }}">{{ student.address }}</a></td>
-                <td><a href="{{ path('detail_student', {'id': student.id }) }}">{{ student.city }}</a></td>
-                <td><a href="{{ path('detail_student', {'id': student.id }) }}">{{ student.phoneNumber }}</a></td>
-                <td><a href="{{ path('detail_student', {'id': student.id }) }}">{{ student.birthday | date('d-m-Y')}}</a></td>
-                <td><a href="{{ path('detail_student', {'id': student.id }) }}">{{ student.zipCode }}</a></td>
+                <td>{{ student.firstName }}</td>
+                <td>{{ student.lastName }}</td>
+                <td>{{ student.address }}</td>
+                <td>{{ student.city }}</a></td>
+                <td>{{ student.phoneNumber }}</a></td>
+                <td>{{ student.birthday | date('d-m-Y')}}</a></td>
+                <td>{{ student.zipCode }}</a></td>
             </tr>
             {% endfor %}
         </tbody>
@@ -83,11 +83,9 @@
     {% endif %}
 
 
-
-
-
+    {# NOT REGISTER TO SESSION #}
     {% if notRegister|default %}
-    {# SEPARATOR #}
+   
     <div class="separator"></div>
 
     <h3>Liste des stagiaires non inscrits à cette session <span>{{ notRegister | length  }}</span></h3>
@@ -108,20 +106,20 @@
         <tbody>
             {% for student in notRegister %}
             <tr>
+                <tr onclick="window.location='{{ path('detail_student', {'id': student.id }) }}';" style="cursor:pointer;"></tr>
                 <td>{{ student.id }}</td>
-                <td><a href="{{ path('detail_student', {'id': student.id }) }}">{{ student.firstName }}</a></td>
-                <td><a href="{{ path('detail_student', {'id': student.id }) }}">{{ student.lastName }}</a></td>
-                <td><a href="{{ path('detail_student', {'id': student.id }) }}">{{ student.address }}</a></td>
-                <td><a href="{{ path('detail_student', {'id': student.id }) }}">{{ student.city }}</a></td>
-                <td><a href="{{ path('detail_student', {'id': student.id }) }}">{{ student.phoneNumber }}</a></td>
-                <td><a href="{{ path('detail_student', {'id': student.id }) }}">{{ student.birthday | date('d-m-Y')}}</a></td>
-                <td><a href="{{ path('detail_student', {'id': student.id }) }}">{{ student.zipCode }}</a></td>
+                <td>{{ student.firstName }}</a></td>
+                <td>{{ student.lastName }}</a></td>
+                <td>{{ student.address }}</a></td>
+                <td>{{ student.city }}</a></td>
+                <td>{{ student.phoneNumber }}</a></td>
+                <td>{{ student.birthday | date('d-m-Y')}}</a></td>
+                <td>{{ student.zipCode }}</a></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    
     {% else %}
     <h2>Tous les stagiaires sont inscrit</h2>
     {% endif %}

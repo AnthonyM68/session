@@ -3,6 +3,7 @@
 {% block title %}Formations{% endblock %}
 
 {% block body %}
+
 <div class="uk-container">
 
     {# session #}
@@ -24,29 +25,24 @@
             </tr>
         </thead>
         <tbody>
-
             {% for session in sessions %}
             <tr>
-                <td><a href="{{ path('detail_session', {'id': session.id }) }}">{{ session.id }}</a></td>
-                <td><a href="{{ path('detail_session', {'id': session.id }) }}">{{ session.formation.id }}</a></td>
-                <td><a href="{{ path('detail_session', {'id': session.id }) }}">{{ session.maxstudents }}</a></td>
-                <td><a href="{{ path('detail_session', {'id': session.id }) }}">{{ session.datestart | date("j-m-Y")
-                        }}</a></td>
-                <td><a href="{{ path('detail_session', {'id': session.id }) }}">{{ session.dateend | date("j-m-Y")
-                        }}</a></td>
-                <td><a href="{{ path('detail_session', {'id': session.id }) }}">{{ session.reservations }}</a></td>
+            <tr onclick="window.location='{{ path('detail_session', {'id': session.id }) }}';" style="cursor:pointer;">
+                <td>{{ session.id }}</a></td>
+                <td>{{ session.formation.id }}</a></td>
+                <td>{{ session.maxstudents }}</a></td>
+                <td>{{ session.datestart | date("j-m-Y") }}</td>
+                <td>{{ session.dateend | date("j-m-Y")}}</td>
+                <td>{{ session.reservations }}</td>
                 </a>
             </tr>
-
             {% endfor %}
-
         </tbody>
     </table>
     <p uk-margin>
         <a class="uk-button uk-button-primary uk-button-small">Ajouter une session</a>
         <a class="uk-button uk-button-secondary uk-button-small">Supprimer une session</a>
     </p>
-
     {% else %}
     <h2>Aucune informations en base de données</h2>
     {% endif %}

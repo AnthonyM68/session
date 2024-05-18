@@ -28,7 +28,7 @@
         </thead>
         <tbody>
             {% for student in students %}
-            <tr>
+            <tr onclick="window.location='{{ path('detail_student', {'id': student.id }) }}';" style="cursor:pointer;">
                 <td>{{ student.id }}</td>
                 <td>{{ student.firstName }}</td>
                 <td>{{ student.lastName }}</td>
