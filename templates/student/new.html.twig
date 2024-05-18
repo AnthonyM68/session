@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formations{% endblock %}
+
+{% block body %}
+<div class="uk-container">
+
+    {# session #}
+    {% if slug == 'add' %}
+
+    {% if formAddStudent|default %}
+
+    <h2>Ajouter un stagiaire</h2>
+
+    <div class="uk-hr"></div>
+
+
+
+    {{ form_start(formAddStudent, {'attr': {'class': 'uk-form uk-margin-top uk-grid-small', 'uk-grid' : '' }}) }}
+
+
+
+    <div class="uk-width-1-4@s">
+        {{ form_row(formAddStudent.firstName) }}
+    </div>
+    <div class="uk-width-1-4@s">
+        {{ form_row(formAddStudent.lastName) }}
+    </div>
+    <div class="uk-width-1-4@s">
+        {{ form_row(formAddStudent.phoneNumber) }}
+    </div>
+    <div class="uk-width-1-4@s">
+        {{ form_row(formAddStudent.birthday) }}
+    </div>
+    <div class="uk-width-1-2@s">
+        {{ form_row(formAddStudent.address) }}
+    </div>
+    <div class="uk-width-1-4@s">
+        {{ form_row(formAddStudent.city) }}
+    </div>
+    <div class="uk-width-1-4@s">
+        {{ form_row(formAddStudent.zipCode) }}
+    </div>
+    <div class="uk-width-1-1">
+        {{ form_row(formAddStudent.Valider) }}
+    </div>
+    {{ form_end(formAddStudent) }}
+    {% endif %}
+    {% endif %}
+</div>
+
+{% endblock %}

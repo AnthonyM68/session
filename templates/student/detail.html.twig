@@ -50,11 +50,9 @@
         </thead>
         <tbody>
             <tr>
-
                 <td>{{ session.id }}</td>
                 <td><a href="{{ path('detail_session', {'id': session.id }) }}">{{ session.dateStart | date('d-m-Y')}}</a></td>
                 <td><a href="">{{ session.dateEnd | date('d-m-Y') }}</a></td>
-
             </tr>
         </tbody>
         {% endfor %}

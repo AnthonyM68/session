@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Session;
 use App\Entity\Formation;
+use App\Form\FormationType;
 use App\Repository\SessionRepository;
 use App\Repository\StudentRepository;
 use App\Repository\FormationRepository;
@@ -159,15 +160,44 @@ class SessionController extends AbstractController
         return $this->render('formation/formation.html.twig', [
             'controller_name' => 'SessionController',
             'view_name' => 'formation/formation.html.twig',
+            'slug' => 'list',
             "formations" => $formations
         ]);
     }
 
+    // #[Route('/formation/{id}/edit', name: 'edit_formation')]
+    // public function editFormation(): Response
+    // {
+    //     return $this->render('session/session.html.twig', [
+    //         'controller_name' => 'SessionController',
+    //     ]);
+    // }
+    #[Route('/formation/new', name: 'new_formation')]
     #[Route('/formation/{id}/edit', name: 'edit_formation')]
-    public function editFormation(): Response
+    public function editFormation(Formation $formation = null, Request $request, EntityManagerInterface $entityManager): Response
     {
-        return $this->render('session/session.html.twig', [
-            'controller_name' => 'SessionController',
+        if (!$formation) {
+            $formation = new Formation();
+        }
+
+        $form = $this->createForm(FormationType::class, $formation);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $category = $form->getData();
+            // prepare PDO
+            $entityManager->persist($formation);
+            // execute PDO
+            $entityManager->flush();
+
+            return $this->redirectToRoute('');
+        }
+
+        return $this->render('formation/formation.html.twig', [
+            'controller_name' => 'CourseController',
+            'view_name' => 'formation/formation.html.twig',
+            'slug' => 'add',
+            'formAddFormation' => $form,
         ]);
     }
 }

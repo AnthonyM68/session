@@ -3,10 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Course;
+use App\Form\CategoryType;
+
 use App\Entity\Program;
 use App\Entity\Category;
-
-use App\Form\CategoryType;
 
 use App\Repository\CourseRepository;
 use App\Repository\ProgramRepository;
@@ -43,6 +43,7 @@ class CourseController extends AbstractController
         return $this->render('category/category.html.twig', [
             'controller_name' => 'CourseController',
             'view_name' => 'category/category.html.twig',
+            'slug' => 'list',
             "categories" => $categories
         ]);
     }
@@ -87,13 +88,10 @@ class CourseController extends AbstractController
         return $this->render('category/category.html.twig', [
             'controller_name' => 'CourseController',
             'view_name' => 'category/category.html.twig',
+            'slug' => 'add',
             'formAddCategory' => $form,
         ]);
     }
-
-
-
-
 
     #[Route('/category/{id}/delete', name: 'delete_category')]
     public function deleteCategory(): Response
@@ -102,19 +100,6 @@ class CourseController extends AbstractController
             'controller_name' => 'CourseController',
         ]);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     /* COURSE */
     #[Route('/course/list', name: 'list_course')]
@@ -128,7 +113,6 @@ class CourseController extends AbstractController
             "courses" => $courses
         ]);
     }
-
 
     #[Route('/course/category/{id}', name: 'list_course_category')]
     public function listSessionFormation(Category $category, Request $request, CourseRepository $categoryRepository): Response
@@ -160,19 +144,6 @@ class CourseController extends AbstractController
         ]);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      *  PROGRAMS
      */
@@ -189,18 +160,6 @@ class CourseController extends AbstractController
         ]);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
     #[Route('/program/{id}/detail', name: 'detail_program')]
     public function detailProgram(Program $program, Request $request, ProgramRepository $programRepository): Response
     {
@@ -214,19 +173,6 @@ class CourseController extends AbstractController
             'program' => $program
         ]);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     #[Route('/course/{id}/delete', name: 'delete_course')]
     public function deleteProgram(): Response

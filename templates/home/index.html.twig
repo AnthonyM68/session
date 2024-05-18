@@ -8,20 +8,20 @@
 {% if formations|default %}
 {# cards inclinés #}
 
-
 {# <div id="container-home" class="uk-container">
 
     <div class="card-container uk-child-width-1-4@s">
 
-         {% for formation in formations %}
-       
-            <div class="card">
-                <div class="card-image" style="background-image: url('{{ asset('img/' ~ formation.name ~ '.jpg') }}')"></div>
-                <div class="card-content">
-                    <h1>{{ formation.name }}</h1>
-                </div>
+        {% for formation in formations %}
+
+        <div class="card">
+            <div class="card-image" style="background-image: url('{{ asset('img/' ~ formation.name ~ '.jpg') }}')">
             </div>
-        {% endfor %} 
+            <div class="card-content">
+                <h1>{{ formation.name }}</h1>
+            </div>
+        </div>
+        {% endfor %}
     </div>
 </div> #}
 
