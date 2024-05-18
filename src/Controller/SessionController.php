@@ -151,7 +151,6 @@ class SessionController extends AbstractController
 
 
     /* FORMATION  */
-
     #[Route('/formation/list', name: 'list_formation')]
     public function listFormation(FormationRepository $formationRepository): Response
     {
@@ -164,16 +163,9 @@ class SessionController extends AbstractController
             "formations" => $formations
         ]);
     }
-
-    // #[Route('/formation/{id}/edit', name: 'edit_formation')]
-    // public function editFormation(): Response
-    // {
-    //     return $this->render('session/session.html.twig', [
-    //         'controller_name' => 'SessionController',
-    //     ]);
-    // }
     #[Route('/formation/new', name: 'new_formation')]
     #[Route('/formation/{id}/edit', name: 'edit_formation')]
+
     public function editFormation(Formation $formation = null, Request $request, EntityManagerInterface $entityManager): Response
     {
         if (!$formation) {
@@ -182,15 +174,17 @@ class SessionController extends AbstractController
 
         $form = $this->createForm(FormationType::class, $formation);
 
+        $form->handleRequest($request);
+      
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $category = $form->getData();
+            
+            $formation = $form->getData();
             // prepare PDO
             $entityManager->persist($formation);
             // execute PDO
             $entityManager->flush();
 
-            return $this->redirectToRoute('');
+            return $this->redirectToRoute('formation');
         }
 
         return $this->render('formation/formation.html.twig', [
@@ -200,4 +194,7 @@ class SessionController extends AbstractController
             'formAddFormation' => $form,
         ]);
     }
+
+
+
 }

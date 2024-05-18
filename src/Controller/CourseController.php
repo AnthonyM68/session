@@ -62,7 +62,6 @@ class CourseController extends AbstractController
         ]);
     }
 
-
     #[Route('/category/new', name: 'new_category')]
     #[Route('/category/{id}/edit', name: 'edit_category')]
 
@@ -74,6 +73,8 @@ class CourseController extends AbstractController
 
         $form = $this->createForm(CategoryType::class, $category);
 
+        $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
 
             $category = $form->getData();
@@ -82,7 +83,7 @@ class CourseController extends AbstractController
             // execute PDO
             $entityManager->flush();
 
-            return $this->redirectToRoute('');
+            return $this->redirectToRoute('app_category');
         }
 
         return $this->render('category/category.html.twig', [
