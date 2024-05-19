@@ -50,9 +50,9 @@ class StudentController extends AbstractController
 
 
     #[Route('/student/new', name: 'new_student')]
-    #[Route('/student/{id}edit', name: 'edit_student')]
+    #[Route('/student/{id}/edit', name: 'edit_student')]
 
-    public function editStudent(Student $student, Request $request, EntityManagerInterface $entityManager): Response
+    public function editStudent(Student $student = null, Request $request, EntityManagerInterface $entityManager): Response
     {
         if (!$student) {
             $student = new Student();
@@ -60,29 +60,33 @@ class StudentController extends AbstractController
 
         $form = $this->createForm(StudentType::class, $student);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $student = $form->getData();
-
+            // prepare PDO
             $entityManager->persist($student);
+            // execute PDO
+            $entityManager->flush();
 
-            return $this->redirectToRoute('');
+            return $this->redirectToRoute('list_student');
         }
 
         return $this->render('student/new.html.twig', [
             'controller_name' => 'StudentController',
             'view_name' => 'student/new.html.twig',
             'formAddStudent' => $form,
-            'edit' => $student->getId()
+            'student_id' => $student->getId()
         ]);
     }
 
 
     #[Route('/student/{id}/delete', name: 'delete_student')]
-    public function deleteStudent(): Response
+    public function deleteStudent(Student $student, EntityManagerInterface $entityManager): Response
     {
-        return $this->render('student/index.html.twig', [
-            'controller_name' => 'StudentController',
-        ]);
+        $entityManager->remove($student);
+        $entityManager->flush();
+        return $this->redirectToRoute('list_student');
     }
 }

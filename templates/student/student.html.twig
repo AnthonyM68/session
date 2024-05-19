@@ -46,14 +46,19 @@
                 <td>{{ student.zipCode }}</td>
                 <td>{{ student.phoneNumber }}</td>
                 <td>{{ student.birthday | date('d-m-Y') }}</td>
-                <td><a href="#" class="token-link uk-icon-button uk-margin-small-right" uk-icon="icon: pencil" uk-tooltip="title: Éditer; pos: top-left"
-                        onclick="editStudent(event, '{{ path('edit_student', {'id': student.id }) }}'); event.stopPropagation();"></a>
+                <td>
+                    <a href="#" class="token-link uk-icon-button uk-margin-small-right" uk-icon="icon: pencil"
+                        uk-tooltip="title: Éditer; pos: top-left"
+                        onclick="editStudent(event, '{{ path('edit_student', {'id': student.id }) }}'); event.stopPropagation();">
+                    </a>
                 </td>
-                <td><a href="#" class="token-link uk-icon-button uk-margin-small-right uk-text-danger" uk-icon="icon: trash" uk-tooltip="title: Supprimer; pos: top-left"></a></td>
+                <td>
+                    <a href="#" class="token-link uk-icon-button uk-margin-small-right uk-text-danger"
+                        uk-icon="icon: trash" uk-tooltip="title: Supprimer; pos: top-left"
+                        onclick="editStudent(event, '{{ path('delete_student', {'id': student.id }) }}'); event.stopPropagation();">
+                    </a>
+                </td>
             </tr>
-            
-
-            
             {% endfor %}
         </tbody>
     </table>

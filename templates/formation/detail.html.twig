@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formations{% endblock %}
+
+{% block body %}
+
+
+<div class="uk-container">
+
+    {% if formations|default %}
+
+    <h1>Liste des module de la formation {{ name|default }}</h1>
+    <div class="ui relaxed divided list">
+        {% for formation in formations %}
+            {% for program in formation.programs %}
+            <div class="item">
+                <div class="content">
+                    {{ program.course.nameCourse }}
+                    <div class="description">Durée: {{ program.days }} Jours</div>
+                </div>
+            </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+    {% else %}
+    <h2>Aucune informations en base de données</h2>
+    {% endif %}
+</div>
+{% endblock %}

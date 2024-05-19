@@ -54,10 +54,6 @@ class SessionController extends AbstractController
 
 
 
-
-
-
-
     /* SESSION */
     #[Route('/session/list', name: 'list_session')]
     public function listSession(SessionRepository $sessionRepository): Response
@@ -75,18 +71,6 @@ class SessionController extends AbstractController
 
 
     /* SESSION */
-    #[Route('/session/formation/{id}', name: 'list_session_formation')]
-    public function listSessionFormation(Formation $formation, Request $request, SessionRepository $sessionRepository): Response
-    {
-        $sessions = $sessionRepository->findBy(["id" => $formation->getId()]);
-
-        return $this->render('session/session.html.twig', [
-            'controller_name' => 'SessionController',
-            'view_name' => 'session/session.html.twig',
-            'session' => 'session',
-            "sessions" => $sessions
-        ]);
-    }
 
     #[Route('/session/{id}/detail', name: 'detail_session')]
     public function detailSession(Session $session = null, Request $request, StudentRepository $studentRepository): Response
@@ -110,22 +94,9 @@ class SessionController extends AbstractController
     #[Route('/session/{id}/edit', name: 'edit_session')]
     public function editSession(Session $session, Request $request, EntityManagerInterface $entityManager): Response
     {
-
         if (!$session) {
             $session = new Session();
         }
-
-        // $form = $this->createForm([SessionType::class, $session]);
-
-        // if($form->isSubmitted() && $form->isValid()) {
-
-        //     $session = $form->getData();
-
-        //     $entityManager->persist($session);
-
-        //     return $this->redirectToRoute('');
-        // }
-
         return $this->render('session/session.html.twig', [
             'controller_name' => 'SessionController',
             'view_name' => 'session/session.html.twig',
@@ -188,5 +159,19 @@ class SessionController extends AbstractController
     }
 
 
+    /* LISTE DES MODULES D'UNE FORMATION */
+    #[Route('/formation/{id}/detail', name: 'detail_formation')]
+    public function detailFormation(Formation $formation, Request $request, SessionRepository $sessionRepository): Response
+    {
 
+        $formations = $sessionRepository->findBy(["id" => $formation->getId()]);
+       
+
+        return $this->render('formation/detail.html.twig', [
+            'controller_name' => 'SessionController',
+            'view_name' => 'formation/detail.html.twig',
+            'name' => $formation->getName(),
+            "formations" => $formations
+        ]);
+    }
 }

@@ -6,16 +6,18 @@
 <div class="uk-container">
 
     {# session #}
-    {% if edit|default %}
+    {% if student_id|default %}
+    <h2>Modifier un stagiaire</h2>
+    {% else %}
+   
+    <h2>Ajouter un stagiaire</h2>
+    {% endif %}
 
     {% if formAddStudent|default %}
-
-    <h2>Ajouter un stagiaire</h2>
 
     <div class="uk-hr"></div>
 
     {{ form_start(formAddStudent, {'attr': {'class': 'uk-form uk-margin-top uk-grid-small', 'uk-grid' : '' }}) }}
-
     <div class="uk-width-1-4@s">
         {{ form_row(formAddStudent.firstName) }}
     </div>
@@ -42,7 +44,7 @@
     </div>
     {{ form_end(formAddStudent) }}
     {% endif %}
-    {% endif %}
+ 
 </div>
 
 {% endblock %}
