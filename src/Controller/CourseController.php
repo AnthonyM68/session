@@ -35,7 +35,7 @@ class CourseController extends AbstractController
 
     /* Categories */
 
-    #[Route('/category/list', name: 'app_category')]
+    #[Route('/category', name: 'list_category')]
     public function listCategory(CategoryRepository $CategoryRepository): Response
     {
         $categories = $CategoryRepository->findBy([], ["name" => "ASC"]);
@@ -43,19 +43,11 @@ class CourseController extends AbstractController
         return $this->render('category/category.html.twig', [
             'controller_name' => 'CourseController',
             'view_name' => 'category/category.html.twig',
-            'slug' => 'list',
             "categories" => $categories
         ]);
     }
     #[Route('/category/{id}/detail', name: 'detail_category')]
     public function detailCategory(): Response
-    {
-        return $this->render('course/course.html.twig', [
-            'controller_name' => 'CourseController',
-        ]);
-    }
-    #[Route('/category/add', name: 'add_category')]
-    public function createCategory(): Response
     {
         return $this->render('course/course.html.twig', [
             'controller_name' => 'CourseController',
@@ -95,11 +87,11 @@ class CourseController extends AbstractController
     }
 
     #[Route('/category/{id}/delete', name: 'delete_category')]
-    public function deleteCategory(): Response
+    public function deleteCategory(Category $category, EntityManagerInterface $entityManager): Response
     {
-        return $this->render('course/course.html.twig', [
-            'controller_name' => 'CourseController',
-        ]);
+        $entityManager->remove($category);
+        $entityManager->flush();
+        return $this->redirectToRoute('list_category');
     }
 
     /* COURSE */
@@ -110,6 +102,7 @@ class CourseController extends AbstractController
 
         return $this->render('course/course.html.twig', [
             'controller_name' => 'CourseController',
+            'view_name' => 'course/course.html.twig',
             'slug' => 'course',
             "courses" => $courses
         ]);
@@ -156,7 +149,7 @@ class CourseController extends AbstractController
     /**
      *  PROGRAMS
      */
-    #[Route('/program/list', name: 'list_program')]
+    #[Route('/program', name: 'list_program')]
     public function listProgram(Program $program, Request $request, ProgramRepository $ProgramRepository): Response
     {
         $programs = $ProgramRepository->findAll();

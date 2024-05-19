@@ -9,17 +9,38 @@
 
     {% if formations|default %}
 
-    <h1>Liste des module de la formation {{ name|default }}</h1>
-    <div class="ui relaxed divided list">
+    <div class="uk-animation-slide-left">
+        <p class="uk-text-center" ><h1>Liste des module de la formation {{ name|default }}</h1></p>
+    </div>
+            
+    <div class="separator"></div>
+
+    
+    <div class="ui three column grid">
         {% for formation in formations %}
-            {% for program in formation.programs %}
-            <div class="item">
-                <div class="content">
-                    {{ program.course.nameCourse }}
-                    <div class="description">Durée: {{ program.days }} Jours</div>
+        {% for program in formation.programs %}
+        <div class="column">
+            <div class="ui relaxed items">
+
+                <div class="item">
+                    <div class="ui tiny image">
+                        <img src="{{ asset('img/' ~ program.course.nameCourse ~ '.jpg') }}">
+                    </div>
+                    <div class="middle aligned content">
+                        <div class="header">{{ program.course.nameCourse }}</div>
+                        <div class="meta">
+                            <span class="price">Durée: {{ program.days }} jours</span>
+                            <span class="stay"></span>
+                        </div>
+                        <div class="description">
+                            <p></p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            {% endfor %}
+        </div>
+
+        {% endfor %}
         {% endfor %}
     </div>
     {% else %}

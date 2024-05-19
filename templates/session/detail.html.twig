@@ -10,8 +10,11 @@
 
     <h1>Détails de la sessions</h1>
 
+
+
+
     {% if session|default %}
-    
+
     <table class="uk-table uk-table-responsive uk-table-hover uk-table-divider uk-table-small">
         <thead>
             <tr>
@@ -35,94 +38,121 @@
         </tbody>
     </table>
     {% endif %}
-    
-    {# list of students registered for the session #}
-    {% if session.students|default %}
-    <ul class="uk-list">
-        {% for program in session.programs %}
-            <li>Module: {{program.course.namecourse }} durée: {{program.days}} jours</li> 
-        {% endfor %}
-    </ul>
-    {% endif %}
 
-    {% if session.students|default %}
-    
-    <div class="separator"></div>
+    <div class="ui top attached tabular menu">
+        <a class="item" href="#modules" data-tab="modules">
+            Modules
+        </a>
+        <a class="item active" href="#inscrits" data-tab="inscrits">
+            Inscrits
+        </a>
+        <a class="item" href="#not-inscrits" data-tab="not-inscrits">
+            Non inscrits
+        </a>
 
-    <h3>Liste des stagiaires inscrits à cette session <span>{{ session.students | length  }}</span></h3>
-    <table class="uk-table uk-table-responsive uk-table-hover uk-table-divider uk-table-small">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Adresse</th>
-                <th>Ville</th>
-                <th>Téléphone</th>
-                <th>Date de naissance</th>
-                <th>Code postal</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for student in session.students %}
-            <tr onclick="window.location='{{ path('detail_student', {'id': student.id }) }}';" style="cursor:pointer;">
-                <td>{{ student.id }}</td>
-                <td>{{ student.firstName }}</td>
-                <td>{{ student.lastName }}</td>
-                <td>{{ student.address }}</td>
-                <td>{{ student.city }}</td>
-                <td>{{ student.phoneNumber }}</td>
-                <td>{{ student.birthday | date('d-m-Y')}}</td>
-                <td>{{ student.zipCode }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-    <h2>Aucune informations en base de données</h2>
-    {% endif %}
+        <div class="right menu">
+            <div class="item">
+                <div class="ui transparent icon input">
+                    <input type="text" placeholder="Search users...">
+                    <i class="search link icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="ui bottom attached segment" id="content">
+        <div class="ui tab" data-tab="modules">
+            {# list of students registered for the session #}
+            {% if session.students|default %}
+            <ul class="uk-list">
+                {% for program in session.programs %}
+                <li>Module: {{program.course.namecourse }} durée: {{program.days}} jours</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        <div class="ui tab active" data-tab="inscrits">
+            {% if session.students|default %}
 
-    {# NOT REGISTER TO SESSION #}
-    {% if notRegister|default %}
-   
-    <div class="separator"></div>
+            <div class="separator"></div>
 
-    <h3>Liste des stagiaires non inscrits à cette session n°<span>{{ notRegister | length  }}</span></h3>
+            <h3>Liste des stagiaires inscrits à cette session <span>{{ session.students | length }}</span></h3>
+            <table class="uk-table uk-table-responsive uk-table-hover uk-table-divider uk-table-small">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Adresse</th>
+                        <th>Ville</th>
+                        <th>Téléphone</th>
+                        <th>Date de naissance</th>
+                        <th>Code postal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in session.students %}
+                    <tr onclick="window.location='{{ path('detail_student', {'id': student.id }) }}';"
+                        style="cursor:pointer;">
+                        <td>{{ student.id }}</td>
+                        <td>{{ student.firstName }}</td>
+                        <td>{{ student.lastName }}</td>
+                        <td>{{ student.address }}</td>
+                        <td>{{ student.city }}</td>
+                        <td>{{ student.phoneNumber }}</td>
+                        <td>{{ student.birthday | date('d-m-Y')}}</td>
+                        <td>{{ student.zipCode }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <h2>Aucune informations en base de données</h2>
+            {% endif %}
+        </div>
+        <div class="ui tab" data-tab="not-inscrits">
+            {# NOT REGISTER TO SESSION #}
+            {% if notRegister|default %}
 
-    <table class="uk-table uk-table-responsive uk-table-hover uk-table-divider uk-table-small">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Adresse</th>
-                <th>Ville</th>
-                <th>Téléphone</th>
-                <th>Date de naissance</th>
-                <th>Code postal</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for student in notRegister %}
-            <tr onclick="window.location='{{ path('detail_student', {'id': student.id }) }}';" style="cursor:pointer;">
-                <td>{{ student.id }}</td>
-                <td>{{ student.firstName }}</td>
-                <td>{{ student.lastName }}</td>
-                <td>{{ student.address }}</td>
-                <td>{{ student.city }}</td>
-                <td>{{ student.phoneNumber }}</td>
-                <td>{{ student.birthday | date('d-m-Y')}}</td>
-                <td>{{ student.zipCode }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            <div class="separator"></div>
 
-    {% else %}
-    <h2>Tous les stagiaires sont inscrit</h2>
-    {% endif %}
-    {% endif %}
+            <h3>Liste des stagiaires non inscrits à cette session n°<span>{{ notRegister | length }}</span></h3>
 
+            <table class="uk-table uk-table-responsive uk-table-hover uk-table-divider uk-table-small">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Adresse</th>
+                        <th>Ville</th>
+                        <th>Téléphone</th>
+                        <th>Date de naissance</th>
+                        <th>Code postal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in notRegister %}
+                    <tr onclick="window.location='{{ path('detail_student', {'id': student.id }) }}';"
+                        style="cursor:pointer;">
+                        <td>{{ student.id }}</td>
+                        <td>{{ student.firstName }}</td>
+                        <td>{{ student.lastName }}</td>
+                        <td>{{ student.address }}</td>
+                        <td>{{ student.city }}</td>
+                        <td>{{ student.phoneNumber }}</td>
+                        <td>{{ student.birthday | date('d-m-Y')}}</td>
+                        <td>{{ student.zipCode }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {% else %}
+            <h2>Tous les stagiaires sont inscrit</h2>
+            {% endif %}
+            {% endif %}
+        </div>
+    </div>
 </div>
 {% endblock %}

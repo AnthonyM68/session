@@ -10,16 +10,14 @@
     {# not work #}
     {# <link rel="stylesheet" href="{{ asset('css/icon.min.css') }}"> #}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/icon.min.css">
-
     {# uikit ui #}
     <link rel="stylesheet" href="{{ asset('css/uikit.min.css') }}">
     {# jquery ui #}
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
     {# custom style #}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    
     {% endblock %}
+
 </head>
 {# navbar #}
 
@@ -31,12 +29,16 @@
     {# footer #}
     <footer id="pageFooter">{% include 'footer/footer.html.twig' %}</footer>
     {% block javascripts %}
-    {#
+    {# jquery #}
+    <script src="{{ asset("js/jquery.min.js") }}"></script>
+    {# jquery ui #}
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> #}
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    {# uikit #}
     <script src={{ asset("js/uikit.min.js") }}></script>
     <script src={{ asset("js/uikit-icons.min.js") }}></script>
     <script src={{ asset("js/semantic.min.js") }}></script>
+    <script src={{ asset("js/script.js") }}></script>
     {{ importmap() }}
     {% endblock %}
 </body>

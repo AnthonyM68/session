@@ -4,23 +4,20 @@
 
 {% block body %}
 
-<script>
-    //event.stopPropagation()
-    function editSession(event, url) {
-        window.location = url;
-    }
-</script>
-
 <div class="uk-container">
 
     {# session #}
-    {% if session|default == 'list' %}
+    <div class="uk-animation-slide-bottom">
+        <p class="uk-text-center">
+            <h1>Liste des sessions</h1>
+        </p>
+    </div>
 
-    <h1>Liste des sessions</h1>
+    <div class="separator"></div>
 
     {% if sessions|default %}
 
-    <table class="uk-table uk-table-responsive uk-table-hover uk-table-divider uk-table-small">
+    <table class="uk-table uk-table-responsive uk-table-hover uk-table-divider uk-table-small uk-table-justify uk-animation-fade">
         <thead>
             <tr>
                 <th>id</th>
@@ -51,20 +48,17 @@
             {% endfor %}
         </tbody>
     </table>
-    <p class="uk-width-1-1 uk-text-right" uk-margin>
+    <p class="uk-width-1-1 uk-text-right uk-animation-fade" uk-margin>
         <a class="uk-button uk-button-primary uk-button-small">Ajouter une session</a>
-        <a class="uk-button uk-button-secondary uk-button-small">Supprimer une session</a>
     </p>
     {% else %}
     <h2>Aucune informations en base de données</h2>
     {% endif %}
-    {% endif %}
-
+    
     {% if edit|default %}
     <h1>Editer / Ajouter une nouvelle session</h1>
 
     <h3>En attente</h3>
-
 
     {% endif %}
 

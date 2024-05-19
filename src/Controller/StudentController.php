@@ -21,7 +21,7 @@ class StudentController extends AbstractController
     // delete student
 
 
-    #[Route('/student/list', name: 'list_student')]
+    #[Route('/student', name: 'list_student')]
 
     public function listStudents(StudentRepository $studentRepository): Response
     {

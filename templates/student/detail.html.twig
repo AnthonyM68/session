@@ -25,7 +25,8 @@
                                 <div class="active side">
                                     <div class="ui card">
                                         <div class="image">
-                                            <img src="{{ asset('img/persons/' ~  student.firstName ~ student.lastName ~ '.webp') }}">
+                                            <img
+                                                src="{{ asset('img/persons/' ~  student.firstName ~ student.lastName ~ '.webp') }}">
                                         </div>
                                         <div class="content">
                                             <div class="header"></div>
@@ -41,7 +42,7 @@
                                                 ID:{{ student.id }}
                                             </span>
                                             <span>
-                                               
+
                                             </span>
                                         </div>
                                     </div>
@@ -79,7 +80,7 @@
                                 <div class="header">Date de naissance</div>
                                 {{ student.birthday | date('d-m-Y') }}
                             </div>
-                            <a class="mini ui button">
+                            <a href="{{ path('edit_student', {'id': student.id }) }}" class="mini ui button">
                                 Editer
                             </a>
                         </div>
@@ -107,30 +108,22 @@
                 </div>
                 <div class="ui segment">
 
+                    {% for session in student.sessions %}
 
-                    
-                        {% for session in student.sessions %}
+                    <div class="ui mini horizontal divided list">
+                        <h6>{{ session.formation.name }}</h6>
 
-                            <div class="ui mini horizontal divided list">
-                                <h6>{{ session.formation.name }}</h6>
-
-                            {% for prog in session.programs %}
-
-                                
-
-                                <div class="item">
-                                    <img class="ui avatar image" src="{{ asset('img/' ~  prog.course.nameCourse ~ '.jpg') }}">
-                                    <div class="content">
-                                        <div class="header">{{ prog.course.nameCourse }}</div>
-                                    </div>
-                                </div>
-                            {% endfor %}
-
+                        {% for prog in session.programs %}
+                        <div class="item">
+                            <img class="ui avatar image" src="{{ asset('img/' ~  prog.course.nameCourse ~ '.jpg') }}">
+                            <div class="content">
+                                <div class="header">{{ prog.course.nameCourse }}</div>
+                            </div>
                         </div>
-
                         {% endfor %}
+                    </div>
 
-                    
+                    {% endfor %}
                 </div>
             </div>
         </div>

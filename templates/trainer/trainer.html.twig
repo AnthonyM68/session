@@ -7,13 +7,15 @@
 <div class="uk-container">
 
     {# trainer #}
-    {% if slug == 'trainer' %}
-
-    <h1>Liste des formateurs</h1>
+    <div class="uk-animation-slide-bottom">
+        <p class="uk-text-center">
+            <h1>Liste des formateurs</h1>
+        </p>
+    </div>
 
     {% if trainers|default %}
 
-    <table class="uk-table uk-table-responsive uk-table-hover uk-table-divider uk-table-small uk-table-justify">
+    <table class="uk-table uk-table-responsive uk-table-hover uk-table-divider uk-table-small uk-table-justify uk-animation-fade">
         <thead>
             <tr>
                 <th>ID</th>
@@ -43,7 +45,6 @@
     </table>
     {% else %}
     <h2>Aucune informations en base de données</h2>
-    {% endif %}
     {% endif %}
 </div>
 {% endblock %}
