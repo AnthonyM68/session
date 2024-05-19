@@ -4,6 +4,13 @@
 
 {% block body %}
 
+<script>
+    //event.stopPropagation()
+    function editStudent(event, url) {
+        window.location = url;
+    }
+</script>
+
 <div class="uk-container">
 
     {# list students #}
@@ -24,6 +31,8 @@
                 <th>Code postal</th>
                 <th>Téléphone</th>
                 <th>Date de naissance</th>
+                <th>Editer</th>
+                <th>Supprimer</th>
             </tr>
         </thead>
         <tbody>
@@ -37,12 +46,18 @@
                 <td>{{ student.zipCode }}</td>
                 <td>{{ student.phoneNumber }}</td>
                 <td>{{ student.birthday | date('d-m-Y') }}</td>
+                <td><a href="#" class="token-link uk-icon-button uk-margin-small-right" uk-icon="icon: pencil" uk-tooltip="title: Éditer; pos: top-left"
+                        onclick="editStudent(event, '{{ path('edit_student', {'id': student.id }) }}'); event.stopPropagation();"></a>
+                </td>
+                <td><a href="#" class="token-link uk-icon-button uk-margin-small-right uk-text-danger" uk-icon="icon: trash" uk-tooltip="title: Supprimer; pos: top-left"></a></td>
             </tr>
+            
+
+            
             {% endfor %}
         </tbody>
     </table>
-
-    <p uk-margin>
+    <p class="uk-width-1-1 uk-text-right" uk-margin>
         <a href="{{ path('new_student') }}" class="uk-button uk-button-primary uk-button-small">Ajouter un stagiaire</a>
         <a class="uk-button uk-button-secondary uk-button-small">Supprimer un stagiaire</a>
     </p>

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Formations{% endblock %}
+{% block title %}Programes{% endblock %}
 
 {% block body %}
 <div class="uk-container">
@@ -8,12 +8,35 @@
     {# session #}
     {% if slug == 'detail' %}
 
-    <h1></h1>
+    <h1>Détail du programe</h1>
 
     {% if program|default %}
-    
-       
-    {{ dump(formation.sessions.program)}}
+
+    <table class="uk-table uk-table-hover uk-table-divider uk-table-small">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>session_id</th>
+                <th>course_id</th>
+                <th>Durée en jours:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><a href="{{ path('detail_program', {'id': program.id }) }}">Programe: {{ program.id }}</a></td>
+                <td><a href="{{ path('detail_program', {'id': program.id }) }}">{{ program.session.id }}</a></td>
+                <td><a href="{{ path('detail_program', {'id': program.id }) }}">{{ program.course.id }}</a></td>
+                <td><a href="{{ path('detail_program', {'id': program.id }) }}">{{ program.days }}</a></td>
+            </tr>
+            <tr>
+                <td>Session: {{ program.session.id  }}</td>
+                <td>Du {{ program.session.dateStart | date('d-m-Y') }} au {{ program.session.dateEnd | date('d-m-Y') }}</td>
+                <td>{{ program.course.nameCourse }}</td>
+                <td></td>
+            </tr>
+
+        </tbody>
+    </table>
 
     {% else %}
     <h2>Aucune informations en base de données</h2>

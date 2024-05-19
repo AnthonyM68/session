@@ -4,10 +4,17 @@
 
 {% block body %}
 
+<script>
+    //event.stopPropagation()
+    function editSession(event, url) {
+        window.location = url;
+    }
+</script>
+
 <div class="uk-container">
 
     {# session #}
-    {% if slug == 'session' %}
+    {% if session|default == 'list' %}
 
     <h1>Liste des sessions</h1>
 
@@ -22,24 +29,29 @@
                 <th>Date début</th>
                 <th>Date fin</th>
                 <th>Inscrits</th>
+                <th>Editer</th>
+                <th>Supprimer</th>
             </tr>
         </thead>
         <tbody>
             {% for session in sessions %}
-            <tr>
             <tr onclick="window.location='{{ path('detail_session', {'id': session.id }) }}';" style="cursor:pointer;">
-                <td>{{ session.id }}</a></td>
-                <td>{{ session.formation.id }}</a></td>
-                <td>{{ session.maxstudents }}</a></td>
+                <td>{{ session.id }}</td>
+                <td>{{ session.formation.id }}</td>
+                <td>{{ session.maxstudents }}</td>
                 <td>{{ session.datestart | date("j-m-Y") }}</td>
-                <td>{{ session.dateend | date("j-m-Y")}}</td>
+                <td>{{ session.dateend | date("j-m-Y") }}</td>
                 <td>{{ session.reservations }}</td>
-                </a>
+                <td><a href="#" class="token-link uk-icon-button uk-margin-small-right" uk-icon="icon: pencil" uk-tooltip="title: Éditer; pos: top-left"
+                    onclick="editSession(event, '{{ path('edit_session', {'id': session.id }) }}'); event.stopPropagation();"></a>
+            </td>
+                <td><a href="#" class="token-link uk-icon-button uk-margin-small-right uk-text-danger"
+                        uk-icon="icon: trash" uk-tooltip="title: Supprimer; pos: top-left"></a></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-    <p uk-margin>
+    <p class="uk-width-1-1 uk-text-right" uk-margin>
         <a class="uk-button uk-button-primary uk-button-small">Ajouter une session</a>
         <a class="uk-button uk-button-secondary uk-button-small">Supprimer une session</a>
     </p>
@@ -47,5 +59,15 @@
     <h2>Aucune informations en base de données</h2>
     {% endif %}
     {% endif %}
+
+    {% if edit|default %}
+    <h1>Editer / Ajouter une nouvelle session</h1>
+
+    <h3>En attente</h3>
+
+
+    {% endif %}
+
+   
 </div>
 {% endblock %}

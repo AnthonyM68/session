@@ -6,7 +6,7 @@
 <div class="uk-container">
 
     {# session #}
-    {% if slug == 'add' %}
+    {% if edit|default %}
 
     {% if formAddStudent|default %}
 
@@ -14,11 +14,7 @@
 
     <div class="uk-hr"></div>
 
-
-
     {{ form_start(formAddStudent, {'attr': {'class': 'uk-form uk-margin-top uk-grid-small', 'uk-grid' : '' }}) }}
-
-
 
     <div class="uk-width-1-4@s">
         {{ form_row(formAddStudent.firstName) }}

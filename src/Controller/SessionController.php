@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Session;
 use App\Entity\Formation;
 use App\Form\FormationType;
+
 use App\Repository\SessionRepository;
 use App\Repository\StudentRepository;
 use App\Repository\FormationRepository;
@@ -66,14 +67,10 @@ class SessionController extends AbstractController
         return $this->render('session/session.html.twig', [
             'controller_name' => 'SessionController',
             'view_name' => 'session/session.html.twig',
-            'slug' => 'session',
+            'session' => 'list',
             "sessions" => $sessions
         ]);
     }
-
-
-
-
 
 
 
@@ -86,13 +83,10 @@ class SessionController extends AbstractController
         return $this->render('session/session.html.twig', [
             'controller_name' => 'SessionController',
             'view_name' => 'session/session.html.twig',
-            'slug' => 'session',
+            'session' => 'session',
             "sessions" => $sessions
         ]);
     }
-
-
-
 
     #[Route('/session/{id}/detail', name: 'detail_session')]
     public function detailSession(Session $session = null, Request $request, StudentRepository $studentRepository): Response
@@ -110,35 +104,33 @@ class SessionController extends AbstractController
             'notRegister' => $notRegister,
         ]);
     }
-    // #[Route('/session/{id}/edit', name: 'edit_session')]
-    // public function foundSessionByIdFormation()
-    // {
-
-    // }
 
 
-
-    // #[Route('/session/{id}/formations', name: 'formations_session')]
-    // public function formationsSession(Session $session = null, Request $request, FormationRepository $formationRepository): Response
-    // {
-    //     if (!$session) {
-    //         $session = new Session();
-    //     }
-    //     $formations = $formationRepository->findFormationByIdStudent($session->getId());
-
-    //     return $this->render('formation/formation.html.twig', [
-    //         'controller_name' => 'SessionController',
-    //         'view_name' => 'formation/formation.html.twig',
-    //         'slug' => 'formations',
-    //         'formations' => $formations,
-    //     ]);
-    // }
-
+    #[Route('/session/new', name: 'session_session')]
     #[Route('/session/{id}/edit', name: 'edit_session')]
-    public function editSession(): Response
+    public function editSession(Session $session, Request $request, EntityManagerInterface $entityManager): Response
     {
+
+        if (!$session) {
+            $session = new Session();
+        }
+
+        // $form = $this->createForm([SessionType::class, $session]);
+
+        // if($form->isSubmitted() && $form->isValid()) {
+
+        //     $session = $form->getData();
+
+        //     $entityManager->persist($session);
+
+        //     return $this->redirectToRoute('');
+        // }
+
         return $this->render('session/session.html.twig', [
             'controller_name' => 'SessionController',
+            'view_name' => 'session/session.html.twig',
+            //'formAddSession' => $form,
+            'edit' => $session->getId()
         ]);
     }
 

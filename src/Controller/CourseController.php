@@ -7,7 +7,7 @@ use App\Form\CategoryType;
 
 use App\Entity\Program;
 use App\Entity\Category;
-
+use App\Entity\Session;
 use App\Repository\CourseRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\SessionRepository;
@@ -144,18 +144,26 @@ class CourseController extends AbstractController
             'controller_name' => 'CourseController',
         ]);
     }
+    #[Route('/course/{id}/delete', name: 'delete_course')]
+    public function deleteProgram(): Response
+    {
+        return $this->render('course/course.html.twig', [
+            'controller_name' => 'CourseController',
+            'view_name' => 'course/course.html.twig',
+        ]);
+    }
 
     /**
      *  PROGRAMS
      */
     #[Route('/program/list', name: 'list_program')]
-    public function listProgram(ProgramRepository $ProgramRepository): Response
+    public function listProgram(Program $program, Request $request, ProgramRepository $ProgramRepository): Response
     {
         $programs = $ProgramRepository->findAll();
 
-        return $this->render('course/course.html.twig', [
+        return $this->render('program/program.html.twig', [
             'controller_name' => 'CourseController',
-            'view_name' => 'course/course.html.twig',
+            'view_name' => 'program/program.html.twig',
             'slug' => 'program',
             "programs" => $programs
         ]);
@@ -175,12 +183,5 @@ class CourseController extends AbstractController
         ]);
     }
 
-    #[Route('/course/{id}/delete', name: 'delete_course')]
-    public function deleteProgram(): Response
-    {
-        return $this->render('course/course.html.twig', [
-            'controller_name' => 'CourseController',
-            'view_name' => 'course/course.html.twig',
-        ]);
-    }
+
 }

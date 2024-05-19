@@ -38,7 +38,7 @@
     
     {# list of students registered for the session #}
     {% if session.students|default %}
-    <ul>
+    <ul class="uk-list">
         {% for program in session.programs %}
             <li>Module: {{program.course.namecourse }} durée: {{program.days}} jours</li> 
         {% endfor %}
@@ -65,15 +65,15 @@
         </thead>
         <tbody>
             {% for student in session.students %}
-            <tr>
+            <tr onclick="window.location='{{ path('detail_student', {'id': student.id }) }}';" style="cursor:pointer;">
                 <td>{{ student.id }}</td>
                 <td>{{ student.firstName }}</td>
                 <td>{{ student.lastName }}</td>
                 <td>{{ student.address }}</td>
-                <td>{{ student.city }}</a></td>
-                <td>{{ student.phoneNumber }}</a></td>
-                <td>{{ student.birthday | date('d-m-Y')}}</a></td>
-                <td>{{ student.zipCode }}</a></td>
+                <td>{{ student.city }}</td>
+                <td>{{ student.phoneNumber }}</td>
+                <td>{{ student.birthday | date('d-m-Y')}}</td>
+                <td>{{ student.zipCode }}</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -88,7 +88,7 @@
    
     <div class="separator"></div>
 
-    <h3>Liste des stagiaires non inscrits à cette session <span>{{ notRegister | length  }}</span></h3>
+    <h3>Liste des stagiaires non inscrits à cette session n°<span>{{ notRegister | length  }}</span></h3>
 
     <table class="uk-table uk-table-responsive uk-table-hover uk-table-divider uk-table-small">
         <thead>
@@ -105,16 +105,15 @@
         </thead>
         <tbody>
             {% for student in notRegister %}
-            <tr>
-                <tr onclick="window.location='{{ path('detail_student', {'id': student.id }) }}';" style="cursor:pointer;"></tr>
+            <tr onclick="window.location='{{ path('detail_student', {'id': student.id }) }}';" style="cursor:pointer;">
                 <td>{{ student.id }}</td>
-                <td>{{ student.firstName }}</a></td>
-                <td>{{ student.lastName }}</a></td>
-                <td>{{ student.address }}</a></td>
-                <td>{{ student.city }}</a></td>
-                <td>{{ student.phoneNumber }}</a></td>
-                <td>{{ student.birthday | date('d-m-Y')}}</a></td>
-                <td>{{ student.zipCode }}</a></td>
+                <td>{{ student.firstName }}</td>
+                <td>{{ student.lastName }}</td>
+                <td>{{ student.address }}</td>
+                <td>{{ student.city }}</td>
+                <td>{{ student.phoneNumber }}</td>
+                <td>{{ student.birthday | date('d-m-Y')}}</td>
+                <td>{{ student.zipCode }}</td>
             </tr>
             {% endfor %}
         </tbody>

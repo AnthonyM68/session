@@ -44,8 +44,7 @@ class StudentController extends AbstractController
         return $this->render('student/detail.html.twig', [
             'controller_name' => 'StudentController',
             'view_name' => 'student/detail.html.twig',
-            'student' => $student,
-            'slug' => 'detail'
+            'student' => $student
         ]);
     }
 
@@ -73,8 +72,8 @@ class StudentController extends AbstractController
         return $this->render('student/new.html.twig', [
             'controller_name' => 'StudentController',
             'view_name' => 'student/new.html.twig',
-            'slug' => 'add',
             'formAddStudent' => $form,
+            'edit' => $student->getId()
         ]);
     }
 
