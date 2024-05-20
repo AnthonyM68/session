@@ -12,9 +12,10 @@
     {# uikit ui #}
     <link rel="stylesheet" href="{{ asset('css/uikit.min.css') }}">
     {# jquery 3.7.1 jquery ui 1.13 #}
-    <link rel="stylesheet" href="{{ asset('css/jquery-ui-1.13.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/jquery-ui.theme-start-1.13.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/jquery-ui.structure-1.13.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/jquery-ui.theme-1.13.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/jquery-ui-1.13.min.css') }}">
+    
     {# custom style #}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     {% endblock %}
@@ -23,6 +24,7 @@
 <body>
     {# header #}
     <header id="pageHeader">{% include 'navbar/navbar.html.twig' %}</header>
+
     {# article #}
     <article id="mainArticle">{% block body %}{% endblock %}</article>
     {# footer #}

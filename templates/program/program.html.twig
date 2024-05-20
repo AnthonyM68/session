@@ -7,36 +7,64 @@
     {# program #}
     {% if slug == 'program' %}
 
-    <h1>Liste des programmes</h1>
+    <h1>Liste des programes</h1>
 
     {% if programs|default %}
+    <div class="tabs-active uk-animation-fade">
+        <ul>
+            <li><a href="#fragment-1">Programes</a></li>
+            {# <li><a href="#fragment-2">Two</a></li> #}
+        </ul>
+        
+        <div id="fragment-1" class="ui center aligned segment">
 
-    <table class="uk-table uk-table-hover uk-table-divider uk-table-small">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Session_id</th>
-                <th>Début</th>
-                <th>Fin</th>
-                <th>ID Module</th>
-                <th>Module</th>
-                <th>Durée en jours:</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for program in programs %}
-            <tr>
-                <td><a href="{{ path('detail_program', {'id': program.id }) }}">{{ program.id }}</a></td>
-                <td><a href="{{ path('detail_program', {'id': program.id }) }}">{{ program.session.id }}</a></td>
-                <td><a href="{{ path('detail_program', {'id': program.id }) }}">{{ program.session.dateStart | date('d-m-Y') }}</a></td>
-                <td><a href="{{ path('detail_program', {'id': program.id }) }}">{{ program.session.dateEnd | date('d-m-Y') }}</a></td>
-                <td><a href="{{ path('detail_program', {'id': program.id }) }}">{{ program.course.id }}</a></td>
-                <td><a href="{{ path('detail_program', {'id': program.id }) }}">{{ program.course.nameCourse }}</a></td>
-                <td><a href="{{ path('detail_program', {'id': program.id }) }}">{{ program.days }}</a></td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            {# table uikit #}
+
+            <table id="table-list" class="uk-table uk-table-hover uk-table-divider uk-table-small">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Session_id</th>
+                        <th>Début</th>
+                        <th>Fin</th>
+                        <th>ID Module</th>
+                        <th>Module</th>
+                        <th>Durée en jours:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for program in programs %}
+                    <tr class="student-item">
+                        <td><a href="{{ path('detail_program', {'id': program.id }) }}">{{ program.id }}</a></td>
+                        <td><a href="{{ path('detail_program', {'id': program.id }) }}">{{ program.session.id }}</a>
+                        </td>
+                        <td><a href="{{ path('detail_program', {'id': program.id }) }}">{{ program.session.dateStart |
+                                date('d-m-Y') }}</a></td>
+                        <td><a href="{{ path('detail_program', {'id': program.id }) }}">{{ program.session.dateEnd |
+                                date('d-m-Y') }}</a></td>
+                        <td><a href="{{ path('detail_program', {'id': program.id }) }}">{{ program.course.id }}</a></td>
+                        <td><a href="{{ path('detail_program', {'id': program.id }) }}">{{ program.course.nameCourse
+                                }}</a></td>
+                        <td><a href="{{ path('detail_program', {'id': program.id }) }}">{{ program.days }}</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+
+
+            <div class="ui small pagination menu">
+                <a class="icon item prevPage"><i class="left chevron icon"></i></a>
+                <div id="pagination" class="ui small pagination menu"></div>
+                <a class="icon item nextPage"><i class="right chevron icon"></i></a>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
     {% else %}
     <h2>Aucune informations en base de données</h2>
     {% endif %}

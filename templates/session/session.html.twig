@@ -16,62 +16,70 @@
     <div class="separator"></div>
 
     {% if sessions|default %}
-
-    <table class="ui compact celled table">
-        <thead>
-            <tr> 
-                <th>id</th>
-                <th>Formation id:</th>
-                <th>Places:</th>
-                <th>Date début</th>
-                <th>Date fin</th>
-                <th>Inscrits</th>
-                <th>Editer</th>
-                <th>Supprimer</th>
-            </tr>
-        </thead>
-        <tbody>
-
-            {% for session in sessions %}
-
-            <tr class="hover" onclick="window.location='{{ path('detail_session', {'id': session.id }) }}';" style="cursor:pointer;">
-                <td>{{ session.id }}</td>
-                <td>{{ session.formation.id }}</td>
-                <td>{{ session.maxstudents }}</td>
-                <td>{{ session.datestart | date("j-m-Y") }}</td>
-                <td>{{ session.dateend | date("j-m-Y") }}</td>
-                <td>{{ session.reservations }}</td>
-                <td>
-                    <a href="#" uk-tooltip="title: Éditer; pos: top-left"
-                        onclick="editSession(event, '{{ path('edit_session', {'id': session.id }) }}'); event.stopPropagation();">
-                        <i class="edit icon"></i>
-                    </a>
-                </td>
-                <td>
-                    <a href="#" uk-tooltip="title: Supprimer; pos: top-left">
-                        <i class="trash alternate outline icon"></i>
-                    </a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-        <tfoot class="full-width">
-            <tr>
-                <th></th>
-                <th colspan="8">
-                    <div class="ui right floated small primary labeled icon button">
-                        <i class="user icon"></i> Ajouter Session
-                    </div>
-                    {# <div class="ui small button">
-                        Approve
-                    </div>
-                    <div class="ui small  disabled button">
-                        Approve All
-                    </div> #}
-                </th>
-            </tr>
-        </tfoot>
-    </table>
+    <div class="tabs-active uk-animation-fade">
+        <ul>
+            <li><a href="#fragment-1">Sessions</a></li>
+            {# <li><a href="#fragment-2">Two</a></li> #}
+        </ul>
+        <div id="fragment-1" class="ui center aligned segment">
+            <table id="table-list" class="ui compact celled table">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Formation id:</th>
+                        <th>Places:</th>
+                        <th>Date début</th>
+                        <th>Date fin</th>
+                        <th>Inscrits</th>
+                        <th>Editer</th>
+                        <th>Supprimer</th>
+                    </tr>
+                </thead>
+                <tbody>
+        
+                    {% for session in sessions %}
+        
+                    <tr class="hover" onclick="window.location='{{ path('detail_session', {'id': session.id }) }}';"
+                        style="cursor:pointer;">
+                        <td>{{ session.id }}</td>
+                        <td>{{ session.formation.id }}</td>
+                        <td>{{ session.maxstudents }}</td>
+                        <td>{{ session.datestart | date("j-m-Y") }}</td>
+                        <td>{{ session.dateend | date("j-m-Y") }}</td>
+                        <td>{{ session.reservations }}</td>
+                        <td>
+                            <a href="#" uk-tooltip="title: Éditer; pos: top-left"
+                                onclick="editSession(event, '{{ path('edit_session', {'id': session.id }) }}'); event.stopPropagation();">
+                                <i class="edit icon"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#" uk-tooltip="title: Supprimer; pos: top-left">
+                                <i class="trash alternate outline icon"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot class="full-width">
+                    <tr>
+                        <th></th>
+                        <th colspan="8">
+                            <div class="ui right floated small primary labeled icon button">
+                                <i class="user icon"></i> Ajouter Session
+                            </div>
+                        </th>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="ui small pagination menu">
+                <a class="icon item prevPage"><i class="left chevron icon"></i></a>
+                <div id="pagination" class="ui small pagination menu"></div>
+                <a class="icon item nextPage"><i class="right chevron icon"></i></a>
+            </div>
+        </div>
+    </div>
+   
 
     {% else %}
     <h2>Aucune informations en base de données</h2>

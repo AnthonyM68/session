@@ -13,39 +13,62 @@
         </p>
     </div>
 
+
+
     <div class="separator"></div>
 
     {% if categories|default %}
+    <div class="tabs-active uk-animation-fade">
+        <ul>
+            <li><a href="#fragment-1">Catégories</a></li>
+            {# <li><a href="#fragment-2">Two</a></li> #}
+        </ul>
 
-    {% for categorie in categories %}
+        <div id="fragment-1" class="ui">
+            <div id="tabs" class="uk-animation-fade">
+                <div class="ui grid">
 
-    <div class="ui items">
-        <div class="item uk-animation-fade">
-            <div class="ui tiny image">
-                <img src="{{ asset('img/' ~  categorie ~ '.jpg') }}">
-            </div>
-            <div class="middle aligned content">
-                <div class="header">
-                    {{ categorie }}
-                </div>
-                <div class="description">
-                    <p></p>
-                </div>
-                <div class="extra">
-                    <div class="ui right floated">
-                        <a href="{{ path('delete_category', {'id': categorie.id }) }}">
-                            <i class="trash icon right floated"></i>
-                        </a>
-                        <a href="{{ path('edit_category', {'id': categorie.id }) }}">
-                            <i class="edit icon right floated"></i>
-                        </a>
-
+                    <div class="four wide column">
+                        <ul class="ui items">
+                            {% for categorie in categories %}
+                            <li class="ui feed">
+                                <div class="event">
+                                    <div class="label">
+                                        <img src="{{ asset('img/png/' ~  categorie ~ '.png') }}">
+                                    </div>
+                                    <div class="content">
+                                        <a href="#tabs-{{ loop.index }}">{{ categorie.name }}</a>
+                                    </div>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
                     </div>
+
+                    <div class="ten wide column">
+                        {% for categorie in categories %}
+                        <div id="tabs-{{ loop.index }}">
+                            <h2>{{ categorie.name }}</h2>
+                            <!-- Contenu de l'onglet -->
+                        </div>
+                        {% endfor %}
+                    </div>
+
                 </div>
             </div>
+            {# <div class="extra">
+                <div class="ui right floated">
+                    <a href="{{ path('delete_category', {'id': categorie.id }) }}">
+                        <i class="trash icon right floated"></i>
+                    </a>
+                    <a href="{{ path('edit_category', {'id': categorie.id }) }}">
+                        <i class="edit icon right floated"></i>
+                    </a>
+
+                </div>
+            </div> #}
         </div>
     </div>
-    {% endfor %}
 
     <p class="uk-width-1-1 uk-text-right" uk-margin>
         <a href="{{ path('new_category') }}" class="uk-button uk-button-primary uk-button-small">Ajouter une

@@ -15,66 +15,80 @@
 
     {% if students|default %}
 
-    <table class="ui celled selectable padded table uk-animation-fade">
-        <thead>
-            <tr>
-                <th class="single line">ID</th>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Adresse</th>
-                <th>Ville</th>
-                <th>Code postal</th>
-                <th>Téléphone</th>
-                <th>Date de naissance</th>
-                <th>Editer</th>
-                <th>Supprimer</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for student in students %}
-            <tr onclick="window.location='{{ path('detail_student', {'id': student.id }) }}';" style="cursor:pointer;">
-                <td class="ui center aligned header">{{ student.id }}</td>
-                <td class="single line">{{ student.firstName }}</td>
-                <td>{{ student.lastName }}</td>
-                <td>{{ student.address }}</td>
-                <td>{{ student.city }}</td>
-                <td>{{ student.zipCode }}</td>
-                <td>{{ student.phoneNumber }}</td>
-                <td>{{ student.birthday | date('d-m-Y') }}</td>
-                <td>
-                    <a href="#" uk-tooltip="title: Éditer; pos: top-left"
-                        onclick="editStudent(event, '{{ path('edit_student', {'id': student.id }) }}'); event.stopPropagation();">
-                        <i class="edit icon"></i>
-                    </a>
-                </td>
-                <td>
-                    <a href="#" uk-tooltip="title: Supprimer; pos: top-left">
-                        <i class="trash alternate outline icon"></i>
-                    </a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-        <tfoot class="full-width">
-            <tr>
-                <th></th>
-                <th colspan="10">
-                    <a href={{ path('new_student') }} class="ui right floated small primary labeled icon button">
-                        <i class="user icon"></i> Ajouter Stagiaire
-                    </a>
-                    <div class="ui small pagination menu">
-                        <a class="icon item"><i class="left chevron icon"></i></a>
-                        <a class="item">1</a>
-                        <a class="item">2</a>
-                        <a class="item">3</a>
-                        <a class="item">4</a>
-                        <a class="icon item"><i class="right chevron icon"></i></a>
-                    </div>
+    <div class="tabs-active uk-animation-fade">
+        <ul>
+            <li><a href="#fragment-1">Liste</a></li>
+            {# <li><a href="#fragment-2">Two</a></li> #}
 
-                </th>
-            </tr>
-        </tfoot>
-    </table>
+        </ul>
+        <div id="fragment-1" class="ui center aligned segment">
+            <table id="table-list" class="uk-padding ui celled selectable padded table">
+                <thead>
+                    <tr>
+                        <th class="single line">ID</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Adresse</th>
+                        <th>Ville</th>
+                        <th>Code postal</th>
+                        <th>Téléphone</th>
+                        <th>Date de naissance</th>
+                        <th>Editer</th>
+                        <th>Supprimer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                    <tr onclick="window.location='{{ path('detail_student', {'id': student.id }) }}';"
+                        style="cursor:pointer;">
+                        <td class="ui center aligned header">{{ student.id }}</td>
+                        <td class="single line">{{ student.firstName }}</td>
+                        <td>{{ student.lastName }}</td>
+                        <td>{{ student.address }}</td>
+                        <td>{{ student.city }}</td>
+                        <td>{{ student.zipCode }}</td>
+                        <td>{{ student.phoneNumber }}</td>
+                        <td>{{ student.birthday | date('d-m-Y') }}</td>
+                        <td>
+                            <a href="#" uk-tooltip="title: Éditer; pos: top-left"
+                                onclick="editStudent(event, '{{ path('edit_student', {'id': student.id }) }}'); event.stopPropagation();">
+                                <i class="edit icon"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#" uk-tooltip="title: Supprimer; pos: top-left">
+                                <i class="trash alternate outline icon"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot class="full-width">
+                    <tr>
+                        <th></th>
+                        <th colspan="10">
+                            <a href={{ path('new_student') }}
+                                class="ui right floated small primary labeled icon button">
+                                <i class="user icon"></i> Ajouter Stagiaire
+                            </a>
+                        </th>
+                    </tr>
+                </tfoot>
+            </table>
+            <div class="ui small pagination menu">
+                <a class="icon item prevPage"><i class="left chevron icon"></i></a>
+                <div id="pagination" class="ui small pagination menu"></div>
+                <a class="icon item nextPage"><i class="right chevron icon"></i></a>
+            </div>
+        </div>
+        <div id="fragment-2">
+            {# Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
+            laoreet dolore magna aliquam erat volutpat. #}
+        </div>
+
+    </div>
+
+
 
     {% else %}
     <h2>Aucune informations en base de données</h2>
