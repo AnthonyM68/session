@@ -5,34 +5,33 @@
     <meta charset="UTF-8">
     <title>{% block title %}Session!{% endblock %}</title>
     {% block stylesheets %}
+    {# jquery 3.7.1 jquery ui 1.13 #}
+    <link rel="stylesheet" href="{{ asset('css/jquery-ui.theme-lightness-1.13.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/jquery-ui.structure-1.13.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/jquery-ui-1.13.min.css') }}">
     {# semantic #}
     <link rel="stylesheet" href="{{ asset('css/semantic.min.css') }}">
     {# icons semantic #}
-    <link rel="stylesheet" href="{{ asset('icon/icon.min.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('icon/icon.min.css') }}">
     {# uikit ui #}
     <link rel="stylesheet" href="{{ asset('css/uikit.min.css') }}">
-    {# jquery 3.7.1 jquery ui 1.13 #}
-    <link rel="stylesheet" href="{{ asset('css/jquery-ui.theme-start-1.13.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/jquery-ui.structure-1.13.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/jquery-ui-1.13.min.css') }}">
-    
     {# custom style #}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     {% endblock %}
+    {# jquery #}
+    <script src={{ asset("js/jquery-3.7.1.min.js") }}></script>
 </head>
 
 <body>
     {# header #}
     <header id="pageHeader">{% include 'navbar/navbar.html.twig' %}</header>
-
     {# article #}
     <article id="mainArticle">{% block body %}{% endblock %}</article>
     {# footer #}
     <footer id="pageFooter">{% include 'footer/footer.html.twig' %}</footer>
 
     {% block javascripts %}
-    {# jquery #}
-    <script src={{ asset("js/jquery-3.7.1.min.js") }}></script>
+    
     {# jquery ui 1.13 #}
     <script src={{ asset("js/jquery-ui-1.13.min.js") }}></script>
     <script src={{ asset("js/jquery.parallax-2.0.0-a.min.js") }}></script>

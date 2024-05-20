@@ -34,7 +34,19 @@ class StudentController extends AbstractController
             "students" => $students
         ]);
     }
+    #[Route('/tab/student', name: 'tab_student')]
 
+    public function tabStudents(StudentRepository $studentRepository): Response
+    {
+        $students = $studentRepository->findBy([], ["firstName" => "ASC"]);
+
+        return $this->render('student/tab/student.html.twig', [
+            'controller_name' => 'StudentController',
+            'view_name' => 'student/tab/student.html.twig',
+            'slug' => 'list',
+            "students" => $students
+        ]);
+    }
     #[Route('/student/{id}/detail', name: 'detail_student')]
     public function detailStudent(Student $student = null, Request $request, StudentRepository $studentRepository): Response
     {

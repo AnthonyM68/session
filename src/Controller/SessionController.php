@@ -49,6 +49,16 @@ class SessionController extends AbstractController
             "trainer" => null
         ]);
     }
+    #[Route('/tab/trainer', name: 'tab_trainer')]
+    public function tabTrainer(FormationRepository $formationRepository): Response
+    {
+        // recherche les formateurs
+        return $this->render('trainer/tab/trainer.html.twig', [
+            'controller_name' => 'SessionController',
+            'view_name' => 'trainer/tab/trainer.html.twig',
+            "trainer" => null
+        ]);
+    }
 
 
 
@@ -65,7 +75,17 @@ class SessionController extends AbstractController
             "sessions" => $sessions
         ]);
     }
+    #[Route('/tab/session', name: 'tab_session')]
+    public function tabSession(SessionRepository $sessionRepository): Response
+    {
+        $sessions = $sessionRepository->findAll();
 
+        return $this->render('session/tab/session.html.twig', [
+            'controller_name' => 'SessionController',
+            'view_name' => 'session/tab/session.html.twig',
+            "sessions" => $sessions
+        ]);
+    }
 
 
     /* SESSION */
@@ -111,7 +131,8 @@ class SessionController extends AbstractController
 
 
 
-    /* FORMATION  */
+    /* FORMATION  */    
+    
     #[Route('/formation', name: 'list_formation')]
     public function listFormation(FormationRepository $formationRepository): Response
     {
@@ -123,6 +144,18 @@ class SessionController extends AbstractController
             "formations" => $formations
         ]);
     }
+    #[Route('/tab/formation', name: 'tab_formation')]
+    public function tabFormation(FormationRepository $formationRepository): Response
+    {
+        $formations = $formationRepository->findAll();
+
+        return $this->render('formation/tab/formation.html.twig', [
+            'controller_name' => 'SessionController',
+            'view_name' => 'formation/tab/formation.html.twig',
+            "formations" => $formations
+        ]);
+    }
+
 
 
     #[Route('/formation/new', name: 'new_formation')]

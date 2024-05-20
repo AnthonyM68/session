@@ -1,0 +1,48 @@
+{% block title %}Formateurs{% endblock %}
+
+{% block tab_content %}
+
+<div class="uk-container">
+
+    {# trainer #}
+    <div class="uk-animation-slide-bottom">
+        <p class="uk-text-center">
+            <h1>Liste des formateurs</h1>
+        </p>
+    </div>
+
+    {% if trainers|default %}
+
+    <table class="uk-table uk-table-responsive uk-table-hover uk-table-divider uk-table-small uk-table-justify uk-animation-fade">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Adresse</th>
+                <th>Ville</th>
+                <th>Téléphone</th>
+                <th>Date de naissance</th>
+                <th>Code postal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for trainer in trainers %}
+            <tr>
+                <td>{{ trainer.id }}</td>
+                <td>{{ trainer.firstName }}</td>
+                <td>{{ trainer.lastName }}</td>
+                <td>{{ trainer.address }}</td>
+                <td>{{ trainer.city }}</td>
+                <td>{{ trainer.phoneNumber }}</td>
+                <td>{{ trainer.birthday | date('d-m-Y') }}</td>
+                <td>{{ trainer.zipCode }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <h2>Aucune informations en base de données</h2>
+    {% endif %}
+</div>
+{% endblock %}

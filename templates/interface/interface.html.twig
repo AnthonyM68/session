@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formations{% endblock %}
+
+{% block body %}
+<div class="uk-container">
+    <div id="interface">
+        <ul>
+            <li><a href="{{ path('tab_formation') }}">Formation</a></li>
+            <li><a href="{{ path('tab_category') }}">Catégorie</a></li>
+            <li><a href="{{ path('tab_session') }}">Sessions</a></li>
+            <li><a href="{{ path('tab_program') }}">Programes</a></li>
+            <li><a href="{{ path('tab_trainer') }}">Formateurs</a></li>
+            <li><a href="{{ path('tab_student') }}">Stagiaires</a></li>
+        </ul>
+        <div id="tab_content">
+            {% block tab_content %}{% endblock %}
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

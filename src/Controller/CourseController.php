@@ -23,18 +23,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CourseController extends AbstractController
 {
-    // list category
-    // detail catégory 
-    // add catégory
-    // edit catégory
-    // delete catégory 
+    #[Route('/interface', name: 'interface')]
+    public function indexy(): Response
+    {
+        return $this->render('interface/interface.html.twig', [
+            'controller_name' => 'CourseController',
+            'view_name' => 'interface/interface.html.twig',
+        ]);
+    }
 
-    // liste course 
-    // detail course 
-    // delete course
-
-    /* Categories */
-
+    
     #[Route('/category', name: 'list_category')]
     public function listCategory(CategoryRepository $CategoryRepository): Response
     {
@@ -46,6 +44,26 @@ class CourseController extends AbstractController
             "categories" => $categories
         ]);
     }
+
+
+    #[Route('/tab/category', name: 'tab_category')]
+    public function tabCategory(CategoryRepository $CategoryRepository): Response
+    {
+        $categories = $CategoryRepository->findBy([], ["name" => "ASC"]);
+
+        return $this->render('category/tab/category.html.twig', [
+            'controller_name' => 'CourseController',
+            'view_name' => 'category/tab/category.html.twig',
+            "categories" => $categories
+        ]);
+    }
+
+
+
+
+
+
+
     #[Route('/category/{id}/detail', name: 'detail_category')]
     public function detailCategory(): Response
     {
@@ -161,7 +179,18 @@ class CourseController extends AbstractController
             "programs" => $programs
         ]);
     }
+    #[Route('/tab/program', name: 'tab_program')]
+    public function tabProgram(Program $program, Request $request, ProgramRepository $ProgramRepository): Response
+    {
+        $programs = $ProgramRepository->findAll();
 
+        return $this->render('program/tab/program.html.twig', [
+            'controller_name' => 'CourseController',
+            'view_name' => 'program/tab/program.html.twig',
+            'slug' => 'program',
+            "programs" => $programs
+        ]);
+    }
     #[Route('/program/{id}/detail', name: 'detail_program')]
     public function detailProgram(Program $program, Request $request, ProgramRepository $programRepository): Response
     {
@@ -175,6 +204,4 @@ class CourseController extends AbstractController
             'program' => $program
         ]);
     }
-
-
 }

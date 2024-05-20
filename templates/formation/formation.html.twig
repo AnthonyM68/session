@@ -4,11 +4,8 @@
 
 {% block body %}
 
-
 <div class="uk-container">
-    {# liste formation #}
-
- 
+    
     <div class="uk-animation-slide-bottom">
         <p class="uk-text-center" ><h1>Liste des formations</h1></p>
     </div>
@@ -55,9 +52,6 @@
     {% endif %}
 
 
-
-
-    {# ajouter une formation #}
     {% if slug|default == 'add' %}
 
     {% if formAddFormation|default %}
