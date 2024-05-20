@@ -26,7 +26,7 @@ class SessionController extends AbstractController
 
 
     /* HOME */
-    #[Route('/formation', name: 'list_formation')]
+    #[Route('/home', name: 'home')]
     public function index(FormationRepository $formationRepository): Response
     {
         $formations = $formationRepository->findAll();

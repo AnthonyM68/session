@@ -6,24 +6,47 @@
 
 {# formation #}
 {% if formations|default %}
-{# cards inclinés #}
 
-{# <div id="container-home" class="uk-container">
+<div class="some-class" data-src={{ asset('img/home.jpg') }} data-pos-x="left" data-parallax>
 
-    <div class="card-container uk-child-width-1-4@s">
+    <div class="uk-container">
+        <img src={{ asset('img/home.jpg') }} alt="" class="src">
 
-        {% for formation in formations %}
-
-        <div class="card">
-            <div class="card-image" style="background-image: url('{{ asset('img/' ~ formation.name ~ '.jpg') }}')">
+        <div class="ui placeholder segment">
+            <div class="ui icon header">
+                <i class="search icon"></i>
+                We don't have any documents matching your query
             </div>
-            <div class="card-content">
-                <h1>{{ formation.name }}</h1>
+            <div class="inline">
+                <div class="ui primary button">Clear Query</div>
+                <div class="ui button">Add Document</div>
             </div>
         </div>
-        {% endfor %}
+
+
+
+
+        <div class="card-container">
+
+            {% for formation in formations %}
+            <div class="uk-margin uk-card uk-card-default uk-card-small uk-card-body uk-card-hover">
+                <div class="ui tiny image">
+                    <img src="{{ asset('img/' ~  formation.name ~ '.jpg') }}">
+
+                </div>
+                <h3 class="uk-card-title">{{ formation.name }}</h3>
+                {# <div class="card-image"
+                    style="background-image: url('{{ asset('img/' ~ formation.name ~ '.jpg') }}')">
+                </div>
+                <h3 class="uk-card-title">{{ formation.name }}</h3> #}
+
+            </div>
+            {% endfor %}
+        </div>
     </div>
-</div> #}
+
+</div>
+
 
 {% else %}
 <h2>Aucune informations en base de données</h2>

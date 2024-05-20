@@ -6,4 +6,5 @@ function editStudent(event, url) {
 }
 $(document).ready(function () {
     $('.menu .item').tab();
+    $('.some-class').parallax();
 });

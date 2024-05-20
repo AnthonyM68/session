@@ -21,10 +21,15 @@
 }
 html,
 body {
-  /* background-color: var(--background-color) !important;
-  color: var(--secondary-color) !important; */
 }
-
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--secondary-color) !important;
+}
 /* COLOR GENERAL */
 .link-color {
   color: var(--link-color) !important;
@@ -36,119 +41,16 @@ body {
   background-color: var(--background-color) !important;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: var(--secondary-color) !important;
-}
-
 a:hover {
   color: var(--link-color) !important;
 }
-.separator  {
+ .separator  {
   width: 100%;
-  height:100px
-}
-/* navbar*/
-.container-logo {
-  width: 100%;
-  object-fit: cover;
-  padding: 10px;
-}
-.logo {
-  width: 100%;
-  height: 80px;
-  object-fit: cover;
-  object-position: 0 0px;
-  border: 1px solid var(--border-color);
-  border-radius: 10px;
-}
+  height:100px;
+} 
 
-
-/* HOME */
-.parallax {
-  /*background-image: url("./../img/home.jpg");*/
-  min-height: 100vh; 
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: -1; 
-}
-
-.parallax::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-
-/* card-home */
-#container-home{
-  background-color: transparent !important;
-}
-/* .card-container {
-  display: flex;
-  flex-wrap:wrap;
-  justify-content: space-around;
-  background-color: transparent !important;
-}
-.card {
-  width: 300px;
-  height: 450px;
-  margin: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  transform: skew(15deg);
-  position: relative;
-  background-color: transparent !important;
-}
-
-.card .card-image {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background-size: cover;
-  z-index: 1 !important;
-}
-.card .card-image::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0 !important;
-}
-.card .card-content {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2 !important;
-  color: white;
-  text-align: center;
-}
-.card .card-content h1 {
-  font-size: 1.3rem;
-} */
-
-/* ARTICLE */
 #mainArticle {
-  /*text-align: center;*/
-  background: transparent !important;
+
 }
 #mainArticle th,
 #mainArticle td {

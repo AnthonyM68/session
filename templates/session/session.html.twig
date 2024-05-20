@@ -9,7 +9,7 @@
     {# session #}
     <div class="uk-animation-slide-bottom">
         <p class="uk-text-center">
-            <h1>Liste des sessions</h1>
+        <h1>Liste des sessions</h1>
         </p>
     </div>
 
@@ -17,9 +17,9 @@
 
     {% if sessions|default %}
 
-    <table class="uk-table uk-table-responsive uk-table-hover uk-table-divider uk-table-small uk-table-justify uk-animation-fade">
+    <table class="ui compact celled table">
         <thead>
-            <tr>
+            <tr> 
                 <th>id</th>
                 <th>Formation id:</th>
                 <th>Places:</th>
@@ -31,30 +31,52 @@
             </tr>
         </thead>
         <tbody>
+
             {% for session in sessions %}
-            <tr onclick="window.location='{{ path('detail_session', {'id': session.id }) }}';" style="cursor:pointer;">
+
+            <tr class="hover" onclick="window.location='{{ path('detail_session', {'id': session.id }) }}';" style="cursor:pointer;">
                 <td>{{ session.id }}</td>
                 <td>{{ session.formation.id }}</td>
                 <td>{{ session.maxstudents }}</td>
                 <td>{{ session.datestart | date("j-m-Y") }}</td>
                 <td>{{ session.dateend | date("j-m-Y") }}</td>
                 <td>{{ session.reservations }}</td>
-                <td><a href="#" class="token-link uk-icon-button uk-margin-small-right" uk-icon="icon: pencil" uk-tooltip="title: Éditer; pos: top-left"
-                    onclick="editSession(event, '{{ path('edit_session', {'id': session.id }) }}'); event.stopPropagation();"></a>
-            </td>
-                <td><a href="#" class="token-link uk-icon-button uk-margin-small-right uk-text-danger"
-                        uk-icon="icon: trash" uk-tooltip="title: Supprimer; pos: top-left"></a></td>
+                <td>
+                    <a href="#" uk-tooltip="title: Éditer; pos: top-left"
+                        onclick="editSession(event, '{{ path('edit_session', {'id': session.id }) }}'); event.stopPropagation();">
+                        <i class="edit icon"></i>
+                    </a>
+                </td>
+                <td>
+                    <a href="#" uk-tooltip="title: Supprimer; pos: top-left">
+                        <i class="trash alternate outline icon"></i>
+                    </a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
+        <tfoot class="full-width">
+            <tr>
+                <th></th>
+                <th colspan="8">
+                    <div class="ui right floated small primary labeled icon button">
+                        <i class="user icon"></i> Ajouter Session
+                    </div>
+                    {# <div class="ui small button">
+                        Approve
+                    </div>
+                    <div class="ui small  disabled button">
+                        Approve All
+                    </div> #}
+                </th>
+            </tr>
+        </tfoot>
     </table>
-    <p class="uk-width-1-1 uk-text-right uk-animation-fade" uk-margin>
-        <a class="uk-button uk-button-primary uk-button-small">Ajouter une session</a>
-    </p>
+
     {% else %}
     <h2>Aucune informations en base de données</h2>
     {% endif %}
-    
+
     {% if edit|default %}
     <h1>Editer / Ajouter une nouvelle session</h1>
 
@@ -62,6 +84,5 @@
 
     {% endif %}
 
-   
 </div>
 {% endblock %}

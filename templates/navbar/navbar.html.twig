@@ -12,9 +12,13 @@
                         <li><a href="{{ path('list_session') }}">Sessions</a></li>
                     </ul>
                 </div>
-                <a class="uk-navbar-item uk-logo container-logo" href="{{ asset('formation') }}">
-                    <img class="logo" src="{{ asset('img/education.jpg') }}" alt="Education tagline">
+                <a class="uk-navbar-item uk-logo container-logo" href="{{ asset('home') }}">
+                    {# <img class="logo" src="{{ asset('img/education.jpg') }}" alt="Education tagline"> #}
+                    <div class="ui tiny image">
+                        <img src="{{ asset('img/education.jpg') }}">
+                    </div>
                 </a>
+                
                 <div class="uk-navbar-center-right">
                     <ul class="uk-navbar-nav">
                         <li><a href="{{ path('list_program') }}">Programes</a></li>

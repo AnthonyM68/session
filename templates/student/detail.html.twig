@@ -10,40 +10,43 @@
 
     <h1>Détails du stagiaire</h1>
 
+
     <div class="ui two column divided grid">
         <div class="stretched row">
-
-
             <div class="ui two column divided grid">
-
                 <div class="stretched row">
                     <div class="column">
 
-
                         <div class="ui people shape">
-                            <div class="sides">
-                                <div class="active side">
-                                    <div class="ui card">
-                                        <div class="image">
-                                            <img
-                                                src="{{ asset('img/persons/' ~  student.firstName ~ student.lastName ~ '.webp') }}">
-                                        </div>
-                                        <div class="content">
-                                            <div class="header"></div>
-                                            <div class="meta">
-                                                <span>{{ student.firstName }} {{ student.lastName }}</span>
-                                            </div>
-                                            <div class="description">
-                                                Note:
-                                            </div>
-                                        </div>
-                                        <div class="extra content">
-                                            <span class="right floated">
-                                                ID:{{ student.id }}
-                                            </span>
-                                            <span>
 
-                                            </span>
+                            <div class="sides">
+
+                                <div class="ui middle aligned grid">
+
+                                    <div class="active side">
+
+                                        <div class="ui card">
+                                            <div class="image">
+                                                <img
+                                                    src="{{ asset('img/persons/' ~  student.firstName ~ student.lastName ~ '.webp') }}">
+                                            </div>
+                                            <div class="content">
+                                                <div class="header"></div>
+                                                <div class="meta">
+                                                    <span>{{ student.firstName }} {{ student.lastName }}</span>
+                                                </div>
+                                                <div class="description">
+                                                    Note:
+                                                </div>
+                                            </div>
+                                            <div class="extra content">
+                                                <span class="right floated">
+                                                    ID:{{ student.id }}
+                                                </span>
+                                                <span>
+
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -51,44 +54,47 @@
                         </div>
                     </div>
                     <div class="column">
-                        <div class="ui list">
-                            <div class="item">
-                                <div class="header">Nom:</div>
-                                {{ student.firstName }}
+                        <div class="ui middle aligned grid">
+                            <div class="ui list">
+                                <div class="item">
+                                    <div class="header">Nom:</div>
+                                    {{ student.firstName }}
+                                </div>
+                                <div class="item">
+                                    <div class="header">Prénom:</div>
+                                    {{ student.lastName }}
+                                </div>
+                                <div class="item">
+                                    <div class="header">Adresse</div>
+                                    {{ student.address }}
+                                </div>
+                                <div class="item">
+                                    <div class="header">Ville</div>
+                                    {{ student.city }}
+                                </div>
+                                <div class="item">
+                                    <div class="header">Code postal</div>
+                                    {{ student.zipCode }}
+                                </div>
+                                <div class="item">
+                                    <div class="header">Numéro de téléphone</div>
+                                    {{ student.phoneNumber }}
+                                </div>
+                                <div class="item">
+                                    <div class="header">Date de naissance</div>
+                                    {{ student.birthday | date('d-m-Y') }}
+                                </div>
+                                <a href="{{ path('edit_student', {'id': student.id }) }}" class="mini ui button">
+                                    Editer
+                                </a>
                             </div>
-                            <div class="item">
-                                <div class="header">Prénom:</div>
-                                {{ student.lastName }}
-                            </div>
-                            <div class="item">
-                                <div class="header">Adresse</div>
-                                {{ student.address }}
-                            </div>
-                            <div class="item">
-                                <div class="header">Ville</div>
-                                {{ student.city }}
-                            </div>
-                            <div class="item">
-                                <div class="header">Code postal</div>
-                                {{ student.zipCode }}
-                            </div>
-                            <div class="item">
-                                <div class="header">Numéro de téléphone</div>
-                                {{ student.phoneNumber }}
-                            </div>
-                            <div class="item">
-                                <div class="header">Date de naissance</div>
-                                {{ student.birthday | date('d-m-Y') }}
-                            </div>
-                            <a href="{{ path('edit_student', {'id': student.id }) }}" class="mini ui button">
-                                Editer
-                            </a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="column">
-                <div class="ui segment">
+
+                <div class="ui middle aligned grid">
                     <div class="ui relaxed divided list">
 
                         <h3>Sessions où le stagiaire est inscrit</h3>
@@ -106,7 +112,8 @@
                         {% endfor %}
                     </div>
                 </div>
-                <div class="ui segment">
+
+                <div class="ui middle aligned grid">
 
                     {% for session in student.sessions %}
 
