@@ -23,74 +23,84 @@
     {{ form_start(formAddSession, {'attr': {'class': 'uk-grid-small', 'uk-grid' : '' }}) }}
 
 
-    <div class="uk-width-1-4">
-        {{ form_row(formAddSession.maxStudents) }}
-    </div>
-    <div class="uk-width-1-4">
-        {{ form_row(formAddSession.dateStart) }}
-    </div>
-    <div class="uk-width-1-4">
-        {{ form_row(formAddSession.dateEnd) }}
-    </div>
-    <div class="uk-width-1-4">
-        {{ form_row(formAddSession.reservations) }}
-    </div>
-    <div class="uk-width-1-2">
-        {{ form_row(formAddSession.formation) }}
-    </div>
+    <div class="uk-grid-divider uk-child-width-1-2@m" uk-grid>
 
+        <div>
+            <div class="uk-grid-divider uk-child-width-1-2@m" uk-grid>
+                <div class="uk-width-1-2">
+                    {{ form_row(formAddSession.maxStudents) }}
+                </div>
+                <div class="uk-width-1-2">
+                    {{ form_row(formAddSession.reservations) }}
 
-    <div class="form">
-        <div class="form-group row flex-action">
-            <button type="button" class="add-another-collection-widget ui-button ui-widget ui-corner-all"
-                data-list-selector="#programme-fields-list">Ajouter Programe(s)
-            </button>
+                </div>
+                <div class="uk-width-1-2">
+                    {{ form_row(formAddSession.dateStart) }}
+                </div>
+                <div class="uk-width-1-2">
+                    {{ form_row(formAddSession.dateEnd) }}
+                </div>
+                <div class="uk-width-1-1">
+                    {{ form_row(formAddSession.formation) }}
+                </div>
+            </div>
         </div>
-        <div id="programme-fields-list" class="remove-collection-widget"
-            data-prototype="{{ form_widget(formAddSession.programs.vars.prototype)|e }}" data-session="{{ session_id }}"
-            data-widget-tags="{{ '<p></p>' |e }}" data-widget-counter="{{ formAddSession.programs|length }}">
-            {% for programField in formAddSession.programs %}
-            <p>
-                {{ form_errors(programField) }}
-            </p>
-            {% endfor %}
+        <div>
+            <div class="uk-grid-divider uk-child-width-1-2@m" uk-grid>
+                <div>
+                    <div class="form">
+                        <div class="uk-margin">
+                            <button type="button" class="add-another-collection-widget uk-button uk-button-default"
+                                data-list-selector="#programme-fields-list">Ajouter Programme(s)
+                            </button>
+                        </div>
+                        <div id="programme-fields-list" class="uk-margin"
+                            data-prototype="{{ form_widget(formAddSession.programs.vars.prototype)|e }}"
+                            data-session="{{ session_id }}" data-widget-tags="{{ '<div></div>' |e }}"
+                            data-widget-counter="{{ formAddSession.programs|length }}">
+                            {% for programField in formAddSession.programs %}
+                            <div class="programme-field uk-margin">
+                                {{ form_row(programField) }}
+                                <button type="button"
+                                    class="remove-programme-collection-widget uk-button uk-button-danger">
+                                    Supprimer
+                                </button>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="form">
+                        <div class="uk-margin">
+                            <button type="button" class="add-student-collection-widget uk-button uk-button-default"
+                                data-list-selector="#student-fields-list">Ajouter Stagiaire
+                            </button>
+                        </div>
+                        <div id="student-fields-list" class="uk-margin"
+                            data-prototype="{{ form_widget(formAddSession.students.vars.prototype)|e }}"
+                            data-session="{{ session_id }}" data-widget-tags="{{ '<div></div>' |e }}"
+                            data-widget-counter="{{ formAddSession.students|length }}">
+                            {% for studentField in formAddSession.students %}
+                            <div class="student-field uk-margin">
+                                {{ form_row(studentField) }}
+                                <button type="button"
+                                    class="remove-student-collection-widget uk-button uk-button-danger">
+                                    Supprimer
+                                </button>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-
-    </div>
-
-
-    <div class="form">
-        <div class="form-group row flex-action">
-            <button type="button" class="add-student-collection-widget ui-button ui-widget ui-corner-all"
-                data-list-selector="#student-fields-list">Ajouter Stagiaire
-            </button>
-        </div>
-
-
-
-        <div id="student-fields-list" class="remove-collection-widget"
-            data-prototype="{{ form_widget(formAddSession.students.vars.prototype)|e }}" data-session="{{ session_id }}"
-            data-widget-tags="{{ '<p></p>' |e }}" data-widget-counter="{{ formAddSession.students|length }}">
-
-            {% for studentField in formAddSession.students %}
-            <p>
-                {{ form_row(studentField) }}
-            </p>
-
-            {% endfor %}
-        </div>
-    </div>
-
-
-    <div class="uk-width-1-1">
-        {{ form_row(formAddSession.Valider) }}
     </div>
 
     {% do formAddSession.programs.setRendered %}
     {% do formAddSession.students.setRendered %}
-    {{ form_end(formAddSession) }}
 
+    {{ form_end(formAddSession) }}
 
     {% else %}
     <h3>En attente</h3>

@@ -1,44 +1,43 @@
 $(document).ready(function () {
 
+    function addRemoveButtonListeners() {
+        $('.remove-programme-collection-widget').click(function (e) {
+            e.preventDefault();
+            $(this).closest('.programme-field').remove();
+        });
 
+        $('.remove-student-collection-widget').click(function (e) {
+            e.preventDefault();
+            $(this).closest('.student-field').remove();
+        });
+    }
 
-    // $('#interface').on('tabsactivate', function (event, ui) {
-    //     setupPagination();
-    // });
-
-    // Scripts jQuery / JavaScript généraux
-
-
-    // add-collection-widget.js : fonction permettant d'ajouter un nouveau bloc "programme" au sein d'une session (pour agrandir la collection)
     $('.add-another-collection-widget').click(function (e) {
+        e.preventDefault();
+        let list = $($(this).attr('data-list-selector'));
+        let counter = list.data('widget-counter') || list.children().length;
+        let newWidget = list.attr('data-prototype');
+        newWidget = newWidget.replace(/__name__/g, counter);
+        counter++;
+        list.data('widget-counter', counter);
+        let newElem = $(list.attr('data-widget-tags')).html(newWidget);
+        newElem.appendTo(list);
+        addRemoveButtonListeners();
+    });
 
+    $('.add-student-collection-widget').click(function (e) {
+        e.preventDefault();
+        let list = $($(this).attr('data-list-selector'));
+        let counter = list.data('widget-counter') || list.children().length;
+        let newWidget = list.attr('data-prototype');
+        newWidget = newWidget.replace(/__name__/g, counter);
+        counter++;
+        list.data('widget-counter', counter);
+        let newElem = $(list.attr('data-widget-tags')).html(newWidget);
+        newElem.appendTo(list);
+        addRemoveButtonListeners();
+    });
 
-        let list = $($(this).attr('data-list-selector'))
-        console.log(list);
-        // Récupération du nombre actuel d'élément "programme" dans la collection (à défaut, utilisation de la longueur de la collection)
-        let counter = list.data('widget-counter') || list.children().length
-        // Récupération de l'identifiant de la session concernée, en cours de création/modification
-        let session = list.data('session')
-        // Extraction du prototype complet du champ (que l'on va adapter ci-dessous)
-        let newWidget = list.attr('data-prototype')
-        // Remplacement des séquences génériques "__name__" utilisées dans les parties "id" et "name" du prototype
-        // par un numéro unique au sein de la collection de "programmes" : ce numéro sera la valeur du compteur
-        // courant (équivalent à l'index du prochain champ, en cours d'ajout).
-        // Au final, l'attribut ressemblera à "session[programmes][n°]"
-        newWidget = newWidget.replace(/__name__/g, counter)
-        // Ajout également des attributs personnalisés "class" et "value", qui n'apparaissent pas dans le prototype original 
-        newWidget = newWidget.replace(/><input type="hidden"/, ' class="borders"><input type="hidden" value="' + session + '"')
-        // Incrément du compteur d'éléments et mise à jour de l'attribut correspondant
-        counter++
-        list.data('widget-counter', counter)
-        // Création d'un nouvel élément (avec son bouton de suppression), et ajout à la fin de la liste des éléments existants
-        let newElem = $(list.attr('data-widget-tags')).html(newWidget)
-        addDeleteLink($(newElem).find('div.borders'))
-        newElem.appendTo(list)
-    })
-    // anonymize-collection-widget.js : fonction permettant de supprimer un bloc "programme" existant au sein d'une session
-    $('.remove-collection-widget').find('div.borders').each(function () {
-        addDeleteLink($(this))
-    })
+    addRemoveButtonListeners();
 
 });
