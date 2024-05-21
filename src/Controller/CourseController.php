@@ -165,6 +165,7 @@ class CourseController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
             $entityManager->persist($course);
             $entityManager->flush();
 
@@ -227,6 +228,32 @@ class CourseController extends AbstractController
             'view_name' => 'program/detail.html.twig',
             'slug' => 'detail',
             'program' => $program
+        ]);
+    }
+    #[Route('/program/new', name: 'new_program')]
+    #[Route('/program/{id}/edit', name: 'edit_program')]
+    public function editProgram(Program $program, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        if (!$program) {
+            $program = new Program();
+        }
+
+        // $form = $this->createForm(CourseType::class, $program);
+        // $form->handleRequest($request);
+
+        // if ($form->isSubmitted() && $form->isValid()) {
+        //     $entityManager->persist($program);
+        //     $entityManager->flush();
+
+        //     return $this->redirectToRoute('list_course');
+        // }
+
+        return $this->render('program/program.html.twig', [
+            'controller_name' => 'CourseController',
+            'view_name' => 'program/program.html.twig',
+            'slug' => 'add',
+            //'formAddProgram' => $form,
+            'program' => $program->getId()
         ]);
     }
     #[Route('/program/{id}/delete', name: 'delete_program')]

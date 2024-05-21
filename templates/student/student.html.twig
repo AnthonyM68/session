@@ -44,33 +44,31 @@
                     <td>{{ student.birthday | date('d-m-Y') }}</td>
                     <td>
                         <a href="#" uk-tooltip="title: Éditer; pos: top-left"
-                            onclick="editStudent(event, '{{ path('edit_student', {'id': student.id }) }}'); event.stopPropagation();">
-                            <i class="edit icon"></i>
+                            onclick="editStudent(event, '{{ path('edit_student', {'id': student.id }) }}'); event.stopPropagation();" class="ui-button ui-widget ui-corner-all">
+                            <i class="edit icon right floated"></i>
                         </a>
                     </td>
                     <td>
-                        <a href="#" uk-tooltip="title: Supprimer; pos: top-left">
-                            <i class="trash alternate outline icon"></i>
+                        <a href="#" uk-tooltip="title: Supprimer; pos: top-left" class="ui-button ui-widget ui-corner-all">
+                            <i class="trash icon right floated"></i>
                         </a>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
-            <tfoot class="full-width">
-                <tr>
-                    <th></th>
-                    <th colspan="10">
-                        <a href={{ path('new_student') }} class="ui right floated small primary labeled icon button">
-                            <i class="user icon"></i> Ajouter Stagiaire
-                        </a>
-                    </th>
-                </tr>
-            </tfoot>
         </table>
-        <div class="ui small pagination menu">
-            <a class="icon item prevPage"><i class="left chevron icon"></i></a>
-            <div id="pagination" class="ui small pagination menu"></div>
-            <a class="icon item nextPage"><i class="right chevron icon"></i></a>
+        <div class="uk-text-center uk-padding-top">
+
+            <div class="ui small pagination menu">
+                <a class="icon item prevPage"><i class="left chevron icon"></i></a>
+                <div id="pagination" class="ui small pagination menu"></div>
+                <a class="icon item nextPage"><i class="right chevron icon"></i></a>
+            </div>
+            <div class="uk-text-right uk-padding-top">
+                <a href="{{ path('new_student') }}" class="ui-button ui-widget ui-corner-all">
+                    <i class="user icon"></i>Ajouter
+                </a>
+            </div>
         </div>
     </div>
     {% else %}

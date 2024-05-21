@@ -23,12 +23,13 @@
         </thead>
         <tbody>
             <tr>
-                <td><a href="{{ path('detail_program', {'id': program.id }) }}">Programe: {{ program.id }}</a></td>
-                <td><a href="{{ path('detail_program', {'id': program.id }) }}">{{ program.session.id }}</a></td>
-                <td><a href="{{ path('detail_program', {'id': program.id }) }}">{{ program.course.id }}</a></td>
-                <td><a href="{{ path('detail_program', {'id': program.id }) }}">{{ program.days }}</a></td>
+                <td>Programe: {{ program.id }}</a></td>
+                <td>{{ program.session.id }}</a></td>
+                <td>{{ program.course.id }}</a></td>
+                <td>{{ program.days }}</a></td>
             </tr>
-            <tr>
+            <tr class="student-item" onclick="window.location='{{ path('detail_session', {'id': program.session.id }) }}';"
+            style="cursor:pointer;">
                 <td>Session: {{ program.session.id  }}</td>
                 <td>Du {{ program.session.dateStart | date('d-m-Y') }} au {{ program.session.dateEnd | date('d-m-Y') }}</td>
                 <td>{{ program.course.nameCourse }}</td>

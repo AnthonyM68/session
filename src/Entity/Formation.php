@@ -16,7 +16,7 @@ class Formation
     private ?int $id = null;
 
 
-    #[ORM\OneToMany(targetEntity: Session::class, mappedBy: 'formation', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Session::class, mappedBy: 'formation')]
     private Collection $sessions;
 
     #[ORM\Column(length: 50)]
@@ -76,6 +76,6 @@ class Formation
     }
     public function __toString()
     {
-        return $this->name;
+        return $this->name ?? '';
     }
 }

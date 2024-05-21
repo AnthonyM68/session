@@ -6,23 +6,95 @@
 
 <div class="uk-container">
 
-    
+
     {% if slug|default == 'add' %}
 
-        {% if session_id|default %}
-        <h2>Modifier une session</h2>
-        {% else %}
-        <h2>Ajouter une session</h2>
-        {% endif %}
+    {% if session_id|default %}
+    <h2>Modifier une session</h2>
+    {% else %}
+    <h2>Ajouter une session</h2>
+    {% endif %}
 
-        {% if formAddSession|default %}
+    {% if formAddSession|default %}
 
-        <div class="uk-hr"></div>
-        {{ form_start(formAddSession, {'attr': {'class': 'uk-form uk-margin-top uk-grid-small', 'uk-grid' : '' }}) }}
-        {{ form_end(formAddSession) }}
-        {% else %}
-        <h3>En attente</h3>
-        {% endif %}
+    <div class="uk-hr"></div>
+
+
+    {{ form_start(formAddSession, {'attr': {'class': 'uk-grid-small', 'uk-grid' : '' }}) }}
+
+
+    <div class="uk-width-1-4">
+        {{ form_row(formAddSession.maxStudents) }}
+    </div>
+    <div class="uk-width-1-4">
+        {{ form_row(formAddSession.dateStart) }}
+    </div>
+    <div class="uk-width-1-4">
+        {{ form_row(formAddSession.dateEnd) }}
+    </div>
+    <div class="uk-width-1-4">
+        {{ form_row(formAddSession.reservations) }}
+    </div>
+    <div class="uk-width-1-2">
+        {{ form_row(formAddSession.formation) }}
+    </div>
+
+
+    <div class="form">
+        <div class="form-group row flex-action">
+            <button type="button" class="add-another-collection-widget ui-button ui-widget ui-corner-all"
+                data-list-selector="#programme-fields-list">Ajouter Programe(s)
+            </button>
+        </div>
+        <div id="programme-fields-list" class="remove-collection-widget"
+            data-prototype="{{ form_widget(formAddSession.programs.vars.prototype)|e }}" data-session="{{ session_id }}"
+            data-widget-tags="{{ '<p></p>' |e }}" data-widget-counter="{{ formAddSession.programs|length }}">
+            {% for programField in formAddSession.programs %}
+            <p>
+                {{ form_errors(programField) }}
+            </p>
+            {% endfor %}
+        </div>
+
+
+    </div>
+
+
+    <div class="form">
+        <div class="form-group row flex-action">
+            <button type="button" class="add-student-collection-widget ui-button ui-widget ui-corner-all"
+                data-list-selector="#student-fields-list">Ajouter Stagiaire
+            </button>
+        </div>
+
+
+
+        <div id="student-fields-list" class="remove-collection-widget"
+            data-prototype="{{ form_widget(formAddSession.students.vars.prototype)|e }}" data-session="{{ session_id }}"
+            data-widget-tags="{{ '<p></p>' |e }}" data-widget-counter="{{ formAddSession.students|length }}">
+
+            {% for studentField in formAddSession.students %}
+            <p>
+                {{ form_row(studentField) }}
+            </p>
+
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <div class="uk-width-1-1">
+        {{ form_row(formAddSession.Valider) }}
+    </div>
+
+    {% do formAddSession.programs.setRendered %}
+    {% do formAddSession.students.setRendered %}
+    {{ form_end(formAddSession) }}
+
+
+    {% else %}
+    <h3>En attente</h3>
+    {% endif %}
 
     {% elseif sessions|default %}
 
@@ -63,12 +135,14 @@
                     <td>{{ session.reservations }}</td>
                     <td>
                         <a href="#" uk-tooltip="title: Éditer; pos: top-left"
-                            onclick="editSession(event, '{{ path('edit_session', {'id': session.id }) }}'); event.stopPropagation();" class="ui-button ui-widget ui-corner-all">
+                            onclick="editSession(event, '{{ path('edit_session', {'id': session.id }) }}'); event.stopPropagation();"
+                            class="ui-button ui-widget ui-corner-all">
                             <i class="edit icon"></i>
                         </a>
                     </td>
                     <td>
-                        <a href="#" uk-tooltip="title: Supprimer; pos: top-left" class="ui-button ui-widget ui-corner-all">
+                        <a href="#" uk-tooltip="title: Supprimer; pos: top-left"
+                            class="ui-button ui-widget ui-corner-all">
                             <i class="trash icon"></i>
                         </a>
                     </td>

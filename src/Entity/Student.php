@@ -133,7 +133,10 @@ class Student
 
         return $this;
     }
-
+    public function __toString()
+    {
+        return $this->firstName . " " . $this->lastName;
+    }
 
 
 
@@ -168,12 +171,4 @@ class Student
     }
 
 
-
-
-
-    
-    public function __toString()
-    {
-        return $this->firstName;
-    }
 }

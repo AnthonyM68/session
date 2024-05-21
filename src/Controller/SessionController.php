@@ -2,17 +2,24 @@
 
 namespace App\Controller;
 
+use PDO;
 use App\Entity\Session;
-use App\Entity\Formation;
-use App\Form\FormationType;
+use App\Entity\Student;
 
+use App\Entity\Formation;
+use App\Form\SessionType;
+use App\Form\FormationType;
 use App\Repository\SessionRepository;
 use App\Repository\StudentRepository;
+
 use App\Repository\FormationRepository;
+
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SessionController extends AbstractController
@@ -110,23 +117,78 @@ class SessionController extends AbstractController
 
     #[Route('/session/new', name: 'new_session')]
     #[Route('/session/{id}/edit', name: 'edit_session')]
-    public function editSession(Session $session, Request $request, EntityManagerInterface $entityManager): Response
+    public function editSession(Request $request, EntityManagerInterface $entityManager, ?Session $session = null): Response
     {
         if (!$session) {
             $session = new Session();
         }
+
+        $form = $this->createForm(SessionType::class, $session);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $session = $form->getData();
+
+            $entityManager->persist($session);
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('list_formation');
+        }
         return $this->render('session/session.html.twig', [
             'controller_name' => 'SessionController',
             'view_name' => 'session/session.html.twig',
+            'formAddSession' => $form,
             'session_id' => $session->getId(),
             'slug' => 'add'
         ]);
     }
 
+    /**
+     * add student to session
+     */
+    #[Route('/session/{sessionId}/add-student/{studentId}', name: 'add_student_to_session')]
+    public function addStudentToSession(int $sessionId, int $studentId, EntityManagerInterface $entityManager, StudentRepository $studentRepository): Response
+    {
+        $session = $entityManager->getRepository(Session::class)->find($sessionId);
+        $student = $entityManager->getRepository(Student::class)->find($studentId);
 
+        if (!$session || !$student) {
+            throw $this->createNotFoundException('The session or student does not exist');
+        }
+        $session->addStudent($student);
 
+        $entityManager->persist($session);
+        $entityManager->flush();
 
+        $notRegister = $studentRepository->findNotRegister($session->getId());
 
+        return $this->redirectToRoute('detail_session', ['id' => $sessionId]);
+    }
+
+    /**
+     * remove student from session
+     */
+    #[Route('/session/{sessionId}/remove-student/{studentId}', name: 'remove_student_from_session')]
+    public function removeStudentFromSession(int $sessionId, int $studentId, EntityManagerInterface $entityManager): Response
+    {
+        $session = $entityManager->getRepository(Session::class)->find($sessionId);
+        $student = $entityManager->getRepository(Student::class)->find($studentId);
+    
+        if (!$session || !$student) {
+            throw $this->createNotFoundException('The session or student does not exist');
+        }
+    
+        $session->removeStudent($student);
+
+        $entityManager->persist($session);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('detail_session', ['id' => $sessionId]);
+    }
+    
 
 
 
@@ -179,6 +241,8 @@ class SessionController extends AbstractController
             'formAddFormation' => $form,
         ]);
     }
+
+    
     #[Route('/tab/formation', name: 'tab_formation')]
     public function tabFormation(FormationRepository $formationRepository): Response
     {

@@ -108,6 +108,7 @@
                         <th>Téléphone</th>
                         <th>Date de naissance</th>
                         <th>Code postal</th>
+                        <th>action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -122,6 +123,14 @@
                         <td>{{ student.phoneNumber }}</td>
                         <td>{{ student.birthday | date('d-m-Y')}}</td>
                         <td>{{ student.zipCode }}</td>
+                        <td>
+                            <a href="#" uk-tooltip="title: Éditer; pos: top-left"
+                                onclick="editSession(event, '{{ path('remove_student_from_session', {'sessionId': session.id, 'studentId': student.id }) }}'); event.stopPropagation();"
+                                class="ui-button ui-widget ui-corner-all">
+                                <i class="trash icon"></i>
+                            </a>
+                        </td>
+
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -138,7 +147,7 @@
 
 
         <div class="ui tab" data-tab="not-inscrits">
-          
+
             {% if notRegister|default %}
 
             <h3>Liste des stagiaires non inscrits: <span>({{ notRegister | length }})</span></h3>
@@ -154,6 +163,7 @@
                         <th>Téléphone</th>
                         <th>Date de naissance</th>
                         <th>Code postal</th>
+                        <th>action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -168,6 +178,15 @@
                         <td>{{ student.phoneNumber }}</td>
                         <td>{{ student.birthday | date('d-m-Y')}}</td>
                         <td>{{ student.zipCode }}</td>
+                        <td>
+                            <a href="#" uk-tooltip="title: Éditer; pos: top-left"
+                                onclick="editSession(event, '{{ path('add_student_to_session', {'sessionId': session.id, 'studentId': student.id }) }}'); event.stopPropagation();"
+                                class="ui-button ui-widget ui-corner-all">
+                                <i class="plus icon"></i>
+                            </a>
+                        </td>
+
+
                     </tr>
                     {% endfor %}
                 </tbody>

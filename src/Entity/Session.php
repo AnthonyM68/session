@@ -16,6 +16,11 @@ class Session
     #[ORM\Column]
     private ?int $id = null;
 
+
+
+
+
+
     #[ORM\Column]
     private ?int $maxStudents = null;
 
@@ -31,11 +36,13 @@ class Session
     #[ORM\ManyToMany(targetEntity: Student::class, inversedBy: 'sessions')]
     private Collection $students;
 
-    #[ORM\OneToMany(targetEntity: Program::class, mappedBy: 'session')]
+    #[ORM\OneToMany(targetEntity: Program::class, mappedBy: 'session', cascade: ['persist'], orphanRemoval:true)]
     private Collection $programs;
 
     #[ORM\ManyToOne(inversedBy: 'sessions')]
     #[ORM\JoinColumn(nullable: false)]
+
+
     private ?Formation $formation = null;
 
     public function __construct()
@@ -167,4 +174,5 @@ class Session
 
         return $this;
     }
+
 }
