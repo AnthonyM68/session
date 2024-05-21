@@ -21,7 +21,7 @@ class FormationType extends AbstractType
         ])
         ->add('Valider', SubmitType::class, [
             'attr' => [
-                'class' => 'uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom',
+                'class' => 'ui-button ui-widget ui-corner-all',
                 'name' => 'new_formation'
             ]
         ])

@@ -25,7 +25,7 @@ class CategoryType extends AbstractType
         ])
         ->add('Valider', SubmitType::class, [
             'attr' => [
-                'class' => 'uk-button uk-button-primary'
+                'class' => 'ui-button ui-widget ui-corner-all'
             ]
         ])
         ;

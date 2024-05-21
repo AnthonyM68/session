@@ -5,15 +5,45 @@
 {% block body %}
 
 <div class="uk-container">
-    
-    <div class="uk-animation-slide-bottom">
-        <p class="uk-text-center" ><h1>Liste des formations</h1></p>
+
+    {% if slug|default == 'add' %}
+
+    {% if formation_id|default %}
+    <h2>Modifier une formation</h2>
+    {% else %}
+    <h2>Ajouter une formation</h2>
+    {% endif %}
+
+    {% if formAddFormation|default %}
+
+    <div class="uk-hr"></div>
+
+    {{ form_start(formAddFormation, {'attr': {'class': 'uk-form uk-margin-top uk-grid-small', 'uk-grid' : '' }}) }}
+
+    <div class="uk-width-1-2">
+        {{ form_row(formAddFormation.name)}}
     </div>
-            
+    <div class="uk-width-1-1">
+        {{ form_row(formAddFormation.Valider) }}
+    </div>
+    
+    {{ form_end(formAddFormation) }}
+    {% endif %}
+
+
+
+
+
+    {% elseif formations|default %}
+
+    <div class="uk-animation-slide-bottom">
+        <p class="uk-text-center">
+        <h1>Liste des formations</h1>
+        </p>
+    </div>
+
     <div class="separator"></div>
 
-
-    {% if formations|default %}
     <div class="ui stackable divided grid">
 
         {% for formation in formations %}
@@ -31,15 +61,19 @@
                         <a class="header">{{ formation.name }}</a>
                         <div class="meta">
                             <span class="cinema">Inscrits:0</span>
-                            <span class="cinema">ID:{{ formation.id }}</span>
+                            <span class="cinema">Modules:0</span>
                         </div>
                         <div class="description">
-                            <p></p>
+                            <span class="cinema">ID:{{ formation.id }}</span>
                         </div>
                         <div class="extra">
-                            <div class="ui label">Formateur</div>
-                            <div class="ui label"><a href="{{ path('detail_formation', {'id': formation.id}) }}"><i
-                                        class="list ol icon"></i>Module</a></div>
+                            <div class="uk-text-left uk-padding-top uk-margin-top">
+                                <a href="{{ path('edit_formation', {'id' : formation.id}) }}" class="ui-button ui-widget ui-corner-all">
+                                    <i class="edit icon right floated"></i></a>
+                            
+                                <a href="{{ path('delete_formation', {'id' : formation.id}) }}" class="ui-button ui-widget ui-corner-all">
+                                    <i class="trash icon right floated"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -47,31 +81,16 @@
         </div>
         {% endfor %}
     </div>
+    <div class="uk-text-right uk-padding-top">
+        <a href="{{ path('new_formation') }}" class="ui-button ui-widget ui-corner-all">
+            <i class="plus circle icon"></i>Ajouter
+        </a>
+    </div>
+
     {% else %}
     <h2>Aucune informations en base de données</h2>
     {% endif %}
 
-
-    {% if slug|default == 'add' %}
-
-    {% if formAddFormation|default %}
-
-    <h2>Ajouter une Formation</h2>
-
-    <div class="uk-hr"></div>
-
-    {{ form_start(formAddFormation, {'attr': {'class': 'uk-form uk-margin-top uk-grid-small', 'uk-grid' : '' }}) }}
-
-    <div class="uk-width-1-1">
-        {{ form_row(formAddFormation.name)}}
-    </div>
-    <div class="uk-width-1-1">
-        {{ form_row(formAddFormation.Valider) }}
-    </div>
-
-    {{ form_end(formAddFormation) }}
-    {% endif %}
-    {% endif %}
 
 </div>
 {% endblock %}

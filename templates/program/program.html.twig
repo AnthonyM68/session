@@ -42,11 +42,19 @@
                 {% endfor %}
             </tbody>
         </table>
-        <div class="ui small pagination menu">
-            <a class="icon item prevPage"><i class="left chevron icon"></i></a>
-            <div id="pagination" class="ui small pagination menu"></div>
-            <a class="icon item nextPage"><i class="right chevron icon"></i></a>
+        <div class="uk-text-center uk-padding-top">
+            
+            <div class="ui small pagination menu">
+                <a class="icon item prevPage"><i class="left chevron icon"></i></a>
+                <div id="pagination" class="ui small pagination menu"></div>
+                <a class="icon item nextPage"><i class="right chevron icon"></i></a>
+            </div>
+            <a href="{{ path('new_category') }}" class="ui-button ui-widget ui-corner-all">
+                <i class="plus circle icon"></i>Ajouter
+            </a>
+            
         </div>
+        
     </div>
     {% else %}
     <h2>Aucune informations en base de données</h2>

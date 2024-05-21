@@ -1,10 +1,31 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Sessions{% endblock %}
+
 {% block body %}
 
 <div class="uk-container">
 
-    {# session #}
+    
+    {% if slug|default == 'add' %}
+
+        {% if session_id|default %}
+        <h2>Modifier une session</h2>
+        {% else %}
+        <h2>Ajouter une session</h2>
+        {% endif %}
+
+        {% if formAddSession|default %}
+
+        <div class="uk-hr"></div>
+        {{ form_start(formAddSession, {'attr': {'class': 'uk-form uk-margin-top uk-grid-small', 'uk-grid' : '' }}) }}
+        {{ form_end(formAddSession) }}
+        {% else %}
+        <h3>En attente</h3>
+        {% endif %}
+
+    {% elseif sessions|default %}
+
     <div class="uk-animation-slide-bottom">
         <p class="uk-text-center">
         <h1>Liste des sessions</h1>
@@ -13,7 +34,6 @@
 
     <div class="separator"></div>
 
-    {% if sessions|default %}
     <div class="tabs-active uk-animation-fade">
 
         <table id="table-list" class="ui compact celled table">
@@ -43,13 +63,13 @@
                     <td>{{ session.reservations }}</td>
                     <td>
                         <a href="#" uk-tooltip="title: Éditer; pos: top-left"
-                            onclick="editSession(event, '{{ path('edit_session', {'id': session.id }) }}'); event.stopPropagation();">
+                            onclick="editSession(event, '{{ path('edit_session', {'id': session.id }) }}'); event.stopPropagation();" class="ui-button ui-widget ui-corner-all">
                             <i class="edit icon"></i>
                         </a>
                     </td>
                     <td>
-                        <a href="#" uk-tooltip="title: Supprimer; pos: top-left">
-                            <i class="trash alternate outline icon"></i>
+                        <a href="#" uk-tooltip="title: Supprimer; pos: top-left" class="ui-button ui-widget ui-corner-all">
+                            <i class="trash icon"></i>
                         </a>
                     </td>
                 </tr>
@@ -59,9 +79,14 @@
                 <tr>
                     <th></th>
                     <th colspan="8">
-                        <div class="ui right floated small primary labeled icon button">
-                            <i class="user icon"></i> Ajouter Session
+                        <div class="uk-text-right uk-padding-top">
+                            <a href="{{ path('new_session') }}" class="ui-button ui-widget ui-corner-all">
+                                <i class="user icon"></i> Ajouter Session
+                            </a>
                         </div>
+                        {# <div class="ui-button ui-widget ui-corner-all">
+                            <i class="user icon"></i> Ajouter Session
+                        </div> #}
                     </th>
                 </tr>
             </tfoot>
@@ -75,13 +100,6 @@
 
     {% else %}
     <h2>Aucune informations en base de données</h2>
-    {% endif %}
-
-    {% if edit|default %}
-    <h1>Editer / Ajouter une nouvelle session</h1>
-
-    <h3>En attente</h3>
-
     {% endif %}
 
 </div>

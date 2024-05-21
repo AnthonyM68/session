@@ -2,10 +2,37 @@
 
 {% block title %}Catégories{% endblock %}
 
-
 {% block body %}
 
 <div class="uk-container">
+
+    {% if slug|default == 'add' %}
+
+    {% if category_id|default %}
+    <h2>Modifier une catégorie</h2>
+    {% else %}
+    <h2>Ajouter une catégorie</h2>
+    {% endif %}
+
+    {% if formAddCategory|default %}
+
+    <div class="uk-hr"></div>
+
+    {{ form_start(formAddCategory, {'attr': {'class': 'uk-form uk-margin-top uk-grid-small', 'uk-grid' : '' }}) }}
+
+    <div class="uk-width-1-2">
+        {{ form_row(formAddCategory.name) }}
+    </div>
+
+    <div class="uk-width-1-1">
+        {{ form_row(formAddCategory.Valider) }}
+    </div>
+
+    {{ form_end(formAddCategory) }}
+    {% endif %}
+
+
+    {% elseif categories|default %}
 
     <div class="uk-animation-slide-bottom">
         <p class="uk-text-center">
@@ -15,89 +42,36 @@
 
     <div class="separator"></div>
 
-    {% if categories|default %}
-    <div class="tabs-active uk-animation-fade">
-
-        <div id="fragment-1" class="ui">
-            <div id="tabs" class="uk-animation-fade">
-                <div class="ui grid">
-
-                    <div class="four wide column">
-                        <ul class="ui items">
-                            {% for categorie in categories %}
-                            <li class="ui feed">
-                                <div class="event">
-                                    <div class="label">
-                                        <img src="{{ asset('img/png/' ~  categorie ~ '.png') }}">
-                                    </div>
-                                    <div class="content">
-                                        <a href="#tabs-{{ loop.index }}">{{ categorie.name }}</a>
-                                    </div>
-                                </div>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-
-                    <div class="ten wide column">
-                        {% for categorie in categories %}
-                        <div id="tabs-{{ loop.index }}">
-                            <h2>{{ categorie.name }}</h2>
-                            <!-- Contenu de l'onglet -->
-                        </div>
-                        {% endfor %}
-                    </div>
-
-                </div>
+    <div class="ui divided items">
+        {% for categorie in categories %}
+        <div class="item">
+            <div class="ui tiny image">
+                <img src="{{ asset('img/png/' ~  categorie ~ '.png') }}">
+            </div>
+            <div class="middle aligned content">
+                <a href="{{ path('list_course_category', {'id': categorie.id }) }}">{{ categorie.name }}</a>
             </div>
 
+            <div class="uk-text-right uk-padding-top uk-margin-top">
+                <a href="{{ path('edit_category', {'id': categorie.id }) }}" class="ui-button ui-widget ui-corner-all">
+                    <i class="edit icon right floated"></i>
+                </a>                
+                <a href="{{ path('delete_category', {'id': categorie.id }) }}" class="ui-button ui-widget ui-corner-all">
+                    <i class="trash icon right floated"></i>
+                </a>
+            </div>
         </div>
+        {% endfor %}
     </div>
-
-    <p class="uk-width-1-1 uk-text-right" uk-margin>
-        <a href="{{ path('new_category') }}" class="uk-button uk-button-primary uk-button-small">Ajouter une
-            catégorie</a>
-    </p>
-
+    <div class="uk-text-right uk-padding-top">
+        <a href="{{ path('new_category') }}" class="ui-button ui-widget ui-corner-all">
+            <i class="plus circle icon"></i>Ajouter
+        </a>
+    </div>
     {% else %}
     <h2>Aucune informations en base de données</h2>
     {% endif %}
-
-    {% if slug|default == 'add' %}
-
-    {% if formAddCategory|default %}
-
-    <h2>Ajouter une Catégorie</h2>
-
-    <div class="uk-hr"></div>
-
-    {{ form_start(formAddCategory, {'attr': {'class': 'uk-form uk-margin-top uk-grid-small', 'uk-grid' : '' }})
-    }}
-
-    <div class="uk-width-1-1">
-        {{ form_row(formAddCategory.name) }}
-    </div>
-    <div class="uk-width-1-1">
-        {{ form_row(formAddCategory.Valider) }}
-    </div>
-
-    {{ form_end(formAddCategory) }}
-    {% endif %}
-    {% endif %}
-
 </div>
-{% block javascripts %}
-    
-{# jquery ui 1.13 #}
-<script src={{ asset("js/jquery-ui-1.13.min.js") }}></script>
-<script src={{ asset("js/jquery.parallax-2.0.0-a.min.js") }}></script>
-{# uikit #}
-<script src={{ asset("js/uikit.min.js") }}></script>
-<script src={{ asset("icon/uikit-icons.min.js") }}></script>
-<script src={{ asset("js/semantic.min.js") }}></script>
-<script src={{ asset("js/script.js") }}></script>
-{{ importmap() }}
-{% endblock %}
 {% endblock %}
 
 {# <div class="extra">

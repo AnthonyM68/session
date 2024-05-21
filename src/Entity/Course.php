@@ -21,8 +21,10 @@ class Course
     #[ORM\Column(length: 50)]
     private ?string $nameCourse = null;
 
-    #[ORM\Column]
-    private ?int $id_category = null;
+    // #[ORM\Column]
+    #[ORM\ManyToOne(targetEntity: Category::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null; // Renommé et changé de type
 
 
 
@@ -77,16 +79,20 @@ class Course
 
         return $this;
     }
-
-    public function getIdCategory(): ?int
+    public function getCategory(): ?Category // Renommé et changé de type
     {
-        return $this->id_category;
+        return $this->category;
     }
 
-    public function setIdCategory(int $id_category): static
+    public function setCategory(?Category $category): self // Renommé et changé de type
     {
-        $this->id_category = $id_category;
+        $this->category = $category;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->nameCourse;
     }
 }

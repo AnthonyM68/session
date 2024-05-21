@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Formations{% endblock %}
+{% block title %}Stagiaire{% endblock %}
 
 {% block body %}
 <div class="uk-container">
@@ -9,9 +9,9 @@
     {% if student_id|default %}
     <h2>Modifier un stagiaire</h2>
     {% else %}
-   
     <h2>Ajouter un stagiaire</h2>
     {% endif %}
+
 
     {% if formAddStudent|default %}
 

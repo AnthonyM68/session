@@ -108,7 +108,7 @@ class SessionController extends AbstractController
     }
 
 
-    #[Route('/session/new', name: 'session_session')]
+    #[Route('/session/new', name: 'new_session')]
     #[Route('/session/{id}/edit', name: 'edit_session')]
     public function editSession(Session $session, Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -118,8 +118,8 @@ class SessionController extends AbstractController
         return $this->render('session/session.html.twig', [
             'controller_name' => 'SessionController',
             'view_name' => 'session/session.html.twig',
-            //'formAddSession' => $form,
-            'edit' => $session->getId()
+            'session_id' => $session->getId(),
+            'slug' => 'add'
         ]);
     }
 
@@ -144,17 +144,7 @@ class SessionController extends AbstractController
             "formations" => $formations
         ]);
     }
-    #[Route('/tab/formation', name: 'tab_formation')]
-    public function tabFormation(FormationRepository $formationRepository): Response
-    {
-        $formations = $formationRepository->findAll();
 
-        return $this->render('formation/tab/formation.html.twig', [
-            'controller_name' => 'SessionController',
-            'view_name' => 'formation/tab/formation.html.twig',
-            "formations" => $formations
-        ]);
-    }
 
 
 
@@ -178,17 +168,28 @@ class SessionController extends AbstractController
             // execute PDO
             $entityManager->flush();
 
-            return $this->redirectToRoute('formation');
+            return $this->redirectToRoute('list_formation');
         }
 
         return $this->render('formation/formation.html.twig', [
             'controller_name' => 'CourseController',
             'view_name' => 'formation/formation.html.twig',
             'slug' => 'add',
+            'formation_id' => $formation->getId(),
             'formAddFormation' => $form,
         ]);
     }
+    #[Route('/tab/formation', name: 'tab_formation')]
+    public function tabFormation(FormationRepository $formationRepository): Response
+    {
+        $formations = $formationRepository->findAll();
 
+        return $this->render('formation/tab/formation.html.twig', [
+            'controller_name' => 'SessionController',
+            'view_name' => 'formation/tab/formation.html.twig',
+            "formations" => $formations
+        ]);
+    }
 
     /* LISTE DES MODULES D'UNE FORMATION */
     #[Route('/formation/{id}/detail', name: 'detail_formation')]

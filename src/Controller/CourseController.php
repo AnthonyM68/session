@@ -3,19 +3,20 @@
 namespace App\Controller;
 
 use App\Entity\Course;
-use App\Form\CategoryType;
-
 use App\Entity\Program;
-use App\Entity\Category;
+
 use App\Entity\Session;
+use App\Entity\Category;
+use App\Form\CourseType;
+use App\Form\CategoryType;
 use App\Repository\CourseRepository;
 use App\Repository\ProgramRepository;
+
 use App\Repository\SessionRepository;
 
 use App\Repository\CategoryRepository;
 
 use Doctrine\ORM\EntityManagerInterface;
-
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -45,7 +46,6 @@ class CourseController extends AbstractController
         ]);
     }
 
-
     #[Route('/tab/category', name: 'tab_category')]
     public function tabCategory(CategoryRepository $CategoryRepository): Response
     {
@@ -58,17 +58,12 @@ class CourseController extends AbstractController
         ]);
     }
 
-
-
-
-
-
-
     #[Route('/category/{id}/detail', name: 'detail_category')]
     public function detailCategory(): Response
     {
         return $this->render('course/course.html.twig', [
             'controller_name' => 'CourseController',
+            'view_name' => 'course/course.html.twig',
         ]);
     }
 
@@ -93,13 +88,14 @@ class CourseController extends AbstractController
             // execute PDO
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_category');
+            return $this->redirectToRoute('list_category');
         }
 
         return $this->render('category/category.html.twig', [
             'controller_name' => 'CourseController',
             'view_name' => 'category/category.html.twig',
             'slug' => 'add',
+            'category_id' => $category->getId(),
             'formAddCategory' => $form,
         ]);
     }
@@ -111,6 +107,10 @@ class CourseController extends AbstractController
         $entityManager->flush();
         return $this->redirectToRoute('list_category');
     }
+
+
+
+
 
     /* COURSE */
     #[Route('/course/list', name: 'list_course')]
@@ -126,14 +126,15 @@ class CourseController extends AbstractController
         ]);
     }
 
+
+
     #[Route('/course/category/{id}', name: 'list_course_category')]
     public function listSessionFormation(Category $category, Request $request, CourseRepository $categoryRepository): Response
     {
-
-        $courses = $categoryRepository->findBy(["id_category" => $category->getId()]);
+        $courses = $categoryRepository->findBy(["category" => $category->getId()]);
 
         return $this->render('course/course.html.twig', [
-            'controller_name' => 'SessionController',
+            'controller_name' => 'CourseController',
             'view_name' => 'course/course.html.twig',
             'slug' => 'course',
             "courses" => $courses
@@ -141,28 +142,52 @@ class CourseController extends AbstractController
     }
 
 
+
+
     #[Route('/course/{id}/detail', name: 'detail_course')]
     public function detailCourse(): Response
-    {
-        return $this->render('course/course.html.twig', [
-            'controller_name' => 'CourseController',
-        ]);
-    }
-    #[Route('/course/{id}/delete', name: 'delete_course')]
-    public function deleteCourse(): Response
-    {
-        return $this->render('course/course.html.twig', [
-            'controller_name' => 'CourseController',
-        ]);
-    }
-    #[Route('/course/{id}/delete', name: 'delete_course')]
-    public function deleteProgram(): Response
     {
         return $this->render('course/course.html.twig', [
             'controller_name' => 'CourseController',
             'view_name' => 'course/course.html.twig',
         ]);
     }
+
+#[Route('/course/new', name: 'new_course')]
+    #[Route('/course/edit/{id}', name: 'edit_course')]
+    public function form(Request $request, EntityManagerInterface $entityManager, ?Course $course = null): Response
+    {
+        if (!$course) {
+            $course = new Course();
+        }
+
+        $form = $this->createForm(CourseType::class, $course);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($course);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('list_course');
+        }
+
+        return $this->render('course/course.html.twig', [
+            'controller_name' => 'CourseController',
+            'slug' => 'add',
+            'view_name' => 'course/course.html.twig',
+            'formAddCourse' => $form->createView(),
+            'course_id' => $course->getId()
+        ]);
+    }
+
+    #[Route('/course/{id}/delete', name: 'delete_course')]
+    public function deleteCourse(Course $course, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $entityManager->remove($course);
+        $entityManager->flush();
+        return $this->redirectToRoute('list_course_category', ['id' => $course->getCategory()->getId() ]);
+    }
+
 
     /**
      *  PROGRAMS
@@ -202,6 +227,14 @@ class CourseController extends AbstractController
             'view_name' => 'program/detail.html.twig',
             'slug' => 'detail',
             'program' => $program
+        ]);
+    }
+    #[Route('/program/{id}/delete', name: 'delete_program')]
+    public function deleteProgram(): Response
+    {
+        return $this->render('program/program.html.twig', [
+            'controller_name' => 'ProgramController',
+            'view_name' => 'program/program.html.twig',
         ]);
     }
 }
