@@ -54,21 +54,22 @@
                                 data-list-selector="#programme-fields-list">Ajouter Programme(s)
                             </button>
                         </div>
-                        <div id="programme-fields-list" class="uk-margin"
-                            data-prototype="{{ form_widget(formAddSession.programs.vars.prototype)|e }}"
-                            data-session="{{ session_id }}" data-widget-tags="{{ '<div></div>' |e }}"
-                            data-widget-counter="{{ formAddSession.programs|length }}">
-                            {% for programField in formAddSession.programs %}
-                            <div class="programme-field uk-margin">
-                                {{ form_row(programField) }}
-                                <button type="button"
-                                    class="remove-programme-collection-widget uk-button uk-button-danger">
-                                    Supprimer
-                                </button>
-                            </div>
-                            {% endfor %}
+                        <div id="programme-fields-list" data-prototype="{{ form_widget(formAddSession.programs.vars.prototype)|e }}"
+                        data-session="{{ session_id }}" data-widget-tags="{{ '<div class=\"uk-margin programme-field\"></div>' |e }}"
+                        data-widget-counter="{{ formAddSession.programs|length }}">
+                        {% for programField in formAddSession.programs %}
+                        <div class="uk-margin programme-field">
+                            {{ form_row(programField) }}
+                            <button type="button" class="remove-programme-collection-widget uk-button uk-button-danger">
+                                Supprimer
+                            </button>
                         </div>
+                        {% endfor %}
                     </div>
+                    
+                    </div>
+                    
+                    
                 </div>
                 <div>
                     <div class="form">
@@ -79,10 +80,11 @@
                         </div>
                         <div id="student-fields-list" class="uk-margin"
                             data-prototype="{{ form_widget(formAddSession.students.vars.prototype)|e }}"
-                            data-session="{{ session_id }}" data-widget-tags="{{ '<div></div>' |e }}"
+                            data-session="{{ session_id }}" data-widget-tags="{{ '<div class=\"uk-margin programme-field\"></div>' |e }}"
                             data-widget-counter="{{ formAddSession.students|length }}">
+
                             {% for studentField in formAddSession.students %}
-                            <div class="student-field uk-margin">
+                            <div class="uk-margin student-field ">
                                 {{ form_row(studentField) }}
                                 <button type="button"
                                     class="remove-student-collection-widget uk-button uk-button-danger">
@@ -168,9 +170,6 @@
                                 <i class="user icon"></i> Ajouter Session
                             </a>
                         </div>
-                        {# <div class="ui-button ui-widget ui-corner-all">
-                            <i class="user icon"></i> Ajouter Session
-                        </div> #}
                     </th>
                 </tr>
             </tfoot>

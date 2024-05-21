@@ -1,7 +1,20 @@
+function addRemoveButtonListeners() {
+    $('.remove-programme-collection-widget').click(function (e) {
+        e.preventDefault();
+        $(this).closest('.programme-field').remove();
+    });
+
+    $('.remove-student-collection-widget').click(function (e) {
+        e.preventDefault();
+        $(this).closest('.student-field').remove();
+    });
+}
+
+
 $(document).ready(function () {
 
     function addRemoveButtonListeners() {
-        $('.remove-programme-collection-widget').click(function (e) {
+        $('.remove-program-collection-widget').click(function (e) {
             e.preventDefault();
             $(this).closest('.programme-field').remove();
         });
@@ -21,6 +34,11 @@ $(document).ready(function () {
         counter++;
         list.data('widget-counter', counter);
         let newElem = $(list.attr('data-widget-tags')).html(newWidget);
+        newElem.append(`
+            <button type="button" class="remove-program-collection-widget uk-button uk-button-danger">
+                Supprimer
+            </button>
+        `);
         newElem.appendTo(list);
         addRemoveButtonListeners();
     });
@@ -34,6 +52,11 @@ $(document).ready(function () {
         counter++;
         list.data('widget-counter', counter);
         let newElem = $(list.attr('data-widget-tags')).html(newWidget);
+        newElem.append(`
+            <button type="button" class="remove-program-collection-widget uk-button uk-button-danger">
+                Supprimer
+            </button>
+        `);
         newElem.appendTo(list);
         addRemoveButtonListeners();
     });
