@@ -39,6 +39,15 @@
 
 
     {% elseif programs|default %}
+
+    <div class="uk-animation-slide-bottom">
+        <p class="uk-text-center">
+        <h1>Liste des programes</h1>
+        </p>
+    </div>
+
+    <div class="separator"></div>
+
     <div class="tabs-active uk-animation-fade">
 
         <table id="table-list" class="uk-table uk-table-hover uk-table-divider uk-table-small">
@@ -78,11 +87,6 @@
                 <a class="icon item prevPage"><i class="left chevron icon"></i></a>
                 <div id="pagination" class="ui small pagination menu"></div>
                 <a class="icon item nextPage"><i class="right chevron icon"></i></a>
-            </div>
-            <div class="uk-text-right uk-padding-top">
-                <a href="{{ path('new_program') }}" class="ui-button ui-widget ui-corner-all">
-                    <i class="plus circle icon"></i>Ajouter
-                </a>
             </div>
         </div>
     </div>

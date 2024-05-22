@@ -1,21 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Formations{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block body %}
 
-{# formation #}
-<div class="uk-container">
-    {# liste formation #}
 
- 
+<div class="uk-container">
+
     <div class="uk-animation-slide-bottom">
         <p class="uk-text-center" ><h1>Accueil</h1></p>
     </div>
             
     <div class="separator"></div>
-
-
+    
     {% if formations|default %}
     <div class="ui stackable divided grid">
 
@@ -53,29 +50,5 @@
     {% else %}
     <h2>Aucune informations en base de données</h2>
     {% endif %}
-
-
-    {# ajouter une formation #}
-    {% if slug|default == 'add' %}
-
-    {% if formAddFormation|default %}
-
-    <h2>Ajouter une Formation</h2>
-
-    <div class="uk-hr"></div>
-
-    {{ form_start(formAddFormation, {'attr': {'class': 'uk-form uk-margin-top uk-grid-small', 'uk-grid' : '' }}) }}
-
-    <div class="uk-width-1-1">
-        {{ form_row(formAddFormation.name)}}
-    </div>
-    <div class="uk-width-1-1">
-        {{ form_row(formAddFormation.Valider) }}
-    </div>
-
-    {{ form_end(formAddFormation) }}
-    {% endif %}
-    {% endif %}
-
 </div>
 {% endblock %}

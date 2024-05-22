@@ -82,6 +82,7 @@ class SessionController extends AbstractController
             "sessions" => $sessions
         ]);
     }
+    /* view session for tab appli */
     #[Route('/tab/session', name: 'tab_session')]
     public function tabSession(SessionRepository $sessionRepository): Response
     {
@@ -242,7 +243,7 @@ class SessionController extends AbstractController
         ]);
     }
 
-    
+
     #[Route('/tab/formation', name: 'tab_formation')]
     public function tabFormation(FormationRepository $formationRepository): Response
     {

@@ -6,10 +6,10 @@
             <div class="uk-navbar-center">
                 <div class="uk-navbar-center-left">
                     <ul class="uk-navbar-nav">
-
                         <li><a href="{{ path('list_formation') }}">Formations</a></li>
-                        <li><a href="{{ path('list_category') }}">Catégories</a></li>
                         <li><a href="{{ path('list_session') }}">Sessions</a></li>
+                        <li><a href="{{ path('list_category') }}">Catégories</a></li>
+                        <li><a href="{{ path('list_course') }}">Modules</a></li>
                     </ul>
                 </div>
                 <a class="uk-navbar-item uk-logo container-logo" href="{{ asset('home') }}">
@@ -21,6 +21,7 @@
                 
                 <div class="uk-navbar-center-right">
                     <ul class="uk-navbar-nav">
+                        
                         <li><a href="{{ path('list_program') }}">Programes</a></li>
                         <li><a href="{{ path('list_trainer') }}">Formateurs</a></li>
                         <li><a href="{{ path('list_student') }}">Stagiaires</a></li>
