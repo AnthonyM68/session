@@ -4,15 +4,27 @@ function editSession(event, url) {
 function editStudent(event, url) {
     window.location = url;
 }
+function addRemoveButtonListeners() {
+    $('.remove-program-collection-widget').click(function (e) {
+        e.preventDefault();
+        $(this).closest('.programme-field').remove();
+    });
 
-/* jquery tab vertical */
-$(function () {
-    $("#tabs-active").tabs().addClass("ui-tabs-vertical ui-helper-clearfix");
-});
-$(function () {
-    $("#interface").tabs();
-});
-// Fonction de pagination
+    $('.remove-student-collection-widget').click(function (e) {
+        e.preventDefault();
+        $(this).closest('.student-field').remove();
+    });
+}
+// fonction permettant l'ajout d'un bouton "Supprimer ce module" dans un bloc "programme", et d'enregistrer l'évenement "click" associé
+function addDeleteLink($moduleForm) {
+    var $removeFormButton = $('<div class="block uk-padding"><button type="button" class="ui-button ui-widget ui-corner-all">Supprimer ce module</button></div>');
+    $moduleForm.append($removeFormButton)
+
+    $removeFormButton.on('click', function (e) {
+        $moduleForm.remove()
+    })
+}
+// pagination jquery
 function setupPagination() {
 
     let itemsPerPage = 5;
@@ -38,15 +50,9 @@ function setupPagination() {
         $(this).addClass('active');
     });
 }
-// fonction permettant l'ajout d'un bouton "Supprimer ce module" dans un bloc "programme", et d'enregistrer l'évenement "click" associé
-function addDeleteLink($moduleForm) {
-    var $removeFormButton = $('<div class="block"><button type="button" class="button">Supprimer ce module</button></div>');
-    $moduleForm.append($removeFormButton)
 
-    $removeFormButton.on('click', function (e) {
-        $moduleForm.remove()
-    })
-}
+
+
 // Fonction permettant l'affichage de la fenêtre modale de confirmation pour chaque situation
 function showModalConfirm($id, $href, $title) {
     console.log("id   = " + $id)
@@ -68,38 +74,23 @@ function showModalConfirm($id, $href, $title) {
     $('#modalPopup').modal('show')
 }
 
+
 $(document).ready(function () {
+    $("#interface").tabs();
+
+    $( "#tabs" ).tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
+    
+    $( "#tabs li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
+
     $('.menu .item').tab();
 
-
-    setupPagination();
+    
 
     // $('#interface').on('tabsactivate', function (event, ui) {
     //     setupPagination();
     // });
-
-
-    // remove-session.js : fonction permettant de demander la confirmation de suppression d'une session
-    $('.remove-session-confirm').on('click', function (e) {
-        e.preventDefault()
-        let id = $(this).data('id')
-        let href = $(this).attr('href')
-        showModalConfirm(id, href, "Confirmation de suppression d'une session")
-    })
-    // remove-stagiaire.js : fonction permettant de demander la confirmation de suppression d'un stagiaire
-    $('.remove-stagiaire-confirm').on('click', function (e) {
-        e.preventDefault()
-        let id = $(this).data('id')
-        let href = $(this).attr('href')
-        showModalConfirm(id, href, "Confirmation de suppression d'un stagiaire")
-    })
-    // anonymize-stagiaire.js : fonction permettant de demander la confirmation d'anonymisation d'un stagiaire
-    $('.anonymize-stagiaire-confirm').on('click', function (e) {
-        e.preventDefault()
-        let id = $(this).data('id')
-        let href = $(this).attr('href')
-        showModalConfirm(id, href, "Confirmation de l'anonymisation d'un stagiaire")
-    })
-
+    setupPagination();
+    // ecouteur d'événement sur le bouton supprimer widget
+    addRemoveButtonListeners();
 
 });

@@ -24,6 +24,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CourseController extends AbstractController
 {
+
+
     #[Route('/interface', name: 'interface')]
     public function indexy(): Response
     {
@@ -32,7 +34,16 @@ class CourseController extends AbstractController
             'view_name' => 'interface/interface.html.twig',
         ]);
     }
-
+    #[Route('/tab/category', name: 'tab_category')]
+    public function tabCategory(CategoryRepository $CategoryRepository): Response
+    {
+        $categories = $CategoryRepository->findBy([], ["name" => "ASC"]);
+        return $this->render('category/tab/category.html.twig', [
+            'controller_name' => 'CourseController',
+            'view_name' => 'category/tab/category.html.twig',
+            "categories" => $categories
+        ]);
+    }
     
     #[Route('/category', name: 'list_category')]
     public function listCategory(CategoryRepository $CategoryRepository): Response
@@ -46,26 +57,9 @@ class CourseController extends AbstractController
         ]);
     }
 
-    #[Route('/tab/category', name: 'tab_category')]
-    public function tabCategory(CategoryRepository $CategoryRepository): Response
-    {
-        $categories = $CategoryRepository->findBy([], ["name" => "ASC"]);
 
-        return $this->render('category/tab/category.html.twig', [
-            'controller_name' => 'CourseController',
-            'view_name' => 'category/tab/category.html.twig',
-            "categories" => $categories
-        ]);
-    }
 
-    #[Route('/category/{id}/detail', name: 'detail_category')]
-    public function detailCategory(): Response
-    {
-        return $this->render('course/course.html.twig', [
-            'controller_name' => 'CourseController',
-            'view_name' => 'course/course.html.twig',
-        ]);
-    }
+
 
     #[Route('/category/new', name: 'new_category')]
     #[Route('/category/{id}/edit', name: 'edit_category')]
@@ -99,7 +93,14 @@ class CourseController extends AbstractController
             'formAddCategory' => $form,
         ]);
     }
-
+    #[Route('/category/{id}/detail', name: 'detail_category')]
+    public function detailCategory(): Response
+    {
+        return $this->render('course/course.html.twig', [
+            'controller_name' => 'CourseController',
+            'view_name' => 'course/course.html.twig',
+        ]);
+    }
     #[Route('/category/{id}/delete', name: 'delete_category')]
     public function deleteCategory(Category $category, EntityManagerInterface $entityManager): Response
     {
@@ -114,7 +115,7 @@ class CourseController extends AbstractController
 
     /* COURSE */
     #[Route('/course/list', name: 'list_course')]
-    public function listCours(CourseRepository $CourseRepository): Response
+    public function listCours(Course $course, CourseRepository $CourseRepository): Response
     {
         $courses = $CourseRepository->findAll();
 
@@ -122,6 +123,7 @@ class CourseController extends AbstractController
             'controller_name' => 'CourseController',
             'view_name' => 'course/course.html.twig',
             'slug' => 'course',
+            'course_id' => $course->getId(),
             "courses" => $courses
         ]);
     }
@@ -188,8 +190,6 @@ class CourseController extends AbstractController
         $entityManager->flush();
         return $this->redirectToRoute('list_course_category', ['id' => $course->getCategory()->getId() ]);
     }
-
-
     /**
      *  PROGRAMS
      */

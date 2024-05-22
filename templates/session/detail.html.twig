@@ -141,12 +141,6 @@
             {% endif %}
         </div>
 
-
-
-
-
-
-
         <div class="ui tab" data-tab="not-inscrits">
 
             {% if notRegister|default %}
@@ -200,8 +194,8 @@
         </div>
     </div>
     <div class="uk-text-right uk-padding-top">
-        <a href="{{ path('delete_formation', {'id': session.id }) }}" class="ui-button ui-widget ui-corner-all">
-            <i class="trash circle icon"></i>Supprimer
+        <a href="{{ path('new_session') }}" class="ui-button ui-widget ui-corner-all">
+            <i class="plus circle icon"></i>Ajouter Session
         </a>
     </div>
 </div>

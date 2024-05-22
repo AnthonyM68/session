@@ -16,7 +16,7 @@ class Formation
     private ?int $id = null;
 
 
-    #[ORM\OneToMany(targetEntity: Session::class, mappedBy: 'formation')]
+    #[ORM\OneToMany(targetEntity: Session::class, mappedBy: 'formation', cascade: ['persist'], orphanRemoval:true)]
     private Collection $sessions;
 
     #[ORM\Column(length: 50)]

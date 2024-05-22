@@ -18,9 +18,8 @@
     {# custom style #}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     {% endblock %}
-    {# jquery #}
-     <script src={{ asset("js/jquery.min.js") }}></script> 
-       
+    
+
 </head>
 
 <body>
@@ -32,16 +31,22 @@
     <footer id="pageFooter">{% include 'footer/footer.html.twig' %}</footer>
 
     {% block javascripts %}
-
+    {# jquery #}
+    <script src={{ asset("js/jquery.min.js") }}></script>
     {# jquery ui 1.13 #}
     <script src={{ asset("js/jquery-ui.min.js") }}></script>
     <script src={{ asset("js/jquery.parallax-2.0.0-a.min.js") }}></script>
     {# uikit #}
     <script src={{ asset("js/uikit.min.js") }}></script>
     <script src={{ asset("icon/uikit-icons.min.js") }}></script>
+    {# semantic #}
     <script src={{ asset("js/semantic.min.js") }}></script>
-    <script src={{ asset("js/student.js") }}></script>
+    {# general #}
     <script src={{ asset("js/script.js") }}></script>
+    {# add widget dynamic #}
+    <script src={{ asset("js/student/student.js") }}></script>
+    <script src={{ asset("js/program/program.js") }}></script>
+
     {{ importmap() }}
     {% endblock %}
 </body>

@@ -15,97 +15,74 @@
     <h2>Ajouter une session</h2>
     {% endif %}
 
-    {% if formAddSession|default %}
+    {% if formAddSession|default %} 
 
     <div class="uk-hr"></div>
-
-
-    {{ form_start(formAddSession, {'attr': {'class': 'uk-grid-small', 'uk-grid' : '' }}) }}
-
+    {{ form_start(formAddSession, {'attr': {'class' : 'uk-grid-small','uk-grid' : '' }}) }}
 
     <div class="uk-grid-divider uk-child-width-1-2@m" uk-grid>
 
-        <div>
-            <div class="uk-grid-divider uk-child-width-1-2@m" uk-grid>
-                <div class="uk-width-1-2">
-                    {{ form_row(formAddSession.maxStudents) }}
-                </div>
-                <div class="uk-width-1-2">
-                    {{ form_row(formAddSession.reservations) }}
+        <div class="uk-grid uk-child-width-1-1@m" uk-grid>
 
+            <div class="uk-width-1-2">
+                {{ form_row(formAddSession.maxStudents) }}
+            </div>
+            <div class="uk-width-1-2">
+                {{ form_row(formAddSession.reservations) }}
+            </div>
+            <div class="uk-width-1-2">
+                {{ form_row(formAddSession.dateStart) }}
+            </div>
+            <div class="uk-width-1-2">
+                {{ form_row(formAddSession.dateEnd) }}
+            </div>
+            <div class="uk-width-1-1">
+                {{ form_row(formAddSession.formation) }}
+            </div>
+            <div class="uk-text-left uk-padding-top">
+                {{ form_row(formAddSession.Valider) }}
+            </div>
+
+
+        </div>
+
+        <div>
+        <div class="uk-grid-divider uk-child-width-1-2@m" uk-grid>
+
+            <div class="form">
+
+                <div class="uk-margin ">
+                    <button type="button" class="add-program-collection-widget uk-button uk-button-default"
+                        data-list-selector="#programme-fields-list">Ajouter Programme(s)</button>
                 </div>
-                <div class="uk-width-1-2">
-                    {{ form_row(formAddSession.dateStart) }}
-                </div>
-                <div class="uk-width-1-2">
-                    {{ form_row(formAddSession.dateEnd) }}
-                </div>
-                <div class="uk-width-1-1">
-                    {{ form_row(formAddSession.formation) }}
-                </div>
+                <div id="programme-fields-list"
+                    data-prototype="{{ form_widget(formAddSession.programs.vars.prototype)|e }}"
+                    data-session="{{ session_id }}" data-widget-tags="{{ '<div class=\" uk-margin programme-field\">
+                </div>' |e }}"
+                data-widget-counter="{{ formAddSession.programs|length }}">
             </div>
         </div>
-        <div>
-            <div class="uk-grid-divider uk-child-width-1-2@m" uk-grid>
-                <div>
-                    <div class="form">
-                        <div class="uk-margin">
-                            <button type="button" class="add-another-collection-widget uk-button uk-button-default"
-                                data-list-selector="#programme-fields-list">Ajouter Programme(s)
-                            </button>
-                        </div>
-                        <div id="programme-fields-list" data-prototype="{{ form_widget(formAddSession.programs.vars.prototype)|e }}"
-                        data-session="{{ session_id }}" data-widget-tags="{{ '<div class=\"uk-margin programme-field\"></div>' |e }}"
-                        data-widget-counter="{{ formAddSession.programs|length }}">
-                        {% for programField in formAddSession.programs %}
-                        <div class="uk-margin programme-field">
-                            {{ form_row(programField) }}
-                            <button type="button" class="remove-programme-collection-widget uk-button uk-button-danger">
-                                Supprimer
-                            </button>
-                        </div>
-                        {% endfor %}
-                    </div>
-                    
-                    </div>
-                    
-                    
-                </div>
-                <div>
-                    <div class="form">
-                        <div class="uk-margin">
-                            <button type="button" class="add-student-collection-widget uk-button uk-button-default"
-                                data-list-selector="#student-fields-list">Ajouter Stagiaire
-                            </button>
-                        </div>
-                        <div id="student-fields-list" class="uk-margin"
-                            data-prototype="{{ form_widget(formAddSession.students.vars.prototype)|e }}"
-                            data-session="{{ session_id }}" data-widget-tags="{{ '<div class=\"uk-margin programme-field\"></div>' |e }}"
-                            data-widget-counter="{{ formAddSession.students|length }}">
 
-                            {% for studentField in formAddSession.students %}
-                            <div class="uk-margin student-field ">
-                                {{ form_row(studentField) }}
-                                <button type="button"
-                                    class="remove-student-collection-widget uk-button uk-button-danger">
-                                    Supprimer
-                                </button>
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
+
+        <div class="form">
+            <div class="uk-margin">
+                <button type="button" class="add-student-collection-widget uk-button uk-button-default"
+                    data-list-selector="#student-fields-list">Ajouter Stagiaire</button>
             </div>
+            <div id="student-fields-list" class="uk-margin"
+                data-prototype="{{ form_widget(formAddSession.students.vars.prototype)|e }}"
+                data-session="{{ session_id }}" data-widget-tags="{{ '<div class=\" uk-margin programme-field\"></div>
+            '|e }}"
+            data-widget-counter="{{ formAddSession.students|length }}">
         </div>
     </div>
+        {% do formAddSession.programs.setRendered %}
+        {% do formAddSession.students.setRendered %}
 
-    {% do formAddSession.programs.setRendered %}
-    {% do formAddSession.students.setRendered %}
+    </div>
 
     {{ form_end(formAddSession) }}
 
-    {% else %}
-    <h3>En attente</h3>
     {% endif %}
 
     {% elseif sessions|default %}
@@ -154,6 +131,7 @@
                     </td>
                     <td>
                         <a href="#" uk-tooltip="title: Supprimer; pos: top-left"
+                        onclick="editSession(event, '{{ path('delete_session', {'id': session.id }) }}'); event.stopPropagation();"
                             class="ui-button ui-widget ui-corner-all">
                             <i class="trash icon"></i>
                         </a>
@@ -163,27 +141,23 @@
             </tbody>
             <tfoot class="full-width">
                 <tr>
-                    <th></th>
                     <th colspan="8">
-                        <div class="uk-text-right uk-padding-top">
-                            <a href="{{ path('new_session') }}" class="ui-button ui-widget ui-corner-all">
-                                <i class="user icon"></i> Ajouter Session
-                            </a>
+                        <div class="ui small pagination menu">
+                            <a class="icon item prevPage"><i class="left chevron icon"></i></a>
+                            <div id="pagination" class="ui small pagination menu"></div>
+                            <a class="icon item nextPage"><i class="right chevron icon"></i></a>
                         </div>
+
                     </th>
+
                 </tr>
             </tfoot>
         </table>
-        <div class="ui small pagination menu">
-            <a class="icon item prevPage"><i class="left chevron icon"></i></a>
-            <div id="pagination" class="ui small pagination menu"></div>
-            <a class="icon item nextPage"><i class="right chevron icon"></i></a>
-        </div>
+        
     </div>
-
     {% else %}
     <h2>Aucune informations en base de données</h2>
+    {# {% endif %} #}
     {% endif %}
-
 </div>
 {% endblock %}

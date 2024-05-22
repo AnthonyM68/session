@@ -141,10 +141,18 @@ class SessionController extends AbstractController
         return $this->render('session/session.html.twig', [
             'controller_name' => 'SessionController',
             'view_name' => 'session/session.html.twig',
+
             'formAddSession' => $form,
             'session_id' => $session->getId(),
             'slug' => 'add'
         ]);
+    }
+    #[Route('/session/{id}/delete', name: 'delete_session')]
+    public function deleteSession(Session $session, EntityManagerInterface $entityManager): Response
+    {
+        $entityManager->remove($session);
+        $entityManager->flush();
+        return $this->redirectToRoute('list_session');
     }
 
     /**
@@ -185,7 +193,7 @@ class SessionController extends AbstractController
         $session->removeStudent($student);
 
         $entityManager->persist($session);
-        $entityManager->flush();
+       // $entityManager->flush();
 
         return $this->redirectToRoute('detail_session', ['id' => $sessionId]);
     }
