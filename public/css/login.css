@@ -1,6 +1,8 @@
-/*************************
-      Floating label
-**************************/
+
+.column {
+	max-width: 450px;
+}
+
 .content {
     font-size:1.1rem;
 }
@@ -23,16 +25,26 @@
 	display: block;
 	width: 100%;
 	margin-bottom: 0;
-	/* Override default `<label>` margin */
 	line-height: 1.5;
 	color: #495057;
 	pointer-events: none;
 	cursor: text;
-	/* Match the input under the label */
 	border: 1px solid transparent;
 	border-radius: 0.25rem;
 	transition: all 0.1s ease-in-out;
 }
+
+
+
+.ui.input.floating-label input:not(:placeholder-shown)~label,
+.ui.input.floating-label input:-webkit-autofill~label {
+	padding-top: 0.25rem;
+	padding-bottom: 0.25rem;
+	font-size: 12px;
+	color: #777;
+}
+
+
 
 .ui.input.left.icon.floating-label>label {
 	left: 26.99px;
@@ -79,14 +91,6 @@
 	padding-bottom: 0.25rem;
 }
 
-.ui.input.floating-label input:not(:placeholder-shown)~label,
-.ui.input.floating-label input:-webkit-autofill~label {
-	padding-top: 0.25rem;
-	padding-bottom: 0.25rem;
-	font-size: 12px;
-	color: #777;
-}
-
 .ui.input.floating-label::-webkit-input-placeholder {
 	color: #6c757d;
 	opacity: 1;
@@ -113,9 +117,15 @@
 }
 
 
-/* Fallback for Edge
--------------------------------------------------- */
 
+
+
+
+
+
+
+
+/* 
 @supports (-ms-ime-align: auto) {
 	.ui.input.floating-label>label {
 		display: none;
@@ -126,8 +136,7 @@
 }
 
 
-/* Fallback for IE
--------------------------------------------------- */
+
 
 @media all and (-ms-high-contrast: none),
 (-ms-high-contrast: active) {
@@ -137,25 +146,4 @@
 	.ui.input.floating-label input:-ms-input-placeholder {
 		color: #777;
 	}
-}
-
-
-/**
-  For demo
-**/
-
-body {
-	background-color: #dadada;
-}
-
-body>.grid {
-	height: 100%;
-}
-
-.image {
-	margin-top: -100px;
-}
-
-.column {
-	max-width: 450px;
-}
+} */
