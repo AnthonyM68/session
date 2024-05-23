@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table session.category : ~5 rows (environ)
+-- Listage des données de la table session.category : ~6 rows (environ)
 INSERT INTO `category` (`id`, `name`) VALUES
 	(1, 'Front-end'),
 	(2, 'Back-end'),
@@ -39,13 +39,13 @@ INSERT INTO `category` (`id`, `name`) VALUES
 CREATE TABLE IF NOT EXISTS `course` (
   `id` int NOT NULL AUTO_INCREMENT,
   `category_id` int NOT NULL,
-  `name_course` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_course` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_169E6FB912469DE2` (`category_id`),
   CONSTRAINT `FK_169E6FB912469DE2` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table session.course : ~19 rows (environ)
+-- Listage des données de la table session.course : ~18 rows (environ)
 INSERT INTO `course` (`id`, `category_id`, `name_course`) VALUES
 	(1, 1, 'HTML5 et CSS3'),
 	(2, 1, 'Javascript'),
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
   PRIMARY KEY (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
--- Listage des données de la table session.doctrine_migration_versions : ~0 rows (environ)
+-- Listage des données de la table session.doctrine_migration_versions : ~2 rows (environ)
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
 	('DoctrineMigrations\\Version20240513123739', '2024-05-13 12:39:12', 227),
 	('DoctrineMigrations\\Version20240521044634', '2024-05-21 04:48:31', 82);
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `formation` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table session.formation : ~3 rows (environ)
 INSERT INTO `formation` (`id`, `name`) VALUES
@@ -120,7 +120,7 @@ CREATE TABLE IF NOT EXISTS `program` (
   KEY `IDX_92ED7784591CC992` (`course_id`),
   CONSTRAINT `FK_92ED7784591CC992` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`),
   CONSTRAINT `FK_92ED7784613FECDF` FOREIGN KEY (`session_id`) REFERENCES `session` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table session.program : ~24 rows (environ)
 INSERT INTO `program` (`id`, `session_id`, `course_id`, `days`) VALUES
@@ -160,7 +160,7 @@ CREATE TABLE IF NOT EXISTS `session` (
   PRIMARY KEY (`id`),
   KEY `IDX_D044D5D45200282E` (`formation_id`),
   CONSTRAINT `FK_D044D5D45200282E` FOREIGN KEY (`formation_id`) REFERENCES `formation` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Listage des données de la table session.session : ~11 rows (environ)
 INSERT INTO `session` (`id`, `formation_id`, `max_students`, `date_start`, `date_end`, `reservations`) VALUES
@@ -187,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `session_student` (
   CONSTRAINT `FK_A5FB2D69CB944F1A` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table session.session_student : ~19 rows (environ)
+-- Listage des données de la table session.session_student : ~15 rows (environ)
 INSERT INTO `session_student` (`session_id`, `student_id`) VALUES
 	(1, 1),
 	(1, 2),
