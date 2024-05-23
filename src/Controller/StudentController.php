@@ -15,11 +15,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class StudentController extends AbstractController
 {
-    // liste students 
-    // detail student 
-    // ajout student 
-    // delete student
 
+    #[Route('/profile', name: 'profile')]
+
+    public function profileUser(StudentRepository $studentRepository): Response
+    {
+    
+        return $this->render('profile/profile.html.twig', [
+            'controller_name' => 'StudentController',
+            'view_name' => 'profile/profile.html.twig'
+        ]);
+    }
 
     #[Route('/student', name: 'list_student')]
 

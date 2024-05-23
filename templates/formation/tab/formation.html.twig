@@ -1,14 +1,28 @@
+<div class="uk-text-right uk-padding-top">
 
-{% block title %}Formations{% endblock %}
+    {% if app.user %}
 
+    <a uk-icon="icon: user">Bienvenue {{ app.user.username }}</a>
+    <a href="{{ path('logout') }}" uk-icon="icon: sign-out">Se déconnecter</a>
+    <a href="#" uk-icon="icon: edit">Mon profil</a>
+
+
+    {% else %}
+    <a href="{{ path('login') }}" uk-icon="icon: sign-in">Se connecter</a>
+    <a href="{{ path('register') }}">S'enregistrer</a>
+    {% endif %}
+
+</div>
 {% block tab_content %}
 
 <div class="uk-container">
-    
+
     <div class="uk-animation-slide-bottom">
-        <p class="uk-text-center" ><h1>Liste des formations</h1></p>
+        <p class="uk-text-center">
+        <h1>Liste des formations</h1>
+        </p>
     </div>
-            
+
     <div class="separator"></div>
 
 

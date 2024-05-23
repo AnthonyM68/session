@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/AnthonyM68/session#readme",
   "dependencies": {
+    "fomantic-ui": "^2.9.3",
+    "gulp": "^5.0.0",
     "semantic-ui-css": "^2.5.0",
     "semantic-ui-icon": "^2.5.0"
   }

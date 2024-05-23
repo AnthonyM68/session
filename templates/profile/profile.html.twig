@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+{% block body %}
+
+<div class="separator"></div>
+
+<div class="uk-container">
+
+    {% if app.user %}
+    <form class="ui form">
+        <h2 class="ui dividing header">Votre profil</h2>
+        <div class="field">
+            <label>Nom d'utilisateur:</label>
+            <div class="two fields">
+                <div class="field">
+                    <input type="text" name="shipping[first-name]" placeholder="{{ app.user.username }}">
+                </div>
+                <div class="field">
+                    <input type="text" name="shipping[last-name]" placeholder="{{ app.user.email }}">
+                </div>
+            </div>
+            {% for role in app.user.roles %}
+            {{ role }}
+            {% endfor %}
+        </div>
+    </form>
+</div>
+
+{% endif %}
+{% endblock %}

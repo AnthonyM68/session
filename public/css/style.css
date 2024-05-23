@@ -56,6 +56,10 @@ a:hover {
   text-align: center;
 }
 
+
+
+
+
 .ui-tabs-vertical {
   width: 55em;
 }
@@ -84,3 +88,11 @@ a:hover {
   float: right;
   width: 40em;
 }
+
+
+#nav-home-right>div .a {
+  border: 0px !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
