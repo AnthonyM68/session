@@ -5,53 +5,55 @@
     <meta charset="UTF-8">
     <title>{% block title %}Session!{% endblock %}</title>
     {% block stylesheets %}
-    {# jquery 3.7.1 jquery ui 1.13 #}
+   
+    <!-- jQuery -->
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <!-- jQuery UI -->
     <link rel="stylesheet" href="{{ asset('css/jquery-ui.theme.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/jquery-ui.structure.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/jquery-ui.min.css') }}">
-    {# semantic #}
+    <!-- Semantic UI -->
     <link rel="stylesheet" href="{{ asset('css/semantic.min.css') }}">
-    {# icons semantic #}
+    <!-- Semantic UI Icons -->
     <link rel="stylesheet" href="{{ asset('icon/icon.min.css') }}">
-    {# uikit ui #}
+    <!-- UIkit -->
     <link rel="stylesheet" href="{{ asset('css/uikit.min.css') }}">
-
-    {# login #}
-    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
-
-    {# custom style #}
+    <!-- Custom Login CSS -->
+    {# <link rel="stylesheet" href="{{ asset('css/login.css') }}"> #}
+    <!-- Custom Style -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     {% endblock %}
-    
-
 </head>
 
 <body>
-    {# header #}
+    <!-- Header -->
     <header id="pageHeader">{% include 'navbar/navbar.html.twig' %}</header>
-    {# article #}
+    <!-- Article -->
     <article id="mainArticle">{% block body %}{% endblock %}</article>
-    {# footer #}
+    <!-- Footer -->
     <footer id="pageFooter">{% include 'footer/footer.html.twig' %}</footer>
 
     {% block javascripts %}
-    {# jquery #}
-    <script src={{ asset("js/jquery.min.js") }}></script>
-    {# jquery ui 1.13 #}
-    <script src={{ asset("js/jquery-ui.min.js") }}></script>
-    <script src={{ asset("js/jquery.parallax-2.0.0-a.min.js") }}></script>
-    {# uikit #}
-    <script src={{ asset("js/uikit.min.js") }}></script>
-    <script src={{ asset("icon/uikit-icons.min.js") }}></script>
-    {# semantic #}
-    <script src={{ asset("js/semantic.min.js") }}></script>
-    {# general #}
-    <script src={{ asset("js/script.js") }}></script>
-    {# add widget dynamic #}
-    <script src={{ asset("js/student/student.js") }}></script>
-    <script src={{ asset("js/program/program.js") }}></script>
 
+   
+    <!-- jQuery UI -->
+    
+    {# <script src="{{ asset('js/jquery.parallax-2.0.0-a.min.js') }}"></script> #}
+    <script src="{{ asset('js/script.js') }}"></script>
+     <!-- UIkit -->
+    <script src="{{ asset('js/uikit.min.js') }}"></script>
+    <script src="{{ asset('icon/uikit-icons.min.js') }}"></script>
+    <!-- Semantic UI -->
+    <script src="{{ asset('js/semantic.min.js') }}"></script>
+
+    <!-- Add Widget Dynamic -->
+    <script src="{{ asset('js/student/student.js') }}"></script>
+    <script src="{{ asset('js/program/program.js') }}"></script>
+    <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+    <!-- General Script -->
+    
     {{ importmap() }}
+
     {% endblock %}
 </body>
 

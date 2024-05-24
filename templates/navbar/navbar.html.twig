@@ -1,54 +1,58 @@
 {% block navbar %}
-
-
-
-
-<div class="ui menu">
-
-    <nav class="uk-navbar-left">
-        <ul class="uk-navbar-nav">
-            <li><a href="{{ path('list_formation') }}">Formations</a></li>
-            <li><a href="{{ path('list_session') }}">Sessions</a></li>
-            <li><a href="{{ path('list_category') }}">Catégories</a></li>
-            <li><a href="{{ path('list_course') }}">Modules</a></li>
-        </ul>
-
-        <a class="uk-navbar-item uk-logo container-logo" href="{{ asset('home') }}">
-
-            <div class="ui tiny image">
-                <img src="{{ asset('img/education.jpg') }}">
+<div class="ui menu navbar">
+    <div class="ui container">
+        <div class="navbar-content uk-navbar uk-padding">
+            <div class="uk-navbar-center">
+                <nav class="navbar-links">
+                    <ul class="uk-navbar-nav">
+                        <li><a href="{{ path('list_formation') }}">Formations</a></li>
+                        <li><a href="{{ path('list_session') }}">Sessions</a></li>
+                        <li><a href="{{ path('list_category') }}">Catégories</a></li>
+                        <li><a href="{{ path('list_course') }}">Modules</a></li>
+                    </ul>
+                    <a class="uk-navbar-item uk-logo container-logo" href="{{ asset('home') }}">
+                        <div class="ui tiny image">
+                            <img src="{{ asset('img/education.jpg') }}">
+                        </div>
+                    </a>
+                    <ul class="uk-navbar-nav">
+                        <li><a href="{{ path('list_program') }}">Programes</a></li>
+                        <li><a href="{{ path('list_trainer') }}">Formateurs</a></li>
+                        <li><a href="{{ path('list_student') }}">Stagiaires</a></li>
+                    </ul>
+                </nav>
             </div>
-        </a>
+            <nav class="right-menu">
+                {% if app.user %}
+                <div class="item">
+                    <div class="middle aligned content">
+                        <a class="header">Bienvenue {{ app.user.username }}</a>
+                    </div>
+                </div>
+                <div class="navbar-links">
+                    <ul class="uk-navbar-nav">
+                        <li>
+                            <a class="header" href="{{ path('logout') }}">Se déconnecter</a>
+                        </li>
+                        <li><a class="header" href="{{ path('profile') }}">Mon profil</a></li>
+                    </ul>
+                    
+                </div>
 
-
-        <ul class="uk-navbar-nav">
-
-            <li><a href="{{ path('list_program') }}">Programes</a></li>
-            <li><a href="{{ path('list_trainer') }}">Formateurs</a></li>
-            <li><a href="{{ path('list_student') }}">Stagiaires</a></li>
-        </ul>
-    </nav>
-
-    <div id="nav-home-right" class="right menu">
-
-
-        {% if app.user %}
-        <div class="item" >
-            <div class="middle aligned content">
-                <a class="header">Bienvenue {{ app.user.username }}</a>
-            </div>
+                {% else %}
+                <div class="navbar-links">
+                    <ul class="uk-navbar-nav">
+                        <li>
+                            <a class="header" href="{{ path('login') }}">Se connecter</a>
+                        </li>
+                        <li>
+                            <a class="header" href="{{ path('register') }}">S'enregistrer</a>
+                        </li>
+                    </ul>
+                </div>
+                {% endif %}
+            </nav>
         </div>
-        {# <a class=" item" href="{{ path('app_logout') }}">Se déconnecter</a>
-        <a class="item" href="#">Mon profil</a> #}
-
-        <a class=" item" href="{{ path('logout') }}">Se déconnecter</a>
-        <a class="item" href="{{ path('profile') }}">Mon profil</a>
-
-
-        {% else %}
-        <a class="item" href="{{ path('login') }}">Se connecter</a>
-        <a class="item" href="{{ path('register') }}">S'enregistrer</a>
-        {% endif %}
     </div>
 </div>
 {% endblock %}

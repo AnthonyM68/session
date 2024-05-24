@@ -76,21 +76,16 @@ function showModalConfirm($id, $href, $title) {
 
 
 $(document).ready(function () {
+    // Initialiser les onglets jQuery UI
     $("#interface").tabs();
-
-    $( "#tabs" ).tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
-    
-    $( "#tabs li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
-
+    // Initialiser les onglets Semantic UI
     $('.menu .item').tab();
-
-    
-
-    // $('#interface').on('tabsactivate', function (event, ui) {
-    //     setupPagination();
-    // });
+    // Active la pagination a chaque click sur les onglet tabs
+    $('#interface').on('tabsactivate', function (event, ui) {
+        setupPagination();
+    });
     setupPagination();
-    // ecouteur d'événement sur le bouton supprimer widget
+    // Ecouteur d'événement sur le bouton supprimer widget
     addRemoveButtonListeners();
 
 });

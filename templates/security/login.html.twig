@@ -1,23 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Connection{% endblock %}
 
 {% block body %}
-<form method="post">
-    {% if error %}
-    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-
-    {% if app.user %}
-    <div class="mb-3">
-        You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-    </div>
-    {% endif %}
-
-</form>
-
 <div class="ui middle aligned center aligned grid">
+
     <div class="column">
+
         <h2 class="ui teal image header">
             <img src="https://fomantic-ui.com/examples/assets/images/logo.png" class="image">
             <div class="content">
@@ -26,11 +15,9 @@
         </h2>
         <form class="ui large form" method="post">
             <div class="ui stacked segment">
-
                 <div class="field">
-
-                    <div class="ui left icon input floating-label">
-                        <i class="user icon"></i>
+                    <div class="ui right icon input floating-label">
+                        <i class="envelope icon"></i>
                         <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class=""
                             autocomplete="email" required autofocus>
                         <label for="inputEmail">Email</label>
@@ -42,18 +29,31 @@
                         <input type="password" name="password" id="inputPassword" class=""
                             autocomplete="current-password" required>
                         <label for="inputPassword">Password</label>
-
                     </div>
                 </div>
                 <button class="ui fluid large teal submit button">Se connecter</button>
             </div>
-
             <div class="ui error message"></div>
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
         </form>
         <div class="ui message">
             Pas encore inscrit? <a href="#">Enregistrez-vous</a>
         </div>
+
+        <form method="post">
+            {% if error %}
+            <div class="ui-state-error ui-corner-all">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            {% if app.user %}
+            <div class="mb-3">
+                Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+            </div>
+            {% endif %}
+
+        </form>
     </div>
 </div>
+
+
 {% endblock %}

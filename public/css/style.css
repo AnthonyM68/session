@@ -1,8 +1,10 @@
+/* CSS existant */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
+
 :root {
   --color: #fff;
   --primary-color: #ccc;
@@ -12,16 +14,14 @@
   --border-color: #ccc;
   --background-color: #fff;
   --accent-color: rgb(0, 122, 156);
-  /*--highlight-color:;
-    --text-color:;*/
   --error-color: red;
-  /*--warning-color:;
-    --success-color:;*/
-  /*--background-color-light:;*/
 }
+
 html,
 body {
+  height: 100%;
 }
+
 h1,
 h2,
 h3,
@@ -30,13 +30,25 @@ h5,
 h6 {
   color: var(--secondary-color) !important;
 }
+
+
+/* .ui.middle.aligned.center.aligned.grid {
+  height: 100vh; 
+}
+.ui.middle.aligned.center.aligned.grid .column {
+  max-width: 450px;
+  height: 100%;
+} */
+
 /* COLOR GENERAL */
 .link-color {
   color: var(--link-color) !important;
 }
+
 .error-color {
   color: var(--error-color) !important;
 }
+
 .background-color {
   background-color: var(--background-color) !important;
 }
@@ -44,30 +56,27 @@ h6 {
 a:hover {
   color: var(--link-color) !important;
 }
+
 .separator {
   width: 100%;
   height: 100px;
 }
 
-#mainArticle {
-}
 #mainArticle th,
 #mainArticle td {
   text-align: center;
 }
-
-
-
-
-
+/* CSS for vertical tabs */
 .ui-tabs-vertical {
-  width: 55em;
+  width: 100%;
 }
+
 .ui-tabs-vertical .ui-tabs-nav {
-  padding: 0.2em 0.1em 0.2em 0.2em;
   float: left;
   width: 12em;
+  margin-right: 1em; /* Ajoutez une marge à droite pour éviter le chevauchement */
 }
+
 .ui-tabs-vertical .ui-tabs-nav li {
   clear: left;
   width: 100%;
@@ -75,24 +84,110 @@ a:hover {
   border-right-width: 0 !important;
   margin: 0 -1px 0.2em 0;
 }
+
 .ui-tabs-vertical .ui-tabs-nav li a {
   display: block;
 }
+
 .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active {
   padding-bottom: 0;
   padding-right: 0.1em;
   border-right-width: 1px;
 }
+
 .ui-tabs-vertical .ui-tabs-panel {
   padding: 1em;
   float: right;
-  width: 40em;
+  width: 40em; /* Ajustez cette largeur si nécessaire */
+  box-sizing: border-box; /* Assurez-vous que le box-sizing est défini */
 }
 
+/* navbar */
 
-#nav-home-right>div .a {
-  border: 0px !important;
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background: var(--background-color);
+  padding: 0;
+}
+
+.navbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.uk-navbar-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.right-menu {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: auto; 
+}
+
+.uk-navbar-nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.uk-navbar-item.uk-logo.container-logo {
+  margin: 0 2rem;
+}
+
+.ui.menu, .uk-navbar-left, .uk-navbar-nav, .uk-navbar-item, .right.menu, .item {
   border: none !important;
   box-shadow: none !important;
 }
 
+.ui.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+
+/* sub navbar */
+#nav-home-right > div,
+#nav-home-right > div .item,
+.uk-navbar-left,
+.uk-navbar-nav,
+.uk-navbar-item,
+.right.menu,
+.item {
+  border: none !important;
+  box-shadow: none !important;
+}
+.ui.menu .item:before {
+  display: none !important;
+}
+
+.ui.menu .item {
+  border: none !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+}
+
+
+
+
+.ui.grid > .row > .column {
+  width: 30%;
+  box-sizing: border-box;
+  padding: 10px;
+}
