@@ -1,5 +1,110 @@
 {% block navbar %}
-<div class="ui menu navbar">
+<nav class="uk-navbar-container">
+    <div class="uk-container">
+        <div uk-navbar>
+
+            <div class="uk-navbar-left">
+
+                <nav class="navbar-links">
+
+                    <ul class="uk-navbar-nav">
+                        <li><a href="{{ path('list_formation') }}">Formations</a></li>
+                        <li><a href="{{ path('list_session') }}">Sessions</a></li>
+                        <li><a href="{{ path('list_category') }}">Catégories</a></li>
+                        <li><a href="{{ path('list_course') }}">Modules</a></li>
+                        <li><a href="{{ path('list_program') }}">Programes</a></li>
+                        <li><a href="{{ path('list_trainer') }}">Formateurs</a></li>
+                        <li><a href="{{ path('list_student') }}">Stagiaires</a></li>
+                    </ul>
+
+                    <ul class="uk-navbar-nav">
+
+                    </ul>
+                </nav>
+
+            </div>
+
+            <div class="uk-navbar-right">
+
+                {# <ul class="uk-navbar-nav">
+                    <li class="uk-active"><a href="#">Active</a></li>
+                    <li>
+                        <a href="#">Parent</a>
+                        <div class="uk-navbar-dropdown">
+                            <ul class="uk-nav uk-navbar-dropdown-nav">
+                                <li class="uk-active"><a href="#">Active</a></li>
+                                <li><a href="#">Item</a></li>
+                                <li><a href="#">Item</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="#">Item</a></li>
+                </ul> #}
+                {% if app.user %}
+
+
+                <ul class="uk-navbar-nav">
+                    <div class="ui feed">
+                        <div class="event">
+                            <div class="label">
+                                <img src={{ asset("img/persons/Formateur1.webp")}}>
+                            </div>
+                            <div class="content">
+                                <div class="summary">
+
+                                    <a href="{{ path('profile') }}" class="user">{{ app.user.username }}</a>
+
+                                    <div class="date">
+                                        Bienvenue
+                                    </div>
+                                </div>
+                                <div class="meta uk divider">
+                                    <a class="header" href="{{ path('logout') }}">Se déconnecter</a>
+                                    <a href="{{ path('profile') }}" class="header">Profil
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {# <li class="ui feed">
+                        <div class="event">
+                            <div class="label">
+                                <img src="/images/avatar/small/elliot.jpg">
+                            </div>
+                            <div class="content">
+                                <a href="{{ path('profile') }}" class="user">{{ app.user.username }}</a>
+                            </div>
+                        </div>
+                    </li> #}
+                    {# <li class="ui feed"><a href="{{ path('profile') }}" class="header">{{ app.user.username
+                            }}</a>
+                    </li>
+                    <li><a class="header" href="{{ path('logout') }}">Se déconnecter</a></li> #}
+                </ul>
+
+
+
+
+                {% else %}
+
+
+                <nav class="navbar-links">
+                    <ul class="uk-navbar-nav">
+                        <li><a class="header" href="{{ path('login') }}">Se connecter</a></li>
+                        <li><a class="header" href="{{ path('register') }}">S'enregistrer</a></li>
+                    </ul>
+                </nav>
+
+
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+
+{# <div class="ui menu navbar">
     <div class="ui container">
         <div class="navbar-content uk-navbar uk-padding">
             <div class="uk-navbar-center">
@@ -24,19 +129,26 @@
             </div>
             <nav class="right-menu">
                 {% if app.user %}
-                <div class="item">
-                    <div class="middle aligned content">
-                        <a class="header">Bienvenue {{ app.user.username }}</a>
-                    </div>
-                </div>
+
                 <div class="navbar-links">
                     <ul class="uk-navbar-nav">
-                        <li>
-                            <a class="header" href="{{ path('logout') }}">Se déconnecter</a>
+
+                        <li class="ui feed">
+                            <div class="event">
+                                <div class="label">
+                                    <img src="/images/avatar/small/elliot.jpg">
+
+                                </div>
+
+                            </div>
+
                         </li>
-                        <li><a class="header" href="{{ path('profile') }}">Mon profil</a></li>
+                        <li class="ui feed"><a href="{{ path('profile') }}" class="header">{{ app.user.username }}</a>
+                        </li>
+                        <li><a class="header" href="{{ path('logout') }}">Se déconnecter</a></li>
                     </ul>
-                    
+
+
                 </div>
 
                 {% else %}
@@ -54,5 +166,5 @@
             </nav>
         </div>
     </div>
-</div>
+</div> #}
 {% endblock %}
