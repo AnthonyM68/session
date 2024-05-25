@@ -88,9 +88,9 @@ class StudentController extends AbstractController
             // execute PDO
             $entityManager->flush();
 
-            return $this->redirectToRoute('list_student');
+            return $this->redirectToRoute('detail_student', ['id' => $student->getId()]);
         }
-
+       
         return $this->render('student/new.html.twig', [
             'controller_name' => 'StudentController',
             'view_name' => 'student/new.html.twig',

@@ -51,7 +51,8 @@
                         </a>
                     </td>
                     <td>
-                        <a href="#" uk-tooltip="title: Supprimer; pos: top-left" class="ui-button ui-widget ui-corner-all">
+                        <a href="#" uk-tooltip="title: Supprimer; pos: top-left" 
+                        onclick="editStudent(event, '{{ path('delete_student', {'id': student.id }) }}'); event.stopPropagation();" class="ui-button ui-widget ui-corner-all">
                             <i class="trash icon right floated"></i>
                         </a>
                     </td>

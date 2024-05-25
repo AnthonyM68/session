@@ -21,7 +21,6 @@ html,
 body {
   height: 100%;
 }
-
 h1,
 h2,
 h3,
@@ -30,16 +29,6 @@ h5,
 h6 {
   color: var(--secondary-color) !important;
 }
-
-
-/* .ui.middle.aligned.center.aligned.grid {
-  height: 100vh; 
-}
-.ui.middle.aligned.center.aligned.grid .column {
-  max-width: 450px;
-  height: 100%;
-} */
-
 /* COLOR GENERAL */
 .link-color {
   color: var(--link-color) !important;
@@ -61,12 +50,11 @@ a:hover {
   width: 100%;
   height: 100px;
 }
-
 #mainArticle th,
 #mainArticle td {
   text-align: center;
 }
-/* CSS for vertical tabs */
+/* Jquery vertical tabs */
 .ui-tabs-vertical {
   width: 100%;
 }
@@ -74,7 +62,7 @@ a:hover {
 .ui-tabs-vertical .ui-tabs-nav {
   float: left;
   width: 12em;
-  margin-right: 1em; /* Ajoutez une marge à droite pour éviter le chevauchement */
+  margin-right: 1em;
 }
 
 .ui-tabs-vertical .ui-tabs-nav li {
@@ -98,8 +86,8 @@ a:hover {
 .ui-tabs-vertical .ui-tabs-panel {
   padding: 1em;
   float: right;
-  width: 40em; /* Ajustez cette largeur si nécessaire */
-  box-sizing: border-box; /* Assurez-vous que le box-sizing est défini */
+  width: 40em;
+  box-sizing: border-box;
 }
 
 /* navbar */
@@ -137,7 +125,7 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-left: auto; 
+  margin-left: auto;
 }
 
 .uk-navbar-nav {
@@ -149,22 +137,7 @@ a:hover {
   margin: 0 2rem;
 }
 
-.ui.menu, .uk-navbar-left, .uk-navbar-nav, .uk-navbar-item, .right.menu, .item {
-  border: none !important;
-  box-shadow: none !important;
-}
-
-.ui.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-
-/* sub navbar */
-#nav-home-right > div,
-#nav-home-right > div .item,
+.ui.menu,
 .uk-navbar-left,
 .uk-navbar-nav,
 .uk-navbar-item,
@@ -173,21 +146,39 @@ a:hover {
   border: none !important;
   box-shadow: none !important;
 }
-.ui.menu .item:before {
-  display: none !important;
+.ui.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
-.ui.menu .item {
-  border: none !important;
-  box-shadow: none !important;
-  margin: 0 !important;
+/* ui grid detail student */
+
+.ui.card {
+  width: 100% !important;
+  padding: 1.5rem;
 }
-
-
-
-
-.ui.grid > .row > .column {
-  width: 30%;
-  box-sizing: border-box;
-  padding: 10px;
+/* hauteur des colonnes égal */
+.ui.grid.equal.height > .row {
+  display: flex;
+  flex-wrap: wrap;
+}
+.ui.grid.equal.height > .row > .column {
+  display: flex;
+  flex-direction: column;
+}
+.ui.grid.equal.height .ui.card {
+  flex: 1;
+}
+/* footer de la card détail */
+.extra.content.detail-footer {
+  display: flex;
+  flex-direction: row;
+  width: 100% !important;
+  justify-content: center;
+}
+.button-container {
+  display: flex;
+  gap: 10px; /* Espace entre les boutons */
 }

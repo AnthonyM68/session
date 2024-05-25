@@ -39,12 +39,21 @@
     <div class="uk-width-1-4@s">
         {{ form_row(formAddStudent.zipCode) }}
     </div>
-    <div class="uk-width-1-1">
+
+    {% endif %}
+    <div class="button-container">
         {{ form_row(formAddStudent.Valider) }}
+
+        {% if student_id|default != null %}
+        <a href="{{ path('detail_student', {'id' : 1}) }}" class="ui-button ui-widget ui-corner-all">
+            <i class="times icon"></i>Annuler
+        </a>
+        {% endif %}
+        <a href="{{ path('list_student') }}" class="ui-button ui-widget ui-corner-all">
+            <i class="reply icon"></i>Retour Liste
+        </a>
     </div>
     {{ form_end(formAddStudent) }}
-    {% endif %}
- 
 </div>
 
 {% endblock %}

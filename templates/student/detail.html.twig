@@ -3,77 +3,80 @@
 {% block title %}Formations{% endblock %}
 
 {% block body %}
+
 <div class="uk-container">
+
     {% if student|default %}
-    <h1>Détails du stagiaire</h1>
-    <div class="ui grid">
-        <div class="three column row">
 
-            <div class="column">
-                <div class="ui card">
-                    <div class="image">
-                        <img src="{{ asset('img/persons/' ~ student.firstName ~ student.lastName ~ '.webp') }}">
-                    </div>
-                    <div class="content">
-                        <div class="header">{{ student.firstName }} {{ student.lastName }}</div>
-                        <div class="meta">
-                            <span>{{ student.firstName }} {{ student.lastName }}</span>
-                        </div>
-                        <div class="description">
-                            Note:
-                        </div>
-                    </div>
-                    <div class="extra content">
-                        <span class="right floated">ID:{{ student.id }}</span>
-                    </div>
-                </div>
-            </div>
+    <div class="ui grid equal height">
+        <div class="row">
+            <div class="height wide column">
+                <div class="ui card card-profil uk-animation-fade">
 
-            <div class="column">
-                <div class="ui card">
-                    <div class="ui list">
-                        <div class="item">
-                            <div class="header">Nom:</div>
-                            {{ student.firstName }}
+                    <div class="uk-card uk-animation-slide-right uk-padding-bottom">
+                        <h1>Détails du stagiaire</h1>
+                    </div>
+
+                    <div class="content uk-margin">
+                        <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
+                            <div class="uk-card-media-left uk-cover-container">
+                                <img src="{{ asset('img/persons/' ~ student.firstName ~ student.lastName ~ '.webp') }}"
+                                    class="uk-padding">
+                            </div>
+                            <div class="uk-card-body">
+
+                                <h3 class="uk-card-title">Card Title</h3>
+
+                                <div class="ui list">
+                                    <div class="item">
+                                        <div class="header">Nom:</div>
+                                        {{ student.firstName }}
+                                    </div>
+                                    <div class="item">
+                                        <div class="header">Prénom:</div>
+                                        {{ student.lastName }}
+                                    </div>
+                                    <div class="item">
+                                        <div class="header">Adresse:</div>
+                                        {{ student.address }}
+                                    </div>
+                                    <div class="item">
+                                        <div class="header">Ville:</div>
+                                        {{ student.city }}
+                                    </div>
+                                    <div class="item">
+                                        <div class="header">Code postal:</div>
+                                        {{ student.zipCode }}
+                                    </div>
+                                    <div class="item">
+                                        <div class="header">Numéro de téléphone:</div>
+                                        {{ student.phoneNumber }}
+                                    </div>
+                                    <div class="item">
+                                        <div class="header">Date de naissance:</div>
+                                        {{ student.birthday | date('d-m-Y') }}
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
-                        <div class="item">
-                            <div class="header">Prénom:</div>
-                            {{ student.lastName }}
-                        </div>
-                        <div class="item">
-                            <div class="header">Adresse:</div>
-                            {{ student.address }}
-                        </div>
-                        <div class="item">
-                            <div class="header">Ville:</div>
-                            {{ student.city }}
-                        </div>
-                        <div class="item">
-                            <div class="header">Code postal:</div>
-                            {{ student.zipCode }}
-                        </div>
-                        <div class="item">
-                            <div class="header">Numéro de téléphone:</div>
-                            {{ student.phoneNumber }}
-                        </div>
-                        <div class="item">
-                            <div class="header">Date de naissance:</div>
-                            {{ student.birthday | date('d-m-Y') }}
-                        </div>
+                    </div>
+                    <div class="uk-text-center detail-footer">
                         <a href="{{ path('edit_student', {'id': student.id }) }}"
-                            class="mini ui button">Editer</a>
+                            class="ui-button ui-widget ui-corner-all">
+                            <i class="pencil alternate icon"></i>Editer
+                        </a>
                     </div>
                 </div>
             </div>
-
-            <div class="column">
+            <div class="eight wide column uk-animation-fade">
+                <h3 class="uk-animation-slide-top">Programes du stagiaire</h3>
                 {% for session in student.sessions %}
                 <div class="ui mini horizontal divided list">
                     <h6>{{ session.formation.name }}</h6>
                     {% for prog in session.programs %}
-                    <div class="item">
-                        <img class="ui avatar image"
-                            src="{{ asset('img/' ~ prog.course.nameCourse ~ '.jpg') }}">
+                    <div class="item right floated">
+                        <img class="ui avatar image" src="{{ asset('img/' ~ prog.course.nameCourse ~ '.jpg') }}">
                         <div class="content">
                             <div class="header">{{ prog.course.nameCourse }}</div>
                         </div>
@@ -81,11 +84,18 @@
                     {% endfor %}
                 </div>
                 {% endfor %}
+                <div class="uk-text-right uk-padding-top">
+                    <a href="{{ path('list_student') }}" class="ui-button ui-widget ui-corner-all">
+                        <i class="reply icon"></i>Retour Liste
+                    </a>
+                </div>
             </div>
+
         </div>
     </div>
     {% else %}
     <h2>Aucune informations en base de données</h2>
     {% endif %}
 </div>
+
 {% endblock %}
